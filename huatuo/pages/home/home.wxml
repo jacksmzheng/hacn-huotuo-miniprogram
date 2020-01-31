@@ -1,0 +1,10 @@
+<!--pages/home/home.wxml-->
+<import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
+<view class='page-section'>
+  <view class='top-separate-line'></view>
+  <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
+  <template is='common-picker' data="{{...department}}"></template>
+  <!-- <commonmodal obj='{{modalObj}}' bindconfirm='{{modalObj.confirm}}' /> -->
+</view>
+
+
