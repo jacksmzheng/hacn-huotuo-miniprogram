@@ -6,7 +6,84 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    healthStatus:
+      [
+        {
+          area:'广州',
+          building:[
+            {
+              name:'Building 1',
+              definiteCount:0,
+              suspectedCount:0,
+              feverCount:0,
+              desc:'0确诊 0疑似 0发烧',
+              status:0,
+            },
+            {
+              name: 'Building 2',
+              definiteCount: 0,
+              suspectedCount: 10,
+              feverCount: 0,
+              desc: '0确诊 10疑似 0发烧',
+              status:1
+            },
+            {
+              name: 'Building 3',
+              definiteCount: 10,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '10确诊 0疑似 0发烧',
+              status:2
+            }
+          ]
+        },
+        {
+          area:'西安',
+          building: [
+            {
+              name: 'Building 1',
+              definiteCount: 0,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '0确诊 0疑似 0发烧',
+              status: 0,
+            },
+            {
+              name: 'Building 2',
+              definiteCount: 0,
+              suspectedCount: 10,
+              feverCount: 0,
+              desc: '0确诊 10疑似 0发烧',
+              status: 1
+            },
+            {
+              name: 'Building 3',
+              definiteCount: 10,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '10确诊 0疑似 0发烧',
+              status: 2
+            }
+          ]
+        }
+      ],
+    vpnStatus:
+      [
+        {
+          vpn: [
+            {
+              name: 'VPN-HK',
+              desc: '0报告',
+              status: 0,
+            },
+            {
+              name: 'VPN-CN',
+              desc: '100报告',
+              status: 1
+            }
+          ]
+        }
+      ]
   },
 
   /**
