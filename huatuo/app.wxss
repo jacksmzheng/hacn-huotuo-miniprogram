@@ -47,7 +47,3 @@ input {
 .form-input-view{
   margin-bottom: 48rpx;
 }
-
-button [type='primary'] {
-  width: 100%;
-}
