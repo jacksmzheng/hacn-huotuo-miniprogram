@@ -1,1 +1,22 @@
 /* pages/officestatus/officestatus.wxss */
+@import '/pages/common/template/commonstatus/commonstatus.wxss';
+.status {
+  width: 100%;
+  background-color: lightskyblue;
+  margin: 32rpx 0rpx;
+  font-family: 'Open Sans';
+  font-size: 12pt;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 10rpx;
+}
+
+.office-area{
+  font-family: 'Flama';
+  font-weight: normal;
+  font-size: 11pt;
+  color: #FFFFFF;
+  background-color:#666666; 
+  margin-bottom: 32rpx;
+  padding: 5rpx;
+}

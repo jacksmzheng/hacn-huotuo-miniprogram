@@ -1,12 +1,4 @@
-/*
- * COPYRIGHT. HSBC HOLDINGS PLC 2019. ALL RIGHTS RESERVED.
- *
- * This software is only to be used for the purpose for which it has been
- * provided. No part fo it is to be reproduced, disassembled, transmitted,
- * stored in retrieval system nor translated in any human or computer
- * language in any way or for any other purposes whatever without the prior
- * written consent of HSBC Holdings plc.
- */
+// pages/successful/successful.js
 const app = getApp()
 
 Page({
@@ -54,27 +46,16 @@ Page({
     })
   },
 
-  generateRanNum: function () {
-    var random = ''
-    for (let i = 0; i < 6; i++) {
-      random += Math.floor(Math.random() * 10)
-    }
-    return random
-  },
-
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-    // clearTimeout(timer)
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-    // clearTimeout(timer)
-    // app.setTimestamp('')
   },
 
   /**
@@ -96,12 +77,8 @@ Page({
   },
 
   exit: function () {
-    // clearTimeout(timer)
-    // app.setTimestamp('')
     wx.reLaunch({
-      url: '/pages/home/home',
+      url: '/pages/officestatus/officestatus',
     })
   },
-
-
 })
