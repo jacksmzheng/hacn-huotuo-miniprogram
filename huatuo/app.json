@@ -1,9 +1,11 @@
 {
   "pages": [
-    "pages/home/home"
+    "pages/officestatus/officestatus",
+    "pages/submithealth/submithealth",
+    "pages/submitvpn/submitvpn"
   ],
   "window": {
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#FFF",
     "navigationBarTitleText": "Hua Tuo",
     "navigationBarTextStyle": "black"
   },
