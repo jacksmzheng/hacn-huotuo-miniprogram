@@ -32,6 +32,55 @@ Page({
       warningLabel: 'Please Enter Staf ID (请输入员工号)',
       content: ''
     },
+    visitHuBei: {
+      items: [{
+        id: 1,
+        name: '去过湖北',
+      }, {
+        id: 2,
+        name: '接触过来自湖北的客人/亲友'
+      }, {
+        id: 3,
+        name: '接触过有以下症状的病人(发热38度以上、咳嗽、咳痰等)'
+      }, {
+        id: 4,
+        name: '以上情况均无',
+      }],
+      title: '自2020年1月1日以来是否有一下情况:(*)',
+      current: '-',
+      position: 'left',
+      checked: false,
+      disabled: false,
+    },
+    healths: {
+      items: [{
+        id: 1,
+        name: '发热',
+      }, {
+        id: 2,
+        name: '干咳'
+      }, {
+        id: 3,
+        name: '乏力'
+      }, {
+        id: 4,
+        name: '腹泻',
+      }, {
+      id: 5,
+      name: '感冒',
+      }, {
+        id: 6,
+        name: '头疼头晕',
+      }, {
+        id: 7,
+        name: '以上均没有',
+      }],
+      title: '您是否有以下症状:(*)',
+      current: [],
+      position: 'left',
+      checked: false,
+      disabled: false,
+    }
   },
 
   /**
@@ -52,9 +101,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.initData();
   },
+  //初始化数据
+  initData: function () {
+    var navigateTitle = '健康问卷调查';
+    this.setData({
+      navigateTitle
+    })
 
+    wx.setNavigationBarTitle({
+      title: navigateTitle,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -107,6 +166,20 @@ Page({
     this.setData({
       ['stafID.content']: e.detail.value
     })
-  }
-
+  },
+  //
+  handleVisitHubeiChange({ detail = {} }) {
+    console.log(detail.value)
+    this.setData({
+      ['visitHuBei.current']: detail.value
+    });
+  },
+  //
+  handleHealthChange({ detail = {} }) {
+    const index = this.data.healths.current.indexOf(detail.value);
+    index === -1 ? this.data.healths.current.push(detail.value) : this.data.healths.current.splice(index, 1);
+    this.setData({
+      ['healths.current']: this.data.healths.current
+    });
+  },
 })
