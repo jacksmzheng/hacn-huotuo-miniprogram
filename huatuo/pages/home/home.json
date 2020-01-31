@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "commonmodal": "/pages/common/components/commonmodal/commonmodal",
+    "commoninput": "/pages/common/components/commoninput/commoninput"
+  }
+}

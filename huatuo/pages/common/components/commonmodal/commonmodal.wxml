@@ -1,0 +1,18 @@
+<view class='mask' wx:if="{{obj.show}}">
+  <view class='main-content-container'>
+    <view class='main-content'>
+      <rich-text class='modal-title' nodes='{{obj.title}}'/>
+      <rich-text class='modal-content' nodes='{{obj.content}}'/>
+      <slot></slot>
+    </view>
+    <view class='modal-btn-wrapper'>
+      <block wx:if='{{obj.canceltext}}'>
+        <button class='cancel-btn' type='primary' bindtap='cancel'>{{obj.canceltext}}</button>
+      </block>
+      <block wx:else>
+        <view class='cancel-btn'></view>
+      </block>
+      <button class='confirm-btn' type='primary' bindtap='confirm'>{{obj.confirmtext}}</button>
+    </view> 
+  </view> 
+</view>
