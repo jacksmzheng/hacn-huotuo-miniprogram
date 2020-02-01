@@ -1,19 +1,21 @@
 <template name="common-status">
   <view class='common-status-container-view'>
     
-    
-    <view class="common-status-label">{{name}}</view>
+    <view class="common-status-label-view">
+      <view style="height:20rpx;width:8rpx;background-color:#000000;"></view>
+      <view class="common-status-label">{{name}}</view>
+    </view>
     <view class="common-status-content">
       <rich-text class="common-status-desc" nodes='{{desc}}'></rich-text>
         <!-- 颜色条 -->
       <block wx:if="{{status == 0}}">
-        <view style="width:100%; height:32rpx; background-color: #07c160;"></view>
+        <view style="width:100%; height:32rpx; background-color: #36DFA5;"></view>
       </block>
       <block wx:if="{{status == 1}}" >
-        <view style="width:100%; height:32rpx; background-color: pink;"></view>
+        <view style="width:100%; height:32rpx; background-color: #90B1F9;"></view>
       </block>
       <block wx:if="{{status == 2}}" >
-        <view style="width:100%; height:32rpx; background-color: #CC0000;"></view>
+        <view style="width:100%; height:32rpx; background-color: #F263A2;"></view>
       </block>
     </view>
 

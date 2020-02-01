@@ -2,16 +2,21 @@
   width: 100%;
   margin-bottom: 48rpx;
   display: flex;
+  flex-direction: column;
+}
+
+.common-status-label-view{
+  display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: center
 }
 
 .common-status-label{
   width: 180rpx;
-  margin: 10rpx 0;
+  margin: 10rpx 16rpx;
   font-family: 'Open Sans';
-  font-size: 10pt;
-  color: #666666;
+  font-size: 9pt;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -26,7 +31,6 @@
 
 .common-status-content{
   width: 100%;
-  margin-left: 24rpx;
   display: flex;
   flex-direction: column;
 }
