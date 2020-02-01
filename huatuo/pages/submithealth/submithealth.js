@@ -1,4 +1,4 @@
-// pages/home/home.js
+// pages/submithealth/submithealth.js
 const { $Message } = require('../dist/base/index');
 Page({
 
@@ -352,16 +352,18 @@ Page({
       var v = this.getFieldValue(visits[i], this.data.visits.items);
       arrs.push(v);
     }
+
+    var others = this.getFieldValue(others, this.data.others.items);
+
     var data= {
       staffId: staffId,
-      mobile: mobile,
+      mobileNum: mobile,
       deparment: department,
-      others: this.getFieldValue(others, this.data.others.items),
-      othersStarffId: others_id,
-      status: this.getFieldValue(status, this.data.status.items),
+      reporter: others == 2 ? staffId : others_id,
+      healthStatus: this.getFieldValue(status, this.data.status.items),
       statusContent: status_content,
-      area: area[1] || area[0],
-      visits: arrs.join(',')
+      city: area[1] || area[0],
+      workplace: arrs.join(',')
     };
     return data;
   },
@@ -369,7 +371,7 @@ Page({
   request(data) {
     wx.request({
       url: 'https://huatuo.app77.cn/api/health',
-      method: 'GET',
+      method: 'POST',
       data: {},
       header: {
         'content-type': 'application/json'
@@ -377,7 +379,7 @@ Page({
       success(res) {
         console.log(res.data);
         var page = '/pages/successful/successful';
-        if(res.statusCode !== '200') {
+        if(res.statusCode !== 200) {
           page = '/pages/errors/errors';
         }
         wx.navigateTo({

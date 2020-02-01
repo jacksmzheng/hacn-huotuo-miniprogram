@@ -1,76 +1,79 @@
 <!--pages/submitvpn/submitvpn.wxml-->
 <import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
 <view class='page-section'>
+  <i-message id="message"/>
   <view class='top-separate-line'></view>
-  <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
+  <form bindsubmit="submitVPNForm">
+    <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
 
-  <view class="picker-container-view">
-    <rich-text class='picker-label' nodes='2. Your Location City 您所在城市'/>
-    <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
-      <view class='picker-item-label'>{{area.region}}</view>
-    </picker>
-  </view>
+    <view class="picker-container-view">
+      <rich-text class='picker-label' nodes='2. Your Location City 您所在城市'/>
+      <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
+        <view class='picker-item-label'>{{area.region}}</view>
+      </picker>
+    </view>
 
-  <i-panel title="{{internetISP.title}}">
-    <i-radio-group current="{{internetISP.current}}" bindchange="handleinternetISPChange">
-        <i-radio wx:for="{{internetISP.items}}" color="green" position="{{internetISP.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>  
-  </i-panel>
-
-  <i-panel title="{{internetLink.title}}">
-    <i-radio-group current="{{internetLink.current}}" bindchange="handleinternetLinkChange">
-        <i-radio wx:for="{{internetLink.items}}" color="green" position="{{internetLink.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>  
-  </i-panel>
-
-  <i-panel title="{{bandWidth.title}}">
-    <i-radio-group current="{{bandWidth.current}}" bindchange="handlebandWidthChange">
-        <i-radio wx:for="{{bandWidth.items}}" color="green" position="{{bandWidth.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>  
-  </i-panel>
-
-  <template is='common-picker' data="{{...vpn}}"></template>
-
-  <i-panel title="{{adslModem.title}}">
-    <i-radio-group current="{{adslModem.current}}" bindchange="handleadslModemChange">
-        <i-radio wx:for="{{adslModem.items}}" color="green" position="{{adslModem.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>  
-  </i-panel>
-
-  <i-panel title="{{symptom.title}}">
-    <i-radio-group current="{{symptom.current}}" bindchange="handlesymptomChange">
-        <i-radio wx:for="{{symptom.items}}" color="green" position="{{symptom.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>  
-  </i-panel>
-
-  <i-panel title="{{performs.title}}">
-    <i-checkbox-group current="{{performs.current}}" bindchange="handlePerformsChange">
-        <i-checkbox wx:for="{{performs.items}}" position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-        </i-checkbox>
-        <textarea class="form-textarea" name="performs_content"></textarea>
-    </i-checkbox-group>
-  </i-panel>
-
-  <!-- <template is='common-picker' data="{{...wfh}}"></template>
-  <template is='common-picker' data="{{...token}}"></template>
-  <template is='common-picker' data="{{...vpnType}}"></template>
-  <commoninput obj="{{support}}" bindinputEvent='{{support.bindInputName}}'/>
-  <i-panel title="{{remoteWork.title}}">
-    <i-radio-group current="{{remoteWork.current}}" bindchange="handleRemoteWorkChange">
-        <block wx:for="{{remoteWork.items}}">
-          <i-radio position="{{remoteWork.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+    <i-panel title="{{internetISP.title}}">
+      <i-radio-group current="{{internetISP.current}}" bindchange="handleinternetISPChange">
+          <i-radio wx:for="{{internetISP.items}}" color="green" position="{{internetISP.position}}" wx:key="{{item.id}}" value="{{item.name}}">
           </i-radio>
-          <view wx:if="{{item.id == '2'}}">
-            <textarea class="form-textarea" name="remote_content"></textarea>
-          </view>
-        </block>
-    </i-radio-group>
-  </i-panel> -->
+      </i-radio-group>  
+    </i-panel>
 
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" bindtap="submit">提交</button>
+    <i-panel title="{{internetLink.title}}">
+      <i-radio-group current="{{internetLink.current}}" bindchange="handleinternetLinkChange">
+          <i-radio wx:for="{{internetLink.items}}" color="green" position="{{internetLink.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>  
+    </i-panel>
+
+    <i-panel title="{{bandWidth.title}}">
+      <i-radio-group current="{{bandWidth.current}}" bindchange="handlebandWidthChange">
+          <i-radio wx:for="{{bandWidth.items}}" color="green" position="{{bandWidth.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>  
+    </i-panel>
+
+    <template is='common-picker' data="{{...vpn}}"></template>
+
+    <i-panel title="{{adslModem.title}}">
+      <i-radio-group current="{{adslModem.current}}" bindchange="handleadslModemChange">
+          <i-radio wx:for="{{adslModem.items}}" color="green" position="{{adslModem.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>  
+    </i-panel>
+
+    <i-panel title="{{symptom.title}}">
+      <i-radio-group current="{{symptom.current}}" bindchange="handlesymptomChange">
+          <i-radio wx:for="{{symptom.items}}" color="green" position="{{symptom.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>  
+    </i-panel>
+
+    <i-panel title="{{performs.title}}">
+      <i-checkbox-group current="{{performs.current}}" bindchange="handlePerformsChange">
+          <i-checkbox wx:for="{{performs.items}}" position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+          </i-checkbox>
+          <textarea class="form-textarea" name="performs_content"></textarea>
+      </i-checkbox-group>
+    </i-panel>
+
+    <!-- <template is='common-picker' data="{{...wfh}}"></template>
+    <template is='common-picker' data="{{...token}}"></template>
+    <template is='common-picker' data="{{...vpnType}}"></template>
+    <commoninput obj="{{support}}" bindinputEvent='{{support.bindInputName}}'/>
+    <i-panel title="{{remoteWork.title}}">
+      <i-radio-group current="{{remoteWork.current}}" bindchange="handleRemoteWorkChange">
+          <block wx:for="{{remoteWork.items}}">
+            <i-radio position="{{remoteWork.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '2'}}">
+              <textarea class="form-textarea" name="remote_content"></textarea>
+            </view>
+          </block>
+      </i-radio-group>
+    </i-panel> -->
+
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+  </form>
 </view>

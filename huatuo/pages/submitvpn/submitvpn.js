@@ -1,4 +1,5 @@
 // pages/submitvpn/submitvpn.js
+const { $Message } = require('../dist/base/index');
 Page({
 
   /**
@@ -402,9 +403,17 @@ Page({
     });
   },
 
-  submit: function() {
+  submitVPNForm: function() {
+    //this.handleError();
     wx.navigateTo({
       url: '/pages/successful/successful',
     })
+  },
+  //show error message
+  handleError() {
+    $Message({
+      content: '请完善信息!',
+      type: 'error'
+    });
   }
 })
