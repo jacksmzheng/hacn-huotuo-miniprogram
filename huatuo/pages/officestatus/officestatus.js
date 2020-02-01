@@ -10,14 +10,15 @@ Page({
     healthStatus:
       [
         {
-          area:'广州 (Guang Zhou)',
+          area:'广州办公室情况',
+          areaen: 'Guangzhou Office Status',
           building:[
             {
               name:'TKH OT1',
               definiteCount:0,
               suspectedCount:0,
               feverCount:0,
-              desc:'0确诊 0疑似 0发烧',
+              desc:'0确认/Confirm 0疑似/Suspect 0发烧/Fever',
               status:0,
             },
             {
@@ -25,7 +26,7 @@ Page({
               definiteCount: 0,
               suspectedCount: 10,
               feverCount: 0,
-              desc: '0确诊 10疑似 0发烧',
+              desc: '0确认/Confirm 10疑似/Suspect 0发烧/Fever',
               status:1
             },
             {
@@ -33,7 +34,7 @@ Page({
               definiteCount: 10,
               suspectedCount: 0,
               feverCount: 0,
-              desc: '10确诊 0疑似 0发烧',
+              desc: '10确认/Confirm 0疑似/Suspect 0发烧/Fever',
               status:2
             },
             {
@@ -41,7 +42,7 @@ Page({
               definiteCount: 10,
               suspectedCount: 0,
               feverCount: 0,
-              desc: '0确诊 0疑似 0发烧',
+              desc: '0确认/Confirm 0疑似/Suspect 0发烧/Fever',
               status:0
             },
             {
@@ -49,7 +50,7 @@ Page({
               definiteCount: 10,
               suspectedCount: 0,
               feverCount: 0,
-              desc: '0确诊 10疑似 0发烧',
+              desc: '0确认/Confirm 10疑似/Suspect 0发烧/Fever',
               status:1
             },
             {
@@ -57,20 +58,21 @@ Page({
               definiteCount: 10,
               suspectedCount: 0,
               feverCount: 0,
-              desc: '10确诊 0疑似 0发烧',
+              desc: '10确认/Confirm 0疑似/Suspect 0发烧/Fever',
               status:2
             }
           ]
         },
         {
-          area:'西安 (Xi An)',
+          area:'西安办公室情况',
+          areaen: 'XiAn Office Status',
           building: [
             {
               name: 'XiAn Center',
               definiteCount: 0,
               suspectedCount: 0,
               feverCount: 0,
-              desc: '0确诊 0疑似 0发烧',
+              desc: '0确认/Confirm 0疑似/Suspect 0发烧/Fever',
               status: 0,
             }
           ]
@@ -82,12 +84,12 @@ Page({
           vpn: [
             {
               name: 'VPN-HK',
-              desc: '0报告',
+              desc: '0 报告 Count of VPN Problem',
               status: 0,
             },
             {
               name: 'VPN-CN',
-              desc: '100报告',
+              desc: '100 报告 Count of VPN Problem',
               status: 1
             }
           ]
@@ -99,7 +101,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const screenWidth =  wx.getSystemInfoSync().windowWidth
+    const imageWidth = (screenWidth - 100)/5
+    const imageHeight = imageWidth
+    this.setData({ imageWidth, imageHeight })
   },
 
   /**
@@ -113,7 +118,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // wx.request({
+    //   url: 'https://huatuo.app77.cn/api/health',
+    //   method: 'GET',
+    //   data: {},
+    //   header: {
+    //     'content-type': 'application/json',
+    //   },
+    //   success(res) {
+    //     console.log('success : ', res)
+    //   },
+    //   fail(res) {
+    //     console.log('fail : ', res)
+    //   },
+    //   complete(res) {
+    //     console.log('complete : ', res)
+    //   }
+    // })
   },
 
   /**
@@ -153,11 +174,11 @@ Page({
 
   submitHealth: function(e) {
     console.log(e)
-    app.goNext(e.target.dataset.url)
+    app.goNext(e.currentTarget.dataset.url)
   },
 
   submitVPN: function(e) {
     console.log(e)
-    app.goNext(e.target.dataset.url)
+    app.goNext(e.currentTarget.dataset.url)
   }
 })
