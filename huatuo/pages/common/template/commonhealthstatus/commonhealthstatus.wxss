@@ -1,0 +1,139 @@
+.common-status-container-view{
+  width: 100%;
+  margin-bottom: 48rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.common-status-label-view{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.common-status-label{
+  margin: 10rpx 16rpx;
+  font-family: 'Open Sans';
+  font-size: 10pt;
+  color: #000000;
+  font-weight: bold;
+}
+
+.common-status-content{
+  display: flex;
+  flex-direction: row;
+}
+
+.common-status-tab{
+  width: 33%;
+  margin-right: 10rpx;
+
+}
+
+.common-status-num{
+  text-align: center;
+  font-weight: bold;
+  font-size: 18pt;
+  padding: 8rpx 0;
+  font-family: 'Open Sans';
+  
+}
+
+.common-status-desc{
+  text-align: center;
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-size: 8pt;
+  padding: 5rpx 0;
+  color: #000000;
+}
+
+.common-status-green-num{
+  background-color:rgba(54,223,165, 0.4);
+  color:#36DFA5;
+}
+
+.common-status-green-desc{
+  background-color:rgba(54,223,165, 0.6);
+}
+
+.common-status-red-num-20{
+  background-color:rgba(242,99,162, 0.2);
+  color:#F263A2;
+}
+
+.common-status-red-num-40{
+  background-color:rgba(242,99,162, 0.4);
+  color:#F263A2;
+}
+
+.common-status-red-num-60{
+  background-color:rgba(242,99,162, 0.6);
+  color:#F263A2;
+}
+
+.common-status-red-desc-20{
+  background-color:rgba(242,99,162, 0.4);
+}
+
+.common-status-red-desc-40{
+  background-color:rgba(242,99,162, 0.6);
+}
+
+.common-status-red-desc-60{
+  background-color:rgba(242,99,162, 0.8);
+}
+
+.common-status-yellow-num-20{
+  background-color:rgba(255,199,38, 0.2);
+  color:#FFC726;
+}
+
+.common-status-yellow-num-40{
+  background-color:rgba(255,199,38, 0.4);
+  color:#FFC726;
+}
+
+.common-status-yellow-num-60{
+  background-color:rgba(255,199,38, 0.6);
+  color:#FFC726;
+}
+
+.common-status-yellow-desc-20{
+  background-color:rgba(255,199,38, 0.4);
+}
+
+.common-status-yellow-desc-40{
+  background-color:rgba(255,199,38, 0.6);
+}
+
+.common-status-yellow-desc-60{
+  background-color:rgba(255,199,38, 0.8);
+}
+
+.common-status-blue-num-20{
+  background-color:rgba(144,177,249, 0.2);
+  color:#90B1F9;
+}
+
+.common-status-blue-num-40{
+  background-color:rgba(144,177,249, 0.4);
+  color:#90B1F9;
+}
+
+.common-status-blue-num-60{
+  background-color:rgba(144,177,249, 0.6);
+  color:#90B1F9;
+}
+
+.common-status-blue-desc-20{
+  background-color:rgba(144,177,249, 0.4);
+}
+
+.common-status-blue-desc-40{
+  background-color:rgba(144,177,249, 0.6);
+}
+
+.common-status-blue-desc-60{
+  background-color:rgba(144,177,249, 0.8);
+}

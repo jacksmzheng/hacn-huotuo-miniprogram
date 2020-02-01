@@ -16,50 +16,50 @@ Page({
             {
               name:'TKH OT1',
               definiteCount:0,
-              suspectedCount:0,
-              feverCount:0,
-              desc:'0确认/Confirm 0疑似/Suspect 0发烧/Fever',
-              status:0,
+              suspectedCount:3,
+              feverCount:2,
+              // desc:'0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
+              // status:0,
             },
             {
               name: 'TKH OT2',
-              definiteCount: 0,
-              suspectedCount: 10,
-              feverCount: 0,
-              desc: '0确认/Confirm 10疑似/Suspect 0发烧/Fever',
-              status:1
+              definiteCount: 2,
+              suspectedCount: 21,
+              feverCount: 70,
+              // desc: '0确诊/Confirm 10疑似/Suspect 0发烧/Fever',
+              // status:1
             },
             {
-              name: 'Jiangwan Office',
-              definiteCount: 10,
-              suspectedCount: 0,
-              feverCount: 0,
-              desc: '10确认/Confirm 0疑似/Suspect 0发烧/Fever',
-              status:2
+              name: 'Jiangwan Office (Wework)',
+              definiteCount: 13,
+              suspectedCount: 34,
+              feverCount: 135,
+              // desc: '10确诊/Confirm 0疑似/Suspect 0发烧/Fever',
+              // status:2
             },
             {
               name: 'Pazhou ODC',
-              definiteCount: 10,
-              suspectedCount: 0,
-              feverCount: 0,
-              desc: '0确认/Confirm 0疑似/Suspect 0发烧/Fever',
-              status:0
+              definiteCount: 24,
+              suspectedCount: 5,
+              feverCount: 7,
+              // desc: '0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
+              // status:0
             },
             {
               name: 'Tancun ODC',
-              definiteCount: 10,
+              definiteCount: 7,
               suspectedCount: 0,
-              feverCount: 0,
-              desc: '0确认/Confirm 10疑似/Suspect 0发烧/Fever',
-              status:1
+              feverCount: 3,
+              // desc: '0确诊/Confirm 10疑似/Suspect 0发烧/Fever',
+              // status:1
             },
             {
               name: 'Renfeng ODC',
-              definiteCount: 10,
-              suspectedCount: 0,
+              definiteCount: 3,
+              suspectedCount: 5,
               feverCount: 0,
-              desc: '10确认/Confirm 0疑似/Suspect 0发烧/Fever',
-              status:2
+              // desc: '10确诊/Confirm 0疑似/Suspect 0发烧/Fever',
+              // status:2
             }
           ]
         },
@@ -69,28 +69,26 @@ Page({
           building: [
             {
               name: 'XiAn Center',
-              definiteCount: 0,
+              definiteCount: 6,
               suspectedCount: 0,
-              feverCount: 0,
-              desc: '0确认/Confirm 0疑似/Suspect 0发烧/Fever',
-              status: 0,
+              feverCount: 5,
+              // desc: '0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
+              // status: 0,
             }
           ]
         }
       ],
-    vpnStatus:
+    vpnStatus: 
       [
         {
           vpn: [
             {
               name: 'VPN-HK',
-              desc: '0 报告 Count of VPN Problem',
-              status: 0,
+              count: 32
             },
             {
               name: 'VPN-CN',
-              desc: '100 报告 Count of VPN Problem',
-              status: 1
+              count: 15
             }
           ]
         }
