@@ -161,7 +161,9 @@ Page({
       checked: false,
       disabled: false,
     },
-
+    isHideOtherAppSlow: true,
+    isHideSomeAppSlow: true,
+    spinShow: true
     // wfh: {
     //   hasLabel: true,
     //   hasWarning: false,
@@ -353,6 +355,18 @@ Page({
 
   handlePerformsChange({ detail = {} }) {
     const index = this.data.performs.current.indexOf(detail.value);
+    var id = this.getFieldValue(detail.value, this.data.performs.items);
+    
+    if(id == 6) {
+      this.setData({
+        isHideOtherAppSlow: index !== -1
+      })
+    }
+    if(id == 7) {
+      this.setData({
+        isHideSomeAppSlow: index !== -1
+      })
+    }
     index === -1 ? this.data.performs.current.push(detail.value) : this.data.performs.current.splice(index, 1);
     this.setData({
       ['performs.current']: this.data.performs.current
@@ -403,10 +417,84 @@ Page({
     });
   },
 
-  submitVPNForm: function() {
-    //this.handleError();
-    wx.navigateTo({
-      url: '/pages/successful/successful',
+  submitVPNForm: function(e) {
+    var staffId = this.data.stafID.content;
+    var city = this.data.area.region;
+    var isp = this.data.internetISP.current;
+    var linkType = this.data.internetLink.current;
+    var bandWidth = this.data.bandWidth.current;
+    var vpnType = this.data.vpn.index;
+    var hadRebootADSL = this.data.adslModem.current;
+    var symptom = this.data.symptom.current;
+    var performs = this.data.performs.current;
+    var performs_other_content = e.detail.value.performs_other_content;
+    var performs_some_content = e.detail.value.performs_some_content;
+    var symptom_id = this.getFieldValue(symptom, this.data.symptom.items);
+    if (staffId == '' || city == '请选择 Please Select' || isp == '-' || linkType == '-'
+      || bandWidth == '-' || vpnType == 0 || hadRebootADSL == '-'
+      || symptom == '-') {
+      this.handleError();
+      return;
+    }
+    var performsArr = [];
+    for(var i = 0; i < performs.length; i++) {
+      var v = this.getFieldValue(performs[i], this.data.performs.items);
+      performsArr.push(v);
+    }
+    if (symptom_id == '3') {
+      if (performsArr.length == 0 || (performsArr.indexOf(6) > -1 && performs_other_content == '') || (performsArr.indexOf(7) > -1 && performs_some_content == '')) {
+        this.handleError();
+        return;
+      }
+    }
+    var data = {
+      //"openId": "xdfgdfg", // wechat open id
+      "staffId": staffId, // staff id
+      "location": city[1] || city[0],// or the code
+      "isp": this.getFieldValue(isp, this.data.internetISP.items), // or the code
+      "linkType": this.getFieldValue(linkType, this.data.internetLink.items),
+      "bandWidth": this.getFieldValue(bandWidth, this.data.bandWidth.items), // 50-, 50-100, 100+, unknown
+      "vpnType": vpnType, //hkVPN
+      "hadRebootADSL": this.getFieldValue(hadRebootADSL, this.data.adslModem.items), // 1:yes, 2:no
+      "symptom": this.getFieldValue(symptom, this.data.symptom.items), // cannotLogin, alwaysDisconnect, others
+      "outlookSlow": performsArr.indexOf(1) > -1 ? 1 : 0, // 0:no, 1:yes
+      "jabberSlow": performsArr.indexOf(2) > -1 ? 1 : 0, // 0:no, 1:yes
+      "sametimeSlow": performsArr.indexOf(3) > -1 ? 1 : 0, // 0:no, 1:yes
+      "videoConferenceSlow": performsArr.indexOf(4) > -1 ? 1 : 0, // 0:no, 1:yes
+      "sharepointSharedFolderSlow": performsArr.indexOf(5) > -1 ? 1 : 0, // 0:no, 1:yes
+      "hasOtherApplicationsSlow": performsArr.indexOf(6) > -1 ? 1 : 0, // 0:no, 1:yes
+      "otherSlowApplications": performs_other_content, // wording
+      "hasSomeApplicationsCannotAccess": performsArr.indexOf(7) > -1 ? 1 : 0, // 0:no, 1:yes
+      "cannotAccessApplications": performs_some_content, // wording
+      "reporterStaffId": staffId // staff id
+    }
+    // wx.navigateTo({
+    //   url: '/pages/successful/successful',
+    // })
+    this.request({vpnStateInfo: data});
+  },
+  //call api
+  request(data) {
+    this.setData({
+      spinShow: true
+    })
+    wx.request({
+      url: 'https://huatuo.app77.cn/api/vpnstate',
+      method: 'POST',
+      data: data,
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+        console.log(res.data);
+        var page = '/pages/successful/successful';
+        if (res.statusCode !== 200) {
+          page = '/pages/errors/errors';
+        }
+        wx.navigateTo({
+          url: page
+        })
+      }
     })
   },
   //show error message
@@ -415,5 +503,14 @@ Page({
       content: '请完善信息!',
       type: 'error'
     });
+  },
+  //
+  getFieldValue(value, data) {
+    for (var i = 0; i < data.length; i++) {
+      if (value == data[i].name) {
+        return data[i].id;
+      }
+    }
+    return null;
   }
 })

@@ -372,7 +372,7 @@ Page({
     wx.request({
       url: 'https://huatuo.app77.cn/api/health',
       method: 'POST',
-      data: {},
+      data: data,
       header: {
         'content-type': 'application/json'
       },

@@ -7,6 +7,9 @@
     "i-panel": "/pages/dist/panel/index",
     "i-checkbox-group": "/pages/dist/checkbox-group/index",
     "i-checkbox": "/pages/dist/checkbox/index",
-    "i-message": "/pages/dist/message/index"
+    "i-message": "/pages/dist/message/index",
+    "i-grid": "/pages/dist/grid/index",
+    "i-grid-item": "/pages/dist/grid-item/index",
+    "i-spin": "/pages/dist/spin/index"
   }
 }
