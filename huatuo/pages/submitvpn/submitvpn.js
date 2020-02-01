@@ -154,12 +154,73 @@ Page({
         id: 7,
         name: "Some application can't access 某些应用程序不能访问",
       }],
-      title: '9. 使用V.P.N.时，有些应用程序反应很慢 Using V.P.N., some application performs very slow:',
+      title: '9. 使用V.P.N.时，有些应用程序反应很慢 Using V.P.N. some application performs very slow:',
       current: [],
       position: 'left',
       checked: false,
       disabled: false,
     },
+
+    // wfh: {
+    //   hasLabel: true,
+    //   hasWarning: false,
+    //   isMandatory: true,
+    //   isCRSRelated: false,
+    //   label: '10. 是否有带电脑回家办公：',
+    //   array: ['请选择 Please Select', '是 YES', '否 NO'],
+    //   index: 0,
+    //   bindName: 'wfhPickerChange',
+    //   content: ''
+    // },
+
+    // token: {
+    //   hasLabel: true,
+    //   hasWarning: false,
+    //   isMandatory: true,
+    //   isCRSRelated: false,
+    //   label: '11. 是否拥有token：',
+    //   array: ['请选择 Please Select', '是 YES', '否 NO'],
+    //   index: 0,
+    //   bindName: 'tokenPickerChange',
+    //   content: ''
+    // },
+
+    // vpnType: {
+    //   hasLabel: true,
+    //   hasWarning: false,
+    //   isMandatory: true,
+    //   isCRSRelated: false,
+    //   label: '12. 所用VPN类型',
+    //   array: ['请选择 Please Select', 'CN', 'HK'],
+    //   index: 0,
+    //   bindName: 'vpnTypePickerChange',
+    //   content: ''
+    // },
+    // support: {
+    //   hasLabel: true,
+    //   hasWarning: false,
+    //   isMandatory: true,
+    //   isCRSRelated: false,
+    //   maxlength: 50,
+    //   label: '13. 是否需要公司提供Token协助：',
+    //   bindInputName: 'supportInputEvent',
+    //   content: ''
+    // },
+
+    // remoteWork: {
+    //   items: [{
+    //     id: 1,
+    //     name: '可以远程工作 Yes, can work from home',
+    //   }, {
+    //     id: 2,
+    //     name: '无法远程工作(请提供具体原因）No, cannot work from home (please describe your current status)'
+    //   }],
+    //   title: '4. 你或者被你报告的同事，现在的情况是 What is the current circumstance of the reported colleague? *',
+    //   current: '-',
+    //   position: 'left',
+    //   checked: false,
+    //   disabled: false,
+    // },
 
   },
 
@@ -296,4 +357,54 @@ Page({
       ['performs.current']: this.data.performs.current
     });
   },
+
+  
+  wfhPickerChange: function(e) {
+    console.log('picker change : ', e)
+
+    this.setData({
+      ['wfh.index']: e.detail.value,
+      ['wfh.content']: this.data.wfh.array[e.detail.value]
+    })
+  },
+
+  tokenPickerChange: function(e) {
+    console.log('picker change : ', e)
+
+    this.setData({
+      ['token.index']: e.detail.value,
+      ['token.content']: this.data.token.array[e.detail.value]
+    })
+  },
+
+  vpnTypePickerChange: function(e) {
+    console.log('picker change : ', e)
+
+    this.setData({
+      ['vpnType.index']: e.detail.value,
+      ['vpnType.content']: this.data.vpnType.array[e.detail.value]
+    })
+  },
+
+  supportInputEvent: function(e_) {
+    const e = e_.detail.e ? e_.detail.e : e_
+    console.log('input event : ', e)
+
+    this.setData({
+      ['support.content']: e.detail.value
+    })
+  },
+
+  handleRemoteWorkChange({ detail = {} }) {
+    console.log(detail.value)
+    this.setData({
+      ['remoteWork.current']: detail.value
+    });
+  },
+
+  submit: function() {
+    wx.navigateTo({
+      url: '/pages/successful/successful',
+    })
+  }
 })

@@ -1,27 +1,51 @@
 <!--pages/officestatus/officestatus.wxml-->
 <import src="/pages/common/template/commonstatus/commonstatus.wxml"/>
-<view class="page-section">
-  <view class="status">办公地点健康情况</view>
-  <block wx:for="{{healthStatus}}" wx:key="{{item}}">
-    <view class="office-area">{{item.area}}</view>
-    <block wx:for="{{item.building}}" wx:key="{{item}}">
+<view class="body">
+  <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.png"/>
+
+  <view class="button-container">
+    <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
+      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
+      <text class="icon-text">健康状态</text>
+      <text class="icon-desc">Health Survey</text>
+    </view>
+    <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
+      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
+      <text class="icon-text">VPN问题</text>
+      <text class="icon-desc">VPN Probelm</text>
+    </view>
+    <view class="icon-view">
+      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
+      <text class="icon-text">旅行记录</text>
+      <text class="icon-desc">Travel History</text>
+    </view>
+    <view class="icon-view">
+      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
+      <text class="icon-text">求助&捐赠</text>
+      <text class="icon-desc">Help & Donation</text>
+    </view>
+    <view class="icon-view">
+      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon5.png"></image>
+      <text class="icon-text">员工调研</text>
+      <text class="icon-desc">Research</text>
+    </view>
+
+  </view>
+
+  <view class="page-section">
+    <block wx:for="{{healthStatus}}" wx:key="{{item}}">
+      <view class="office-area">{{item.area}}</view>
+      <view class="office-desc">{{item.areaen}}</view>
+      <block wx:for="{{item.building}}" wx:key="{{item}}">
+        <template is='common-status' data="{{...item}}"></template>
+      </block>
+
+    </block>
+    <view class="office-area">VPN状态</view>
+    <view class="office-desc">VPN Status</view>
+    <block wx:for="{{vpnStatus[0].vpn}}" wx:key="{{item}}">
       <template is='common-status' data="{{...item}}"></template>
     </block>
+  </view>
 
-  </block>
-  <view class="status">VPN状态</view>
-  <block wx:for="{{vpnStatus[0].vpn}}" wx:key="{{item}}">
-    <template is='common-status' data="{{...item}}"></template>
-  </block>
-</view>
-<view class="page-section">
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">上报健康状态</button>
-
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">上报VPN问题</button>
-
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >上报旅行记录</button>
-
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >请求帮助</button>
-
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >员工调研</button>
 </view>

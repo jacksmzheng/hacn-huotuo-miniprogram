@@ -1,21 +1,54 @@
 /* pages/officestatus/officestatus.wxss */
 @import '/pages/common/template/commonstatus/commonstatus.wxss';
-.status {
-  background-color: lightskyblue;
-  margin: 32rpx 0rpx;
+.office-area {
   font-family: 'Open Sans';
   font-size: 12pt;
-  color: #FFFFFF;
+  color: black;
   font-weight: bold;
+}
+
+.office-desc{
+  font-size: 10pt;
+  font-family: 'Open Sans';
+  color: #666666; 
+  margin-bottom: 32rpx;
+}
+
+.image {
+  width: 100%;
+  justify-content: center;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.icon-view{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
   padding: 10rpx;
 }
 
-.office-area{
-  font-family: 'Flama';
-  font-weight: normal;
-  font-size: 11pt;
-  color: #FFFFFF;
-  background-color:#666666; 
-  margin-bottom: 32rpx;
-  padding: 5rpx;
+.icon-text{
+  margin-top: 24rpx;
+  font-size: 10pt;
+  font-family: 'Open Sans';
+  color: #666666;
+}
+
+.icon-desc{
+  font-size: 6pt;
+  font-family: 'Open Sans';
+  color: #666666;
+}
+
+.body{
+  background-color: whitesmoke;
 }
