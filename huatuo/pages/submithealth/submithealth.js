@@ -1,4 +1,5 @@
 // pages/home/home.js
+const { $Message } = require('../dist/base/index');
 Page({
 
   /**
@@ -38,7 +39,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      maxlength: 8,
+      maxlength: 15,
       label: '2. 你的紧急联系电话 Your cell phone for emergency call:',
       confirmLabel: '2. 你的紧急联系电话 Your cell phone for emergency call:',
       bindInputName: 'inputEvent',
@@ -124,7 +125,7 @@ Page({
         id: 2,
         name: '不需要提供紧急支持 (No need for emergency support)'
       }],
-      title: '7. 你或者被你报告的同事，需要公司提供紧急支持吗 Does the reported colleague need emergency support from the company?',
+      title: '8. 你或者被你报告的同事，需要公司提供紧急支持吗 Does the reported colleague need emergency support from the company?',
       current: '-',
       position: 'left',
       checked: false,
@@ -138,7 +139,7 @@ Page({
         id: 2,
         name: '无法远程工作(请提供具体原因）No, cannot work from home (please describe your current status)'
       }],
-      title: '8. 你或者被你报告的同事，如身体情况允许远程工作，是否有远程工作的条件，包括Laptop，V.P.N token，Internet WIFI等 If the health condition allows you or the reported colleague to work remotely, do you or the reported colleague have sufficient facilities to work from home, including Laptop, V.P.N token, and internet WIFI, etc?',
+      title: '9. 你或者被你报告的同事，如身体情况允许远程工作，是否有远程工作的条件，包括Laptop，V.P.N token，Internet WIFI等 If the health condition allows you or the reported colleague to work remotely, do you or the reported colleague have sufficient facilities to work from home, including Laptop, V.P.N token, and internet WIFI, etc?',
       current: '-',
       position: 'left',
       checked: false,
@@ -231,6 +232,7 @@ Page({
     switch(num) {
       case '1': field = 'stafID.content'; break;
       case '2': field = 'mobile.content'; break;
+      case '3': field = 'address.content'; break;
     }
     this.setData({
       [field]: e.detail.value
@@ -282,5 +284,30 @@ Page({
 
   submitHealthForm(e) {
     console.log(e.detail.value);
+    var staffId = this.data.stafID.content;
+    var mobile = this.data.mobile.content;
+    var others = this.data.others.current;
+    var status = this.data.status.current;
+    var status_content = e.detail.value.status_content;
+    var address = this.data.address.content;
+    var visits = this.data.visits.current;
+    var date = this.data.date;
+    var supports = this.data.supports.current;
+    var supports_content = e.detail.value.supports_content;
+    var remote = this.data.remote.current;
+    var remote_content = e.detail.value.remote_content;
+
+    //this.handleError();
+
+    wx.navigateTo({
+      url: '/pages/successful/successful',
+    })
+  },
+
+  handleError() {
+    $Message({
+      content: '请完善信息!',
+      type: 'error'
+    });
   }
 })
