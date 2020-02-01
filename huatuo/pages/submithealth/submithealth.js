@@ -368,7 +368,7 @@ Page({
   //call api
   request(data) {
     wx.request({
-      url: 'https://huatuo.app77.cn/api/health44',
+      url: 'https://huatuo.app77.cn/api/health',
       method: 'GET',
       data: {},
       header: {
