@@ -36,7 +36,7 @@
             <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
             </i-radio>
             <view wx:if="{{item.id == '5'}}">
-              <textarea class="form-textarea" name="status_content"></textarea>
+              <textarea hidden="{{isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
             </view>
           </block>
       </i-radio-group>

@@ -11,7 +11,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '4. 您或您所报告同事的部门(What is the departmentof the reported colleague?',
+      label: '4. 你或你所报告同事的部门(What is the departmentof the reported colleague?',
       confirmLabel: '2. Department (部门)',
       array: ['- Please Select (请选择) -', 'PWS', 'PIB', 'HACN'],
       index: 0,
@@ -49,7 +49,7 @@ Page({
     },
     area: {
       region: '请选择 Please Select',
-      label: '5. 您或您所报告同事的办公城市 Where are you or the reported colleague located? *',
+      label: '5. 你或你所报告同事的办公城市 Where are you or the reported colleague located? *',
     },
     others: {
       items: [{
@@ -99,7 +99,7 @@ Page({
         id: 6,
         name: '居住楼或小区被有关部门限制出入 The building or residential estate lived in is being restricted.'
         }],
-      title: '7. 您现在的情况是 What is the current circumstance of the reported colleague? *',
+      title: '7. 你现在的情况是 What is the current circumstance of the reported colleague? *',
       current: '-',
       position: 'left',
       checked: false,
@@ -136,7 +136,8 @@ Page({
       position: 'left',
       checked: false,
       disabled: false,
-    }//,
+    },
+    isHideOtherSymptom: true
     // supports: {
     //   items: [{
     //     id: 1,
@@ -272,8 +273,10 @@ Page({
   //
   handleStatusChange({ detail = {} }) {
     console.log(detail.value)
+    var v = this.getFieldValue(detail.value, this.data.status.items);
     this.setData({
-      ['status.current']: detail.value
+      ['status.current']: detail.value,
+      isHideOtherSymptom: v !== 5
     });
   },
   //
