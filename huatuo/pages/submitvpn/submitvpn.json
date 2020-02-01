@@ -6,6 +6,7 @@
     "i-radio": "/pages/dist/radio/index",
     "i-panel": "/pages/dist/panel/index",
     "i-checkbox-group": "/pages/dist/checkbox-group/index",
-    "i-checkbox": "/pages/dist/checkbox/index"
+    "i-checkbox": "/pages/dist/checkbox/index",
+    "i-message": "/pages/dist/message/index"
   }
 }
