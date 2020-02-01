@@ -11,8 +11,8 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: 'Department (部门)',
-      confirmLabel: 'Department (部门)',
+      label: '4. 您或您所报告同事的部门(What is the departmentof the reported colleague?',
+      confirmLabel: '2. Department (部门)',
       array: ['- Please Select (请选择) -', 'PWS', 'PIB', 'HACN'],
       index: 0,
       bindName: 'pickerChange',
@@ -47,6 +47,10 @@ Page({
       num: '2',
       content: ''
     },
+    area: {
+      region: '请选择 Please Select',
+      label: '5. 您或您所报告同事的办公城市 Where are you or the reported colleague located? *',
+    },
     others: {
       items: [{
         id: 1,
@@ -60,6 +64,20 @@ Page({
       position: 'left',
       checked: false,
       disabled: false,
+    },
+    flag: true,
+    othersStaffId: {
+      hasLabel: true,
+      hasWarning: false,
+      isMandatory: true,
+      isCRSRelated: false,
+      maxlength: 15,
+      label: '你所报告同事的员工编号 The Staff ID of reported collegue:',
+      confirmLabel: '你所报告同事的员工编号 The Staff ID of reported collegue:',
+      bindInputName: 'inputEvent',
+      warningLabel: 'Please Enter the staff ID (请输入员工编号)',
+      num: '3',
+      content: ''
     },
     status: {
       items: [{
@@ -81,24 +99,11 @@ Page({
         id: 6,
         name: '居住楼或小区被有关部门限制出入 The building or residential estate lived in is being restricted.'
         }],
-      title: '4. 你或者被你报告的同事，现在的情况是 What is the current circumstance of the reported colleague? *',
+      title: '7. 您现在的情况是 What is the current circumstance of the reported colleague? *',
       current: '-',
       position: 'left',
       checked: false,
       disabled: false,
-    },
-    address: {
-      hasLabel: true,
-      hasWarning: false,
-      isMandatory: true,
-      isCRSRelated: false,
-      maxlength: 8,
-      label: '5. 你或者被你报告的同事，现在的所在地 Where are you or the reported colleague located?',
-      confirmLabel: '5. 你或者被你报告的同事，现在的所在地 Where are you or the reported colleague located?',
-      bindInputName: 'inputEvent',
-      warningLabel: 'Please Enter your locations (请输入所在地)',
-      num: '3',
-      content: ''
     },
     visits: {
       items: [{
@@ -106,46 +111,61 @@ Page({
         name: '无 None',
       }, {
         id: 2,
-        name: '广州 GZ'
+        name: 'TKH OT1'
       }, {
         id: 3,
-        name: '西安 XA'
+        name: 'TKH OT2'
+      }, {
+        id: 4,
+        name: 'Jiang Wan Office (We Work)'
+      }, {
+        id: 5,
+        name: 'Pazhou ODC'
+      }, {
+        id: 6,
+        name: 'Tanchu ODC'
+      }, {
+        id: 7,
+        name: 'Renfeng ODC'
+      }, {
+        id: 8,
+        name: 'XiAn Center'
       }],
-      title: '6. 14天之内去过的办公地点 Which office did you visit in 14 days? *',
+      title: '6. 14天之内去过的办公地点 Which office did you visit in 14 days?(多选) *',
       current: [],
       position: 'left',
       checked: false,
       disabled: false,
-    },
-    supports: {
-      items: [{
-        id: 1,
-        name: '需要提供紧急支持 (请提供联系方式及需要支持的内容） Yes, need the emergency support (please provide the contact number and what kind of support is required)',
-      }, {
-        id: 2,
-        name: '不需要提供紧急支持 (No need for emergency support)'
-      }],
-      title: '8. 你或者被你报告的同事，需要公司提供紧急支持吗 Does the reported colleague need emergency support from the company?',
-      current: '-',
-      position: 'left',
-      checked: false,
-      disabled: false,
-    },
-    remote: {
-      items: [{
-        id: 1,
-        name: '可以远程工作 Yes, can work from home',
-      }, {
-        id: 2,
-        name: '无法远程工作(请提供具体原因）No, cannot work from home (please describe your current status)'
-      }],
-      title: '9. 你或者被你报告的同事，如身体情况允许远程工作，是否有远程工作的条件，包括Laptop，V.P.N token，Internet WIFI等 If the health condition allows you or the reported colleague to work remotely, do you or the reported colleague have sufficient facilities to work from home, including Laptop, V.P.N token, and internet WIFI, etc?',
-      current: '-',
-      position: 'left',
-      checked: false,
-      disabled: false,
-    },
-    date: ''
+    }//,
+    // supports: {
+    //   items: [{
+    //     id: 1,
+    //     name: '需要提供紧急支持 (请提供联系方式及需要支持的内容） Yes, need the emergency support (please provide the contact number and what kind of support is required)',
+    //   }, {
+    //     id: 2,
+    //     name: '不需要提供紧急支持 (No need for emergency support)'
+    //   }],
+    //   title: '8. 你或者被你报告的同事，需要公司提供紧急支持吗 Does the reported colleague need emergency support from the company?',
+    //   current: '-',
+    //   position: 'left',
+    //   checked: false,
+    //   disabled: false,
+    // },
+    // remote: {
+    //   items: [{
+    //     id: 1,
+    //     name: '可以远程工作 Yes, can work from home',
+    //   }, {
+    //     id: 2,
+    //     name: '无法远程工作(请提供具体原因）No, cannot work from home (please describe your current status)'
+    //   }],
+    //   title: '9. 你或者被你报告的同事，如身体情况允许远程工作，是否有远程工作的条件，包括Laptop，V.P.N token，Internet WIFI等 If the health condition allows you or the reported colleague to work remotely, do you or the reported colleague have sufficient facilities to work from home, including Laptop, V.P.N token, and internet WIFI, etc?',
+    //   current: '-',
+    //   position: 'left',
+    //   checked: false,
+    //   disabled: false,
+    // },
+    // date: ''
   },
 
   /**
@@ -232,7 +252,7 @@ Page({
     switch(num) {
       case '1': field = 'stafID.content'; break;
       case '2': field = 'mobile.content'; break;
-      case '3': field = 'address.content'; break;
+      case '3': field = 'othersStaffId.content'; break;
     }
     this.setData({
       [field]: e.detail.value
@@ -244,6 +264,10 @@ Page({
     this.setData({
       ['others.current']: detail.value
     });
+    var value = this.getFieldValue(detail.value, this.data.others.items);
+    this.setData({
+      flag: value == 2
+    })
   },
   //
   handleStatusChange({ detail = {} }) {
@@ -267,6 +291,13 @@ Page({
     });
   },
   //
+  regionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      ['area.region']: e.detail.value
+    })
+  },
+  //
   handleVisitsChange({ detail = {} }) {
     const index = this.data.visits.current.indexOf(detail.value);
     index === -1 ? this.data.visits.current.push(detail.value) : this.data.visits.current.splice(index, 1);
@@ -286,28 +317,89 @@ Page({
     console.log(e.detail.value);
     var staffId = this.data.stafID.content;
     var mobile = this.data.mobile.content;
+    var department = this.data.department.content;
     var others = this.data.others.current;
+    var others_id = this.data.othersStaffId.content;
     var status = this.data.status.current;
     var status_content = e.detail.value.status_content;
-    var address = this.data.address.content;
+    var area = this.data.area.region;
     var visits = this.data.visits.current;
-    var date = this.data.date;
-    var supports = this.data.supports.current;
-    var supports_content = e.detail.value.supports_content;
-    var remote = this.data.remote.current;
-    var remote_content = e.detail.value.remote_content;
-
-    //this.handleError();
-
-    wx.navigateTo({
-      url: '/pages/successful/successful',
+    //var date = this.data.date;
+    //var supports = this.data.supports.current;
+    //var supports_content = e.detail.value.supports_content;
+    //var remote = this.data.remote.current;
+    //var remote_content = e.detail.value.remote_content;
+    if (staffId == '' || mobile == '' || others == '' || department == '' || status == '-' 
+      || area == '请选择 Please Select' || visits.length == 0) {
+      this.handleError();
+      return;
+    }
+    if (others == this.data.others.items[0].name && others_id == '') {
+      this.handleError();
+      return;
+    }
+    if (status == this.data.status.items[4].name && status_content == '') {
+      this.handleError();
+      return;
+    }
+    var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, area, visits);
+    this.request(data);
+  },
+  //build post data
+  buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, area, visits) {
+    var arrs = [];
+    for(var i = 0; i < visits.length; i++) {
+      var v = this.getFieldValue(visits[i], this.data.visits.items);
+      arrs.push(v);
+    }
+    var data= {
+      staffId: staffId,
+      mobile: mobile,
+      deparment: department,
+      others: this.getFieldValue(others, this.data.others.items),
+      othersStarffId: others_id,
+      status: this.getFieldValue(status, this.data.status.items),
+      statusContent: status_content,
+      area: area[1] || area[0],
+      visits: arrs.join(',')
+    };
+    return data;
+  },
+  //call api
+  request(data) {
+    wx.request({
+      url: 'https://huatuo.app77.cn/api/health',
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+        console.log(res.data);
+        var page = '/pages/successful/successful';
+        if(res.statusCode !== '200') {
+          page = '/pages/errors/errors';
+        }
+        wx.navigateTo({
+          url: page
+        })
+      }
     })
   },
-
+  //show error message
   handleError() {
     $Message({
       content: '请完善信息!',
       type: 'error'
     });
+  },
+  //
+  getFieldValue(value, data) {
+    for(var i = 0; i < data.length; i++) {
+      if(value == data[i].name) {
+        return data[i].id;
+      }
+    }
+    return null;
   }
 })

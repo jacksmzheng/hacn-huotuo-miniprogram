@@ -1,0 +1,80 @@
+/* /pages/accountintroduce/eidconfirmation/eidconfirmation.wxss */
+.page-body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.icon-view{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-box-img {
+  margin: 40rpx 0;
+}
+
+.success-text{
+  font-size: 13pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+.page-content-title {
+  font-size: 10pt;
+  color: #686868;
+  margin-top: 16rpx;
+  padding-bottom: 48rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 40rpx;
+  border-bottom: 1rpx solid #EDEDED;
+}
+
+.page-content {
+  font-size:10pt;
+  margin-top: 32rpx;
+  line-height: 40rpx;
+  color: #333333;
+  width:100%;
+}
+
+.footer-view {
+  background-color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-notice-view{
+  background-color: #EDEDED;
+  border-top: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+  padding: 32rpx;
+  font-size: 10pt;
+  color: #666666;
+  font-weight: bolder;
+  line-height: 40rpx;
+  flex: 1;
+}
+
+.remarks{
+  font-size: 10pt;
+  color: #333333;
+  font-weight: bolder;
+}
+
+.page-notice-text{
+  margin-top: 16rpx;
+  font-weight: normal;
+  color: #666666;
+}
+
+.button-view{
+  margin: 32rpx;
+}
+
+#default-btn{
+  margin-top: 32rpx;
+}

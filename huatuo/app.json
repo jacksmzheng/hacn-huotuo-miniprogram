@@ -3,7 +3,8 @@
     "pages/officestatus/officestatus",
     "pages/submithealth/submithealth",
     "pages/submitvpn/submitvpn",
-    "pages/successful/successful"
+    "pages/successful/successful",
+    "pages/errors/errors"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFF",
