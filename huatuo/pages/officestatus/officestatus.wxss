@@ -1,10 +1,26 @@
 /* pages/officestatus/officestatus.wxss */
-@import '/pages/common/template/commonstatus/commonstatus.wxss';
+@import '/pages/common/template/commonhealthstatus/commonhealthstatus.wxss';
 .office-area {
   font-family: 'Open Sans';
   font-size: 12pt;
   color: black;
   font-weight: bold;
+}
+
+.status-desc{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.status-desc-label{
+  width: 25%;
+  font-size: 10pt;
+  text-align: center;
+  padding: 5rpx;
+  font-family: 'Open Sans';
+  color: #FFFFFF; 
+  margin-bottom: 32rpx;
 }
 
 .office-desc{
@@ -51,4 +67,83 @@
 
 .body{
   background-color: whitesmoke;
+}
+
+.common-vpn-status-content{
+  display: flex;
+  flex-direction: row;
+}
+
+.common-vpn-status-tab{
+  width: 50%;
+  margin-right: 10rpx;
+}
+
+.common-vpn-status-sub-tab{
+  font-weight: bold;
+  padding: 10rpx 0;
+  font-family: 'Open Sans';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.common-vpn-status-sub-sub-tab{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.common-vpn-status-sub-sub-tab .label{
+  font-size: 30pt;
+  font-weight: bolder;
+}
+
+.common-vpn-status-sub-sub-tab .desc{
+  font-size: 10pt;
+  font-weight: normal;
+}
+
+.common-vpn-status-desc{
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 14pt;
+  padding: 5rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.common-vpn-status-desc .desc{
+  font-size: 7pt;
+}
+
+.common-status-green-num{
+  background-color:rgba(54,223,165, 0.2);
+  color:#36DFA5;
+}
+
+.common-status-green-desc{
+  background-color:rgba(54,223,165, 0.6);
+  color:#36DFA5;
+}
+
+.common-status-blue-num{
+  background-color:rgba(106,206,252, 0.4);
+  color:#6ACEFC;
+}
+
+.common-status-blue-desc{
+  background-color:rgba(106,206,252, 0.6);
+  color: #6ACEFC;
+}
+
+.common-status-orange-num{
+  background-color:rgba(255,122,3, 0.4);
+  color:#FF7A03;
+}
+
+.common-status-orange-desc{
+  background-color:rgba(255,122,3, 0.6);
+  color: #FF7A03;
 }
