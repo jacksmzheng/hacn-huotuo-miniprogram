@@ -2,24 +2,72 @@
 <import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
 <view class='page-section'>
   <view class='top-separate-line'></view>
-  <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
-  <template is='common-picker' data="{{...department}}"></template>
-  <!-- <commonmodal obj='{{modalObj}}' bindconfirm='{{modalObj.confirm}}' /> -->
-  <i-panel title="{{visitHuBei.title}}">
-    <i-radio-group current="{{visitHuBei.current}}" bindchange="handleVisitHubeiChange">
-        <i-radio wx:for="{{visitHuBei.items}}" color="green" position="{{visitHuBei.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>
-</i-panel>
+  <form bindsubmit="submitHealthForm">
+    <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
+    <commoninput obj="{{mobile}}" bindinputEvent='{{mobile.bindInputName}}'/>
+    <!-- <template is='common-picker' data="{{...department}}"></template> -->
+    <!-- <commonmodal obj='{{modalObj}}' bindconfirm='{{modalObj.confirm}}' /> -->
+    <i-panel title="{{others.title}}">
+      <i-radio-group current="{{others.current}}" bindchange="handleOthersChange">
+          <i-radio wx:for="{{others.items}}" color="green" position="{{others.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
 
-<i-panel title="{{healths.title}}">
-    <i-checkbox-group current="{{healths.current}}" bindchange="handleHealthChange">
-        <i-checkbox wx:for="{{healths.items}}" position="{{healths.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-        </i-checkbox>
-    </i-checkbox-group>
-</i-panel>
+    <i-panel title="{{status.title}}">
+      <i-radio-group current="{{status.current}}" bindchange="handleStatusChange">
+          <block wx:for="{{status.items}}">
+            <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '5'}}">
+              <textarea class="form-textarea" name="status-content"></textarea>
+            </view>
+          </block>
+      </i-radio-group>
+    </i-panel>
 
-  <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" bindtap="submitHealthForm">提交</button>
+    <commoninput obj="{{address}}" bindinputEvent='{{address.bindInputName}}'/>
+    
+  <i-panel title="{{visits.title}}">
+        <i-checkbox-group current="{{visits.current}}" bindchange="handleVisitsChange">
+            <i-checkbox wx:for="{{visits.items}}" position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-checkbox>
+        </i-checkbox-group>
+    </i-panel>
+
+  <i-panel title="6. 你或者被你报告的同事，是什么时候开始发现相关症状的 When did the current symptom start？">
+    <picker mode="date" value="{{date}}" start="2019-09-01" end="2020-09-01" bindchange="bindDateChange">
+      <view class="picker health-picker">
+        当前选择: {{date}}
+      </view>
+    </picker>
+  </i-panel>
+
+    <i-panel title="{{supports.title}}">
+        <i-radio-group current="{{supports.current}}" bindchange="handleSupportsChange">
+          <block wx:for="{{supports.items}}">
+            <i-radio position="{{supports.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '1'}}">
+              <textarea class="form-textarea" name="support-content"></textarea>
+            </view>
+          </block>
+        </i-radio-group>
+    </i-panel>
+
+    <i-panel title="{{remote.title}}">
+        <i-radio-group current="{{remote.current}}" bindchange="handleRemoteChange">
+            <i-radio wx:for="{{remote.items}}" position="{{remote.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <textarea class="form-textarea" name="remote-content"></textarea>
+        </i-radio-group>
+    </i-panel>
+    <!-- <i-panel title="如有，请具体说明：*">
+      <textarea class="form-textarea" name="textarea"></textarea>
+    </i-panel> -->
+
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+  </form>
 </view>
 
 

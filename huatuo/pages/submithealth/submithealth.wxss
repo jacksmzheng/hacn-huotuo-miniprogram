@@ -13,3 +13,15 @@ textarea {
 #primary-btn {
   margin-right: 0rpx;
 }
+
+.form-textarea {
+  border: 1px #B2B2B2 solid;
+  margin: 10px 0;
+}
+
+.health-picker {
+  font-family: 'Open Sans';
+  color: #333333;
+  font-size: 11pt;
+  font-weight: normal;
+}
