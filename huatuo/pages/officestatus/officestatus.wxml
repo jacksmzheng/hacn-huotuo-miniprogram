@@ -1,5 +1,23 @@
 <!--pages/officestatus/officestatus.wxml-->
+<import src="/pages/common/template/commonstatus/commonstatus.wxml"/>
 <view class="page-section">
+  <view class="status">办公地点健康情况</view>
+  <block wx:for="{{healthStatus}}" wx:key="{{item}}">
+    <view class="office-area">{{item.area}}</view>
+    <block wx:for="{{item.building}}" wx:key="{{item}}">
+      <template is='common-status' data="{{...item}}"></template>
+    </block>
+
+  </block>
+  <view class="status">VPN状态</view>
+  <block wx:for="{{vpnStatus[0].vpn}}" wx:key="{{item}}">
+    <template is='common-status' data="{{...item}}"></template>
+  </block>
+
+
+
+
+
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">上报健康状态</button>
 
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">上报VPN问题</button>
@@ -9,6 +27,6 @@
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >请求帮助</button>
 
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >员工调研</button>
-  
+
 </view>
 

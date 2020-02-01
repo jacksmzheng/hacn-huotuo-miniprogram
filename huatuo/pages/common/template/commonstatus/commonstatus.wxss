@@ -1,0 +1,32 @@
+.common-status-container-view{
+  width: 100%;
+  margin-bottom: 48rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.common-status-label{
+  width: 180rpx;
+  margin: 10rpx 0;
+  font-family: 'Open Sans';
+  font-size: 10.5pt;
+  color: #666666;
+  font-weight: bold;
+}
+
+.common-status-desc{
+  margin-bottom: 16rpx;
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-size: 10pt;
+  color: #666666;
+  line-height: 40rpx;
+}
+
+.common-status-content{
+  width: 100%;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
