@@ -2,6 +2,7 @@
 <import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
 <view class='page-section'>
   <i-message id="message"/>
+  <!-- <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin> -->
   <view class='top-separate-line'></view>
   <form bindsubmit="submitVPNForm">
     <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
@@ -52,9 +53,19 @@
 
     <i-panel title="{{performs.title}}">
       <i-checkbox-group current="{{performs.current}}" bindchange="handlePerformsChange">
-          <i-checkbox wx:for="{{performs.items}}" position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+          <!-- <i-checkbox wx:for="{{performs.items}}" position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
           </i-checkbox>
-          <textarea class="form-textarea" name="performs_content"></textarea>
+          <textarea class="form-textarea" name="performs_content"></textarea> -->
+          <block wx:for="{{performs.items}}">
+            <i-checkbox position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-checkbox>
+            <view wx:if="{{item.id == '6'}}">
+              <textarea hidden="{{isHideOtherAppSlow}}" class="form-textarea" name="performs_other_content"></textarea>
+            </view>
+            <view wx:if="{{item.id == '7'}}">
+              <textarea hidden="{{isHideSomeAppSlow}}" class="form-textarea" name="performs_some_content"></textarea>
+            </view>
+          </block>
       </i-checkbox-group>
     </i-panel>
 
