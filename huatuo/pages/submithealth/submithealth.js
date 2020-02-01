@@ -324,24 +324,24 @@ Page({
     var status_content = e.detail.value.status_content;
     var area = this.data.area.region;
     var visits = this.data.visits.current;
-    // var date = this.data.date;
-    // var supports = this.data.supports.current;
-    // var supports_content = e.detail.value.supports_content;
-    // var remote = this.data.remote.current;
-    // var remote_content = e.detail.value.remote_content;
-    // if (staffId == '' || mobile == '' || others == '' || department == '' || status == '-' 
-    //   || area == '请选择 Please Select' || visits.length == 0) {
-    //   this.handleError();
-    //   return;
-    // }
-    // if (others == this.data.others.items[0].name && others_id == '') {
-    //   this.handleError();
-    //   return;
-    // }
-    // if (status == this.data.status.items[4].name && status_content == '') {
-    //   this.handleError();
-    //   return;
-    // }
+    //var date = this.data.date;
+    //var supports = this.data.supports.current;
+    //var supports_content = e.detail.value.supports_content;
+    //var remote = this.data.remote.current;
+    //var remote_content = e.detail.value.remote_content;
+    if (staffId == '' || mobile == '' || others == '' || department == '' || status == '-' 
+      || area == '请选择 Please Select' || visits.length == 0) {
+      this.handleError();
+      return;
+    }
+    if (others == this.data.others.items[0].name && others_id == '') {
+      this.handleError();
+      return;
+    }
+    if (status == this.data.status.items[4].name && status_content == '') {
+      this.handleError();
+      return;
+    }
     var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, area, visits);
     this.request(data);
   },
@@ -368,16 +368,20 @@ Page({
   //call api
   request(data) {
     wx.request({
-      url: 'https://huatuo.app77.cn/api/health',
+      url: 'https://huatuo.app77.cn/api/health44',
       method: 'GET',
       data: {},
       header: {
         'content-type': 'application/json'
       },
       success(res) {
-        console.log(res.data)
+        console.log(res.data);
+        var page = '/pages/successful/successful';
+        if(res.statusCode !== '200') {
+          page = '/pages/errors/errors';
+        }
         wx.navigateTo({
-          url: '/pages/successful/successful',
+          url: page
         })
       }
     })
