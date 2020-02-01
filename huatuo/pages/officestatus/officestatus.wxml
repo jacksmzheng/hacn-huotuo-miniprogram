@@ -13,11 +13,8 @@
   <block wx:for="{{vpnStatus[0].vpn}}" wx:key="{{item}}">
     <template is='common-status' data="{{...item}}"></template>
   </block>
-
-
-
-
-
+</view>
+<view class="page-section">
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">上报健康状态</button>
 
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">上报VPN问题</button>
@@ -27,6 +24,4 @@
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >请求帮助</button>
 
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" disabled="true" type="default" >员工调研</button>
-
 </view>
-
