@@ -1,7 +1,6 @@
 /* pages/officestatus/officestatus.wxss */
 @import '/pages/common/template/commonstatus/commonstatus.wxss';
 .status {
-  width: 100%;
   background-color: lightskyblue;
   margin: 32rpx 0rpx;
   font-family: 'Open Sans';
