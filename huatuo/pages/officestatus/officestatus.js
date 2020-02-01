@@ -4,15 +4,16 @@ const app = getApp()
 Page({
   /**
    * 页面的初始数据
+   * 
    */
   data: {
     healthStatus:
       [
         {
-          area:'广州',
+          area:'广州 (Guang Zhou)',
           building:[
             {
-              name:'Building 1',
+              name:'TKH OT1',
               definiteCount:0,
               suspectedCount:0,
               feverCount:0,
@@ -20,7 +21,7 @@ Page({
               status:0,
             },
             {
-              name: 'Building 2',
+              name: 'TKH OT2',
               definiteCount: 0,
               suspectedCount: 10,
               feverCount: 0,
@@ -28,7 +29,31 @@ Page({
               status:1
             },
             {
-              name: 'Building 3',
+              name: 'Jiangwan Office',
+              definiteCount: 10,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '10确诊 0疑似 0发烧',
+              status:2
+            },
+            {
+              name: 'Pazhou ODC',
+              definiteCount: 10,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '0确诊 0疑似 0发烧',
+              status:0
+            },
+            {
+              name: 'Tancun ODC',
+              definiteCount: 10,
+              suspectedCount: 0,
+              feverCount: 0,
+              desc: '0确诊 10疑似 0发烧',
+              status:1
+            },
+            {
+              name: 'Renfeng ODC',
               definiteCount: 10,
               suspectedCount: 0,
               feverCount: 0,
@@ -38,31 +63,15 @@ Page({
           ]
         },
         {
-          area:'西安',
+          area:'西安 (Xi An)',
           building: [
             {
-              name: 'Building 1',
+              name: 'XiAn Center',
               definiteCount: 0,
               suspectedCount: 0,
               feverCount: 0,
               desc: '0确诊 0疑似 0发烧',
               status: 0,
-            },
-            {
-              name: 'Building 2',
-              definiteCount: 0,
-              suspectedCount: 10,
-              feverCount: 0,
-              desc: '0确诊 10疑似 0发烧',
-              status: 1
-            },
-            {
-              name: 'Building 3',
-              definiteCount: 10,
-              suspectedCount: 0,
-              feverCount: 0,
-              desc: '10确诊 0疑似 0发烧',
-              status: 2
             }
           ]
         }
