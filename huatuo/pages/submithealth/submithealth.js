@@ -361,10 +361,10 @@ Page({
     var data= {
       staffId: staffId,
       mobileNum: mobile,
-      deparment: department,
+      department: department,
       reporter: others == 2 ? staffId : others_id,
       healthStatus: this.getFieldValue(status, this.data.status.items),
-      statusContent: status_content,
+      other: status_content,
       city: area[1] || area[0],
       workplace: arrs.join(',')
     };
