@@ -12,7 +12,7 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 8,
-      label: '1. 员工号 Staf ID',
+      label: '1. 你的员工编号 Your Staf ID',
       bindInputName: 'inputEvent',
       placeholder: '请输入 Please Enter',
       content: ''
@@ -91,8 +91,8 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '6. 你在使用中国大陆 V.P.N 还是 香港V.P.N ？ You are using CN V.P.N or HK V.P.N ?',
-      array: ['请选择 Please Select', '中国大陆V.P.N CN V.P.N', '香港V.P.N HK V.P.N'],
+      label: '6. 你所用的VPN类型 Your VPN Type',
+      array: ['请选择 Please Select', '中国大陆VPN CN VPN', '香港VPN HK VPN'],
       index: 0,
       bindName: 'vpnPickerChange',
       content: ''
@@ -104,10 +104,10 @@ Page({
         name: '已经重启 YES',
       }, {
         id: 2,
-        name: '没有重启 NO',
+        name: '没有重启 NO',//note:Suggest to try again after reboot 建议重启再试
       }
       ],
-      title: '7. 你重启ADSL基带猫了吗？ Have you try to reboot your ADSL modem ?',
+      title: '7. 你重启ADSL基带猫了吗？ Have you rebooted your ADSL modem ?',
       current: '-',
       position: 'left',
       checked: false,
@@ -117,10 +117,10 @@ Page({
     symptom: {
       items: [{
         id: 1,
-        name: '无法登陆V.P.N Can not login',
+        name: '无法登陆VPN Can not login',
       }, {
         id: 2,
-        name: 'V.P.N连接经常会断开 Always disconnect',
+        name: 'VPN连接经常会断开 Always disconnect',
       }, {
         id: 3,
         name: '其他，请填写第9题 Others, please fill in Question #9',
@@ -156,7 +156,7 @@ Page({
         id: 7,
           name: "某些应用程序不能访问 Some application can't access",
       }],
-      title: '9. 使用V.P.N.时，有些应用程序反应很慢： Using V.P.N. some application performs very slow :',
+      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN',
       current: [],
       position: 'left',
       checked: false,
