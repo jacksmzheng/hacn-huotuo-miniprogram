@@ -58,6 +58,7 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 8,
+      type: 'number',
       label: '1. 你的员工编号 Your Staff ID:',
       bindInputName: 'inputEvent',
       num: '1',
@@ -69,6 +70,7 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 15,
+      type: 'number',
       label: '2. 你的紧急联系电话 Your cell phone for emergency call :',
       confirmLabel: '2. 你的紧急联系电话 Your cell phone for emergency call :',
       bindInputName: 'inputEvent',
@@ -369,8 +371,9 @@ Page({
     //var supports_content = e.detail.value.supports_content;
     //var remote = this.data.remote.current;
     //var remote_content = e.detail.value.remote_content;
-    if (staffId == '' || mobile == '' || others == '-' || department == '' || status == '-' 
-      || city == '0' || visits.length == 0) {
+    var isInvalidDepartment = department == this.data.department.array[0] || department == '';
+    if (staffId == '' || mobile == '' || others == '-' || isInvalidDepartment || status == '-' 
+      || city == '0' || city == 0 || visits.length == 0) {
       this.handleError();
       return;
     }
@@ -380,6 +383,11 @@ Page({
     }
     if (status == this.data.status.items[4].name && status_content == '') {
       this.handleError();
+      return;
+    }
+    //var reg = new RegExp('^\\d+$', 'gi');
+    if (!(/^\d+$/g).test(staffId) || !(/^\d+$/g).test(mobile)) {
+      this.handleError('请输入合法的员工编号或者电话号码！');
       return;
     }
     var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, city, visits);
@@ -429,9 +437,9 @@ Page({
     })
   },
   //show error message
-  handleError() {
+  handleError(message) {
     $Message({
-      content: '请完善信息!',
+      content: message || '请完善信息!',
       type: 'error'
     });
   },

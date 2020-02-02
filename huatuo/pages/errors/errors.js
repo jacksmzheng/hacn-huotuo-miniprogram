@@ -31,7 +31,7 @@ Page({
   initData: function () {
     var navigateTitle = '提交失败'
     var successful = '信息提交失败'
-    var alert = "请稍后再试"
+    var alert = "对不起，请稍后再试！"
     var remarks = '注：'
     var notice = '请勿重复提交。'
     var exit = '返回'

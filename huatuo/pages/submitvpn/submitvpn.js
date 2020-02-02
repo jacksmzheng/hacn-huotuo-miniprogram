@@ -23,7 +23,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '2. 您所在的城市 Your Location',
+      label: '2. 你所在的城市 Your Location',
       array: [
         '请选择 Please Select',
         '广州市 Guang Zhou',
@@ -396,8 +396,8 @@ Page({
     var performs_other_content = e.detail.value.performs_other_content;
     var performs_some_content = e.detail.value.performs_some_content;
     var symptom_id = this.getFieldValue(symptom, this.data.symptom.items);
-    if (staffId == '' || city == 0 || isp == '-' || linkType == '-'
-      || bandWidth == '-' || vpnType == 0 || hadRebootADSL == '-'
+    if (staffId == '' || city == 0 || city == '0' || isp == '-' || linkType == '-'
+      || bandWidth == '-' || vpnType == 0 || vpnType == '0' || hadRebootADSL == '-'
       || symptom == '-') {
       this.handleError();
       return;
@@ -412,6 +412,10 @@ Page({
         this.handleError();
         return;
       }
+    }
+    if (!(/^\d+$/g).test(staffId)) {
+      this.handleError('请输入合法的员工编号！');
+      return;
     }
     var data = {
       //"openId": "xdfgdfg", // wechat open id
@@ -462,9 +466,9 @@ Page({
     })
   },
   //show error message
-  handleError() {
+  handleError(message) {
     $Message({
-      content: '请完善信息!',
+      content: message || '请完善信息!',
       type: 'error'
     });
   },
