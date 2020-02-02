@@ -140,7 +140,7 @@ Page({
     visits: {
       items: [{
         id: 1,
-        name: '无 None',
+        name: 'None',
       }, {
         id: 2,
         name: 'TKH OT1'
