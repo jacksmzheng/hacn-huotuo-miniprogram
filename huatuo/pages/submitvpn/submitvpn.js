@@ -1,5 +1,6 @@
 // pages/submitvpn/submitvpn.js
 const { $Message } = require('../dist/base/index');
+const app = getApp();
 Page({
 
   /**
@@ -438,7 +439,7 @@ Page({
       "cannotAccessApplications": performs_some_content, // wording
       "reporterStaffId": staffId // staff id
     }
-    this.request({vpnStateInfo: data});
+    this.request({vpnInfo: data});
   },
 
   //call api
@@ -446,8 +447,9 @@ Page({
     this.setData({
       spinShow: true
     })
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: 'https://huatuo.app77.cn/api/vpn',
+      url: host + '/api/vpn',
       method: 'POST',
       data: data,
       header: {
