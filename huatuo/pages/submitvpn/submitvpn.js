@@ -448,7 +448,7 @@ Page({
 
   //call api
   request(data) {
-    wx.showLoading({ title: '正在提交中...' });
+    wx.showLoading({ title: '数据处理中...' });
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
       url: host + '/api/vpn',
