@@ -1,5 +1,6 @@
 // pages/submithealth/submithealth.js
 const { $Message } = require('../dist/base/index');
+const app = getApp();
 Page({
 
   /**
@@ -417,8 +418,9 @@ Page({
   },
   //call api
   request(data) {
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: 'https://huatuo.app77.cn/api/health',
+      url: host + '/api/health',
       method: 'POST',
       data: data,
       header: {
