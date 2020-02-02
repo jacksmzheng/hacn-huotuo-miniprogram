@@ -128,6 +128,11 @@
   color:#36DFA5;
 }
 
+
+.common-status-tab .common-status-green-desc {
+  color: #000000;
+}
+
 .common-status-blue-num{
   background-color:rgba(106,206,252, 0.4);
   color:#6ACEFC;

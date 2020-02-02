@@ -18,48 +18,36 @@ Page({
               definiteCount:0,
               suspectedCount:3,
               feverCount:2,
-              // desc:'0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
-              // status:0,
             },
             {
               name: 'TKH OT2',
               definiteCount: 2,
               suspectedCount: 21,
               feverCount: 70,
-              // desc: '0确诊/Confirm 10疑似/Suspect 0发烧/Fever',
-              // status:1
             },
             {
               name: 'Jiangwan Office (Wework)',
               definiteCount: 13,
               suspectedCount: 34,
               feverCount: 135,
-              // desc: '10确诊/Confirm 0疑似/Suspect 0发烧/Fever',
-              // status:2
             },
             {
               name: 'Pazhou ODC',
               definiteCount: 24,
               suspectedCount: 5,
               feverCount: 7,
-              // desc: '0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
-              // status:0
             },
             {
               name: 'Tancun ODC',
               definiteCount: 7,
               suspectedCount: 0,
               feverCount: 3,
-              // desc: '0确诊/Confirm 10疑似/Suspect 0发烧/Fever',
-              // status:1
             },
             {
               name: 'Renfeng ODC',
               definiteCount: 3,
               suspectedCount: 5,
               feverCount: 0,
-              // desc: '10确诊/Confirm 0疑似/Suspect 0发烧/Fever',
-              // status:2
             }
           ]
         },
@@ -72,8 +60,6 @@ Page({
               definiteCount: 6,
               suspectedCount: 0,
               feverCount: 5,
-              // desc: '0确诊/Confirm 0疑似/Suspect 0发烧/Fever',
-              // status: 0,
             }
           ]
         }
@@ -84,7 +70,7 @@ Page({
           vpn: [
             {
               name: 'VPN-HK',
-              count: 32
+              count: 0
             },
             {
               name: 'VPN-CN',
@@ -116,23 +102,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // wx.request({
-    //   url: 'https://huatuo.app77.cn/api/health',
-    //   method: 'GET',
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json',
-    //   },
-    //   success(res) {
-    //     console.log('success : ', res)
-    //   },
-    //   fail(res) {
-    //     console.log('fail : ', res)
-    //   },
-    //   complete(res) {
-    //     console.log('complete : ', res)
-    //   }
-    // })
+
   },
 
   /**
