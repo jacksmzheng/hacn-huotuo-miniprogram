@@ -1,0 +1,84 @@
+<!--pages/officestatus/officestatus.wxml-->
+<import src="/pages/common/template/commonhealthstatus/commonhealthstatus.wxml"/>
+
+<view class="body">
+
+  <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.png"/>
+
+  <view class="button-container">
+    <view style="display: flex;flex-direction: row;align-items: baseline;">
+      <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
+        <text class="icon-text">报告病例</text>
+        <text class="icon-desc">Report A Case</text>
+      </view>
+      <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
+        <text class="icon-text">VPN问题</text>
+        <text class="icon-desc">VPN Problem</text>
+      </view>
+      <block wx:if="{{!prodVersion}}">
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
+          <text class="icon-text">旅行记录</text>
+          <text class="icon-desc">Travel History</text>
+        </view>
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
+          <text class="icon-text">求助&捐赠</text>
+          <text class="icon-desc">Help & Donation</text>
+        </view>
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon5.png"></image>
+          <text class="icon-text">员工调研</text>
+          <text class="icon-desc">Research</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="page-section">
+    <block wx:for="{{healthStatus}}" wx:key="{{item}}">
+      <view class="office-area">{{item.area}}</view>
+      <view class="office-desc">{{item.areaen}}</view>
+
+      <block wx:for="{{item.buildingReports}}" wx:key="{{item}}">
+        <template is='common-health-status' data="{{...item}}"></template>
+      </block>
+
+    </block>
+    <view class="office-area">VPN状态</view>
+    <view class="office-desc">VPN Status</view>
+    <view class="common-vpn-status-content">
+      <!-- VPN-HK -->
+      <view class="common-vpn-status-tab">
+        <view class="common-vpn-status-sub-tab {{vpnStatus[0].vpn[0].count == 0 ? 'common-status-green-num' : 'common-status-blue-num' }} ">
+          <view class="common-vpn-status-sub-sub-tab">
+            <view class="label">{{vpnStatus[0].vpn[0].count}}</view>
+            <view class="desc">报告</view>
+          </view>
+        </view>
+        <view class="common-vpn-status-desc {{vpnStatus[0].vpn[0].count == 0 ? 'common-status-green-desc' : 'common-status-blue-desc' }}">
+          <view class="label">{{vpnStatus[0].vpn[0].name}}</view>
+          <view class="desc">Count of VPN Problem</view>
+        </view>
+      </view>
+
+      <!-- VPN-CN -->
+      <view class="common-vpn-status-tab">
+        <view class="common-vpn-status-sub-tab {{vpnStatus[0].vpn[1].count == 0 ? 'common-status-green-num' : 'common-status-orange-num' }} ">
+          <view class="common-vpn-status-sub-sub-tab">
+            <view class="label">{{vpnStatus[0].vpn[1].count}}</view>
+            <view class="desc">报告</view>
+          </view>
+        </view>
+        <view class="common-vpn-status-desc {{vpnStatus[0].vpn[1].count == 0 ? 'common-status-green-desc' : 'common-status-orange-desc' }}">
+          <view class="label">{{vpnStatus[0].vpn[1].name}}</view>
+          <view class="desc">Count of VPN Problem</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>

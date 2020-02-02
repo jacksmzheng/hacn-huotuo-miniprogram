@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/officestatus/officestatus",
+    "pages/submithealth/submithealth",
+    "pages/submitvpn/submitvpn",
+    "pages/successful/successful",
+    "pages/errors/errors"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTitleText": "HUATUO",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

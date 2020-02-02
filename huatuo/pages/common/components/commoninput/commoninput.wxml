@@ -1,0 +1,9 @@
+<view class='form-input-view'>
+  <rich-text class='form-input-label' style="display:{{obj.hasLabel && !obj.hideLabel ? 'block' : 'none' }}" nodes='{{obj.label}}{{obj.isMandatory ? "<sup>*</sup>" : ""}}{{obj.isCRSRelated ? "<sup>#</sup>" : ""}}{{obj.eg}}'/>
+  <view class='form-input-desc' style="display:{{obj.desc ? 'block' : 'none' }}">{{obj.desc}}</view>
+  <input 
+  class="form-input-content" 
+  style='border-color: {{ status == "1" ? "#34A344" : obj.hasWarning ? "#CC0000" : "#B2B2B2" }}'
+  maxlength="{{obj.maxlength ? obj.maxlength : 200}}" data-num='{{obj.num}}' bindinput="{{obj.bindInputName}}" placeholder="{{obj.placeholder}}" value='{{obj.content}}' type='{{obj.type}}' cursor-spacing='150rpx' disabled='{{obj.isDisabled}}' bindfocus='focus' bindblur='blur' />
+  <view class='warning-label' style="display:{{obj.hasWarning ? 'block' : 'none' }};" >{{obj.warningLabel}}</view>
+</view>

@@ -1,0 +1,91 @@
+<!--pages/home/home.wxml-->
+<import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
+<view class='page-section'>
+  <i-message id="message"/>
+  <view class='top-separate-line'></view>
+  <form bindsubmit="submitHealthForm">
+    <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
+    <commoninput obj="{{mobile}}" bindinputEvent='{{mobile.bindInputName}}'/>
+    <i-panel title="{{others.title}}">
+      <i-radio-group current="{{others.current}}" bindchange="handleOthersChange">
+          <i-radio wx:for="{{others.items}}" color="green" position="{{others.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <view hidden="{{flag}}">
+      <commoninput obj="{{othersStaffId}}" bindinputEvent='{{othersStaffId.bindInputName}}'/>
+    </view>
+    <template is='common-picker' data="{{...department}}"></template>
+    <!-- <commonmodal obj='{{modalObj}}' bindconfirm='{{modalObj.confirm}}' /> -->
+    <template is='common-picker' data="{{...city}}"></template>
+ <!-- <view class="picker-container-view">
+    <rich-text class='picker-label' nodes='{{area.label}}'/>
+    <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
+      <view class='picker-item-label'>{{area.region}}</view>
+    </picker>
+  </view> -->
+  <i-panel title="{{visits.title}}">
+        <i-checkbox-group current="{{visits.current}}" bindchange="handleVisitsChange">
+          <block wx:for="{{visits.items}}">
+            <view wx:if="{{index == 0}}">
+              <i-checkbox position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+            </view>
+             <view wx:if="{{index > 0}}" hidden="{{isHideOtherWorkPlace}}">
+              <i-checkbox position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+            </view>
+          </block>
+        </i-checkbox-group>
+    </i-panel>
+    <i-panel title="{{status.title}}">
+      <i-radio-group current="{{status.current}}" bindchange="handleStatusChange">
+          <block wx:for="{{status.items}}">
+            <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '5'}}">
+              <textarea hidden="{{isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
+            </view>
+          </block>
+      </i-radio-group>
+    </i-panel>
+
+    <!-- <commoninput obj="{{address}}" bindinputEvent='{{address.bindInputName}}'/> -->
+ 
+
+  <!-- <i-panel title="7. 你或者被你报告的同事，是什么时候开始发现相关症状的 When did the current symptom start？">
+    <picker mode="date" value="{{date}}" start="2019-09-01" end="2020-09-01" bindchange="bindDateChange">
+      <view class="picker health-picker">
+        当前选择: {{date}}
+      </view>
+    </picker>
+  </i-panel>
+
+    <i-panel title="{{supports.title}}">
+        <i-radio-group current="{{supports.current}}" bindchange="handleSupportsChange">
+          <block wx:for="{{supports.items}}">
+            <i-radio position="{{supports.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '1'}}">
+              <textarea class="form-textarea" name="supports_content"></textarea>
+            </view>
+          </block>
+        </i-radio-group>
+    </i-panel>
+
+    <i-panel title="{{remote.title}}">
+        <i-radio-group current="{{remote.current}}" bindchange="handleRemoteChange">
+            <i-radio wx:for="{{remote.items}}" position="{{remote.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <textarea class="form-textarea" name="remote_content"></textarea>
+        </i-radio-group>
+    </i-panel> -->
+    <!-- <i-panel title="如有，请具体说明：*">
+      <textarea class="form-textarea" name="textarea"></textarea>
+    </i-panel> -->
+
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+  </form>
+</view>
+
+

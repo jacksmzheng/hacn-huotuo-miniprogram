@@ -1,0 +1,21 @@
+<!--/pages/submitdocuments/successful/successful.wxml-->
+<view class='page-body'>
+  <view class='top-separate-line'></view>
+  <view class='page-section icon-view'>
+    <icon class="icon-box-img" type="success" size="50"></icon>
+    <view class='success-text'>{{successful}}</view>
+    <view class='page-content-title'> </view>
+    <view class='page-content'>{{alert}}</view>
+  </view>
+
+  <view class='footer-view'>
+    <view class='page-notice-view'>
+      <view class='remarks'>{{remarks}}</view>
+      <view class='page-notice-text'>{{notice}}</view> 
+    </view>
+    <view class='button-view'>
+      <button class="primary-btn" style="width:100%;" type="primary" bindtap='exit'>{{exit}}</button>
+    </view> 
+  </view>
+
+</view>
