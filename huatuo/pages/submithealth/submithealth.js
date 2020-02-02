@@ -11,13 +11,10 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '4. 你或你所报告同事的部门(What is the departmentof the reported colleague?',
-      confirmLabel: '2. Department (部门)',
-      array: ['- Please Select (请选择) -', 'PWS', 'PIB', 'HACN'],
+      label: '4. 你或你所报告同事的部门 What is the departmentof the reported colleague?',
+      array: ['请选择 Please Select', 'PWS', 'PIB', 'HACN'],
       index: 0,
       bindName: 'pickerChange',
-      placeholder: '',
-      warningLabel: 'Please Select Department (请选择部门)',
       content: ''
     },
 
@@ -28,9 +25,7 @@ Page({
       isCRSRelated: false,
       maxlength: 8,
       label: '1. 你的员工编号 Your Staff ID:',
-      confirmLabel: '1. 你的员工编号 Your Staff ID:',
       bindInputName: 'inputEvent',
-      warningLabel: 'Please Enter Staf ID (请输入员工号)',
       num: '1',
       content: ''
     },

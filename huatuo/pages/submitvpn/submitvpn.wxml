@@ -8,7 +8,7 @@
     <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
 
     <view class="picker-container-view">
-      <rich-text class='picker-label' nodes='2. Your Location City 您所在城市'/>
+      <rich-text class='picker-label' nodes='2. 您所在城市 Your Location City'/>
       <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
         <view class='picker-item-label'>{{area.region}}</view>
       </picker>
@@ -53,9 +53,6 @@
 
     <i-panel title="{{performs.title}}">
       <i-checkbox-group current="{{performs.current}}" bindchange="handlePerformsChange">
-          <!-- <i-checkbox wx:for="{{performs.items}}" position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-          </i-checkbox>
-          <textarea class="form-textarea" name="performs_content"></textarea> -->
           <block wx:for="{{performs.items}}">
             <i-checkbox position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
             </i-checkbox>
@@ -68,22 +65,6 @@
           </block>
       </i-checkbox-group>
     </i-panel>
-
-    <!-- <template is='common-picker' data="{{...wfh}}"></template>
-    <template is='common-picker' data="{{...token}}"></template>
-    <template is='common-picker' data="{{...vpnType}}"></template>
-    <commoninput obj="{{support}}" bindinputEvent='{{support.bindInputName}}'/>
-    <i-panel title="{{remoteWork.title}}">
-      <i-radio-group current="{{remoteWork.current}}" bindchange="handleRemoteWorkChange">
-          <block wx:for="{{remoteWork.items}}">
-            <i-radio position="{{remoteWork.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-            </i-radio>
-            <view wx:if="{{item.id == '2'}}">
-              <textarea class="form-textarea" name="remote_content"></textarea>
-            </view>
-          </block>
-      </i-radio-group>
-    </i-panel> -->
 
     <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
   </form>
