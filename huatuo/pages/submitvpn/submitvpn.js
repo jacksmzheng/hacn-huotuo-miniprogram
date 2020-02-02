@@ -174,7 +174,7 @@ Page({
         id: 7,
           name: "某些应用程序不能访问 Some application can't access",
       }],
-      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN*',
+      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN(多选)*',
       current: [],
       position: 'left',
       checked: false,
