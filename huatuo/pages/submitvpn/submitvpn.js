@@ -13,9 +13,10 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 8,
-      label: '1. 你的员工编号 Your Staf ID',
+      label: '1. 你的员工编号 Your Staff ID',
       bindInputName: 'inputEvent',
       placeholder: '请输入 Please Enter',
+      adslModemFlag:false,
       content: ''
     },
 
@@ -56,7 +57,7 @@ Page({
         id: 5,
         name: '其它 Others',
       }],
-      title: '3. 你所使用的宽带服务 Your internet ISP',
+      title: '3. 你所使用的宽带服务 Your internet ISP*',
       current: '-',
       position: 'left',
       checked: false,
@@ -74,7 +75,7 @@ Page({
         id: 3,
         name: "不知道 Don't Know",
       }],
-      title: '4. 你所使用的上网线路 Your internet link',
+      title: '4. 你所使用的上网线路 Your internet link*',
       current: '-',
       position: 'left',
       checked: false,
@@ -96,7 +97,7 @@ Page({
         name: "不知道 Don't Know",
       }
       ],
-      title: '5. 你所使用的带宽 Your bandwidth',
+      title: '5. 你所使用的带宽 Your bandwidth*',
       current: '-',
       position: 'left',
       checked: false,
@@ -124,7 +125,7 @@ Page({
         name: '没有重启 NO',//note:Suggest to try again after reboot 建议重启再试
       }
       ],
-      title: '7. 你重启ADSL基带猫了吗？ Have you rebooted your ADSL modem ?',
+      title: '7. 你重启ADSL基带猫了吗？ Have you rebooted your ADSL modem ?*',
       current: '-',
       position: 'left',
       checked: false,
@@ -143,7 +144,7 @@ Page({
         name: '其他，请填写第9题 Others, please fill in Question #9',
       }
       ],
-      title: '8. 有什么症状？ What is the symptom ?',
+      title: '8. 有什么症状？ What is the symptom ?*',
       current: '-',
       position: 'left',
       checked: false,
@@ -173,7 +174,7 @@ Page({
         id: 7,
           name: "某些应用程序不能访问 Some application can't access",
       }],
-      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN',
+      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN(多选)*',
       current: [],
       position: 'left',
       checked: false,
@@ -307,9 +308,11 @@ Page({
   },
 
   handleadslModemChange({ detail = {} }) {
-    console.log(detail.value)
+    console.log(detail)
+    let adslModemFlag = detail.value =="已经重启 YES"? false : true;
     this.setData({
-      ['adslModem.current']: detail.value
+      ['adslModem.current']: detail.value,
+      adslModemFlag: adslModemFlag
     });
   },
 
@@ -385,6 +388,7 @@ Page({
   },
 
   submitVPNForm: function(e) {
+    wx.showLoading({ title: '正在提交中...' });
     var staffId = this.data.stafID.content;
     var city = this.data.city.index;
     var isp = this.data.internetISP.current;
@@ -414,7 +418,7 @@ Page({
         return;
       }
     }
-    if (!(/^\d+$/g).test(staffId)) {
+    if (!(/^\d{8}$/g).test(staffId)) {
       this.handleError('请输入合法的员工编号！');
       return;
     }
@@ -456,12 +460,13 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
+        wx.hideLoading();
         console.log(res.data);
         var page = '/pages/successful/successful';
         if (res.statusCode !== 200) {
           page = '/pages/errors/errors';
         }
-        wx.navigateTo({
+        wx.redirectTo({
           url: page
         })
       }
@@ -473,6 +478,7 @@ Page({
       content: message || '请完善信息!',
       type: 'error'
     });
+    wx.hideLoading();
   },
   //
   getFieldValue(value, data) {
