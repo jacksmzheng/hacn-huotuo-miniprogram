@@ -8,7 +8,7 @@
     <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
 
     <view class="picker-container-view">
-      <rich-text class='picker-label' nodes='2. 您所在城市 Your Location City'/>
+      <rich-text class='picker-label' nodes='2. 您所在的城市 Your Location'/>
       <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
         <view class='picker-item-label'>{{area.region}}</view>
       </picker>
@@ -39,9 +39,14 @@
 
     <i-panel title="{{adslModem.title}}">
       <i-radio-group current="{{adslModem.current}}" bindchange="handleadslModemChange">
-          <i-radio wx:for="{{adslModem.items}}" color="green" position="{{adslModem.position}}" wx:key="{{item.id}}" value="{{item.name}}">
-          </i-radio>
-      </i-radio-group>  
+          <block wx:for="{{adslModem.items}}">
+            <i-radio position="{{adslModem.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '2'}}">
+                <view class='picker-label-notes'>建议重启再试 Suggest to try again after reboot</view>
+            </view>
+          </block>
+      </i-radio-group>
     </i-panel>
 
     <i-panel title="{{symptom.title}}">

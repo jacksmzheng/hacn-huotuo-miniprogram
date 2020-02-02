@@ -7,59 +7,60 @@ Page({
    * 
    */
   data: {
+    prodVersion: false,
     healthStatus:
       [
         {
           area:'广州办公室情况',
           areaen: 'Guangzhou Office Status',
-          building:[
+          buildingReports:[
             {
-              name:'TKH OT1',
-              definiteCount:0,
-              suspectedCount:3,
-              feverCount:2,
+              buildingName:'TKH OT1',
+              confirmed:0,
+              suspect:3,
+              fever:2,
             },
             {
-              name: 'TKH OT2',
-              definiteCount: 2,
-              suspectedCount: 21,
-              feverCount: 70,
+              nambuildingNamee: 'TKH OT2',
+              confirmed: 2,
+              suspect: 21,
+              fever: 70,
             },
             {
-              name: 'Jiangwan Office (Wework)',
-              definiteCount: 13,
-              suspectedCount: 34,
-              feverCount: 135,
+              buildingName: 'Jiangwan Office (Wework)',
+              confirmed: 13,
+              suspect: 34,
+              fever: 135,
             },
             {
-              name: 'Pazhou ODC',
-              definiteCount: 24,
-              suspectedCount: 5,
-              feverCount: 7,
+              buildingName: 'Pazhou ODC',
+              confirmed: 24,
+              suspect: 5,
+              fever: 7,
             },
             {
-              name: 'Tancun ODC',
-              definiteCount: 7,
-              suspectedCount: 0,
-              feverCount: 3,
+              buildingName: 'Tancun ODC',
+              confirmed: 7,
+              suspect: 0,
+              fever: 3,
             },
             {
-              name: 'Renfeng ODC',
-              definiteCount: 3,
-              suspectedCount: 5,
-              feverCount: 0,
+              buildingName: 'Renfeng ODC',
+              confirmed: 3,
+              suspect: 5,
+              fever: 0,
             }
           ]
         },
         {
           area:'西安办公室情况',
           areaen: 'XiAn Office Status',
-          building: [
+          buildingReports: [
             {
-              name: 'XiAn Center',
-              definiteCount: 6,
-              suspectedCount: 0,
-              feverCount: 5,
+              buildingName: 'XiAn Center',
+              confirmed: 6,
+              suspect: 0,
+              fever: 5,
             }
           ]
         }
@@ -70,7 +71,7 @@ Page({
           vpn: [
             {
               name: 'VPN-HK',
-              count: 0
+              count: 32
             },
             {
               name: 'VPN-CN',
@@ -102,21 +103,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // this.refreshData()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(this.data.refreshEvent)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -138,6 +139,65 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  refreshData: function () {
+    const that = this
+    that.requestHealthStatus()
+    that.requestVPNStatus()
+
+    // var refreshEvent = setInterval(function () {
+    //   that.requestHealthStatus()
+    //   that.requestVPNStatus()
+    // }, 5*60*1000)
+    // that.setData({ refreshEvent })
+  },
+
+  requestHealthStatus: function () {
+    console.log('requestHealthStatus')
+    wx.request({
+      url: 'https://huatuo.app77.cn/api/health',
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json',
+        'X-IS-DUMMY': false
+      },
+      success(res) {
+        console.log(res)
+        if ( res.statusCode == 200 ){
+          var healthStatus = res.data
+          console.log('healthStatus : ', healthStatus)
+          that.setData({ healthStatus })
+
+        }
+        
+
+      },
+      fail(res) {
+        console.log('fail : ', res)
+      },
+    });
+  },
+
+  requestVPNStatus: function () {
+    console.log('requestVPNStatus')
+    const that = this
+    wx.request({
+      url: 'https://huatuo.app77.cn/api/vpnstate',
+      method: 'POST',
+      data: {},
+      header: {
+        'content-type': 'application/json',
+        'X-IS-DUMMY': false
+      },
+      success(res) {
+        console.log(res)
+      },
+      fail(res) {
+        console.log('fail : ', res)
+      },
+    })
   },
 
   submitHealth: function(e) {

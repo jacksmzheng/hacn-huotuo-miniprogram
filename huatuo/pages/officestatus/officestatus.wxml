@@ -6,32 +6,35 @@
   <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.png"/>
 
   <view class="button-container">
-    <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
-      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
-      <text class="icon-text">健康状态</text>
-      <text class="icon-desc">Health Survey</text>
+    <view style="display: flex;flex-direction: row;align-items: baseline;">
+      <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
+        <text class="icon-text">健康状态</text>
+        <text class="icon-desc">Health Survey</text>
+      </view>
+      <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
+        <text class="icon-text">VPN问题</text>
+        <text class="icon-desc">VPN Problem</text>
+      </view>
+      <block wx:if="{{!prodVersion}}">
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
+          <text class="icon-text">旅行记录</text>
+          <text class="icon-desc">Travel History</text>
+        </view>
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
+          <text class="icon-text">求助&捐赠</text>
+          <text class="icon-desc">Help & Donation</text>
+        </view>
+        <view class="icon-view">
+          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon5.png"></image>
+          <text class="icon-text">员工调研</text>
+          <text class="icon-desc">Research</text>
+        </view>
+      </block>
     </view>
-    <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
-      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
-      <text class="icon-text">VPN问题</text>
-      <text class="icon-desc">VPN Probelm</text>
-    </view>
-    <view class="icon-view">
-      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
-      <text class="icon-text">旅行记录</text>
-      <text class="icon-desc">Travel History</text>
-    </view>
-    <view class="icon-view">
-      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
-      <text class="icon-text">求助&捐赠</text>
-      <text class="icon-desc">Help & Donation</text>
-    </view>
-    <view class="icon-view">
-      <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon5.png"></image>
-      <text class="icon-text">员工调研</text>
-      <text class="icon-desc">Research</text>
-    </view>
-
   </view>
 
   <view class="page-section">
@@ -39,7 +42,7 @@
       <view class="office-area">{{item.area}}</view>
       <view class="office-desc">{{item.areaen}}</view>
 
-      <block wx:for="{{item.building}}" wx:key="{{item}}">
+      <block wx:for="{{item.buildingReports}}" wx:key="{{item}}">
         <template is='common-health-status' data="{{...item}}"></template>
       </block>
 
