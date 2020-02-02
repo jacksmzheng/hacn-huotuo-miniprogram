@@ -15,52 +15,52 @@ Page({
           areaen: 'Guangzhou Office Status',
           buildingReports:[
             {
-              buildingName:'TKH OT1',
+              buildingName:'',
               confirmed:0,
-              suspect:3,
-              fever:2,
+              suspect:0,
+              fever:0,
             },
             {
-              buildingName: 'TKH OT2',
-              confirmed: 2,
-              suspect: 21,
-              fever: 70,
-            },
-            {
-              buildingName: 'Jiangwan Office (Wework)',
-              confirmed: 13,
-              suspect: 34,
-              fever: 135,
-            },
-            {
-              buildingName: 'Pazhou ODC',
-              confirmed: 24,
-              suspect: 5,
-              fever: 7,
-            },
-            {
-              buildingName: 'Tancun ODC',
-              confirmed: 7,
+              buildingName: '',
+              confirmed: 0,
               suspect: 0,
-              fever: 3,
+              fever: 0,
             },
             {
-              buildingName: 'Renfeng ODC',
-              confirmed: 3,
-              suspect: 5,
+              buildingName: '',
+              confirmed: 0,
+              suspect: 0,
+              fever: 0,
+            },
+            {
+              buildingName: '',
+              confirmed: 0,
+              suspect: 0,
+              fever: 0,
+            },
+            {
+              buildingName: '',
+              confirmed: 0,
+              suspect: 0,
+              fever: 0,
+            },
+            {
+              buildingName: '',
+              confirmed: 0,
+              suspect: 0,
               fever: 0,
             }
           ]
         },
         {
           area:'西安办公室情况',
-          areaen: 'XiAn Office Status',
+          areaen: "Xi'An Office Status",
           buildingReports: [
             {
-              buildingName: 'XiAn Center',
-              confirmed: 6,
+              buildingName: '',
+              confirmed: 0,
               suspect: 0,
-              fever: 5,
+              fever: 0,
             }
           ]
         }
@@ -71,15 +71,15 @@ Page({
           vpn: [
             {
               name: 'VPN-HK',
-              count: 32
+              count: 0
             },
             {
               name: 'VPN-CN',
-              count: 15
+              count: 0
             }
           ]
         }
-      ]
+      ],
   },
 
   /**
@@ -103,7 +103,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.refreshData()
+    this.refreshData()
   },
 
   /**
@@ -143,20 +143,55 @@ Page({
 
   refreshData: function () {
     const that = this
-    that.requestHealthStatus()
-    that.requestVPNStatus()
+    wx.showLoading({ title: '数据加载中...' })
+    that.requestDict()
     that.setData({
       refreshEvent: setInterval(function () {
-        that.requestHealthStatus()
-        that.requestVPNStatus()
+        that.requestDict()
       }, 5 * 60 * 1000),
     })
   },
 
+  requestDict:function() {
+    const that = this
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    wx.request({
+      url: host + '/api/datadict',
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json',
+        'X-IS-DUMMY': false
+      },
+      success(res) {
+        console.log('dictionary success res :', res)
+        if (res.statusCode == 200){
+          that.setData({
+            areaDic: res.data.area,
+            buildingDic: res.data.building,
+            vpnDic: res.data.vpn
+          })
+          wx.showLoading({ title: '数据加载中...', })
+          that.requestHealthStatus()
+          that.requestVPNStatus()
+        }
+
+      },
+      fail(res) {
+        console.log('dictionary fail res : ', res)
+      },
+      complete(res) {
+        wx.hideLoading()
+      }
+    });
+
+  },
+
   requestHealthStatus: function () {
     const that = this
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: 'https://huatuo.app77.cn/api/health',
+      url: host+ '/api/health',
       method: 'GET',
       data: {},
       header: {
@@ -173,42 +208,81 @@ Page({
       fail(res) {
         console.log('health status fail res : ', res)
       },
+      complete(res){
+        wx.hideLoading()
+      }
     });
   },
 
   requestVPNStatus: function () {
-    console.log('requestVPNStatus')
     const that = this
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: 'https://huatuo.app77.cn/api/vpnstate',
+      url: host+ '/api/vpn/report',
       method: 'POST',
-      data: {},
+      data: {
+        "day": 0
+      },
       header: {
         'content-type': 'application/json',
         'X-IS-DUMMY': false
       },
       success(res) {
         console.log('vpn status success res :',res)
+        if (res.statusCode == 200 && res.data) {
+          const vpnStatus = that.formatVPNData(res.data)
+          that.setData({ vpnStatus })
+        }
       },
       fail(res) {
         console.log('vpn status fail res : : ', res)
       },
+      complete(res) {
+        wx.hideLoading()
+      }
     })
   },
 
   formatHealthData: function(responseData){
+    const areaDic = this.data.areaDic
+    const buildingDic = this.data.buildingDic
     for (let i = 0; i < responseData.length; i++){
-      console.log('responseData ' + i, responseData[i])
-      if( responseData[i].area == 'GZ'){
-        responseData[i].area = '广州办公室情况'
-        responseData[i].areaen = 'Guangzhou Office Status'
+      if (areaDic && responseData[i].area == 'GZ' ){
+        responseData[i].area = areaDic.GZ["zh-cn"] 
+        responseData[i].areaen = areaDic.GZ["en-hk"] 
+        responseData[i].buildingReports[0].buildingName = buildingDic["2"]
+        responseData[i].buildingReports[1].buildingName = buildingDic["3"]
+        responseData[i].buildingReports[2].buildingName = buildingDic["4"]
+        responseData[i].buildingReports[3].buildingName = buildingDic["5"]
+        responseData[i].buildingReports[4].buildingName = buildingDic["6"]
+        responseData[i].buildingReports[5].buildingName = buildingDic["7"]
+
       }
-      if (responseData[i].area == 'XA'){
-        responseData[i].area = '西安办公室情况'
-        responseData[i].areaen = 'XiAn Office Status'
+      if (areaDic && responseData[i].area == 'XA') {
+        responseData[i].area = areaDic.XA["zh-cn"]
+        responseData[i].areaen = areaDic.XA["en-hk"]
+        for (let j = 0; j < responseData[i].buildingReports.length; j++){
+          responseData[i].buildingReports[j].buildingName = buildingDic["8"]
+        }
       }
     }
     return responseData
+  },
+
+  formatVPNData: function(responseData){
+    const vpnReports = responseData.vpnReports
+    const vpnStatus = this.data.vpnStatus
+    const vpnDic = this.data.vpnDic
+
+    for (let i = 0; i < vpnReports.length; i++){
+      if(vpnDic[vpnReports[i].vpnType]){
+        vpnStatus[0].vpn[i].name = vpnDic[vpnReports[i].vpnType]['en-hk']
+        vpnStatus[0].vpn[i].cnname = vpnDic[vpnReports[i].vpnType]['zh-cn']
+        vpnStatus[0].vpn[i].count = vpnReports[i].count
+      }
+    }
+    
+    return vpnStatus
   },
 
   submitHealth: function(e) {
