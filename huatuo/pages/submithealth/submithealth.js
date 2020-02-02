@@ -71,7 +71,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      maxlength: 15,
+      maxlength: 11,
       type: 'number',
       label: '2. 你的紧急联系电话 Your cell phone for emergency call :',
       confirmLabel: '2. 你的紧急联系电话 Your cell phone for emergency call :',
@@ -104,7 +104,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      maxlength: 15,
+      maxlength: 8,
       label: '你所报告同事的员工编号 The Staff ID of reported colleague :',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
@@ -169,7 +169,8 @@ Page({
       checked: false,
       disabled: false,
     },
-    isHideOtherSymptom: true
+    isHideOtherSymptom: true,
+    isHideOtherWorkPlace: false
     // supports: {
     //   items: [{
     //     id: 1,
@@ -344,6 +345,12 @@ Page({
   //
   handleVisitsChange({ detail = {} }) {
     const index = this.data.visits.current.indexOf(detail.value);
+    var id = this.getFieldValue(detail.value, this.data.visits.items);
+    if(id == 1) {
+      this.setData({
+        isHideOtherWorkPlace: index == -1
+      })
+    }
     index === -1 ? this.data.visits.current.push(detail.value) : this.data.visits.current.splice(index, 1);
     this.setData({
       ['visits.current']: this.data.visits.current
@@ -379,16 +386,25 @@ Page({
       this.handleError();
       return;
     }
-    if (others == this.data.others.items[0].name && others_id == '') {
-      this.handleError();
-      return;
+    if (others == this.data.others.items[0].name) {
+      if(others_id == '') {
+        this.handleError();
+        return;
+      } else if (!(/^\d{8}$/g).test(others_id)) {
+        this.handleError('请输入合法的员工编号或者电话号码！');
+        return;
+      } else if (staffId == others_id) {
+        this.handleError('你所报告同事的员工编号不能重复!');
+        return;
+      }
+      
     }
     if (status == this.data.status.items[4].name && status_content == '') {
       this.handleError();
       return;
     }
     //var reg = new RegExp('^\\d+$', 'gi');
-    if (!(/^\d+$/g).test(staffId) || !(/^\d+$/g).test(mobile)) {
+    if (!(/^\d{8}$/g).test(staffId) || !(/^\d{11}$/g).test(mobile)) {
       this.handleError('请输入合法的员工编号或者电话号码！');
       return;
     }
@@ -413,12 +429,13 @@ Page({
       healthStatus: this.getFieldValue(status, this.data.status.items),
       other: status_content,
       city: city == '1' ? 'GZ' : 'XA',
-      workplace: arrs.join(',')
+      workplace: arrs.indexOf(1) > -1 ? '1' : arrs.join(',')
     };
     return data;
   },
   //call api
   request(data) {
+    wx.showLoading({ title: '数据处理中...' });
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
       url: host + '/api/health',
@@ -436,6 +453,9 @@ Page({
         wx.navigateTo({
           url: page
         })
+      },
+      complete(res) {
+        wx.hideLoading();
       }
     })
   },
