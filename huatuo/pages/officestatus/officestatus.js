@@ -7,7 +7,7 @@ Page({
    * 
    */
   data: {
-    prodVersion: false,
+    prodVersion: app.globalData.prodVersion,
     healthStatus:
       [
         {
@@ -21,7 +21,7 @@ Page({
               fever:2,
             },
             {
-              nambuildingNamee: 'TKH OT2',
+              buildingName: 'TKH OT2',
               confirmed: 2,
               suspect: 21,
               fever: 70,
@@ -145,16 +145,16 @@ Page({
     const that = this
     that.requestHealthStatus()
     that.requestVPNStatus()
-
-    // var refreshEvent = setInterval(function () {
-    //   that.requestHealthStatus()
-    //   that.requestVPNStatus()
-    // }, 5*60*1000)
-    // that.setData({ refreshEvent })
+    that.setData({
+      refreshEvent: setInterval(function () {
+        that.requestHealthStatus()
+        that.requestVPNStatus()
+      }, 5 * 60 * 1000),
+    })
   },
 
   requestHealthStatus: function () {
-    console.log('requestHealthStatus')
+    const that = this
     wx.request({
       url: 'https://huatuo.app77.cn/api/health',
       method: 'GET',
@@ -164,18 +164,14 @@ Page({
         'X-IS-DUMMY': false
       },
       success(res) {
-        console.log(res)
-        if ( res.statusCode == 200 ){
-          var healthStatus = res.data
-          console.log('healthStatus : ', healthStatus)
+        console.log('health status success res :',res)
+        if ( res.statusCode == 200 && res.data ){
+          const healthStatus = that.formatHealthData(res.data)
           that.setData({ healthStatus })
-
         }
-        
-
       },
       fail(res) {
-        console.log('fail : ', res)
+        console.log('health status fail res : ', res)
       },
     });
   },
@@ -192,12 +188,27 @@ Page({
         'X-IS-DUMMY': false
       },
       success(res) {
-        console.log(res)
+        console.log('vpn status success res :',res)
       },
       fail(res) {
-        console.log('fail : ', res)
+        console.log('vpn status fail res : : ', res)
       },
     })
+  },
+
+  formatHealthData: function(responseData){
+    for (let i = 0; i < responseData.length; i++){
+      console.log('responseData ' + i, responseData[i])
+      if( responseData[i].area == 'GZ'){
+        responseData[i].area = '广州办公室情况'
+        responseData[i].areaen = 'Guangzhou Office Status'
+      }
+      if (responseData[i].area == 'XA'){
+        responseData[i].area = '西安办公室情况'
+        responseData[i].areaen = 'XiAn Office Status'
+      }
+    }
+    return responseData
   },
 
   submitHealth: function(e) {

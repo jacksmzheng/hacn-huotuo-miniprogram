@@ -6,6 +6,7 @@ App({
     prodUrl: ''
   },
   globalData: {
+    prodVersion: false,
     userInfo: null
   },
   goNext(url) {
