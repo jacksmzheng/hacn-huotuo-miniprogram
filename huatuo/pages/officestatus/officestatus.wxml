@@ -9,8 +9,8 @@
     <view style="display: flex;flex-direction: row;align-items: baseline;">
       <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
-        <text class="icon-text">健康状态</text>
-        <text class="icon-desc">Health Survey</text>
+        <text class="icon-text">报告病例</text>
+        <text class="icon-desc">Report A Case</text>
       </view>
       <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
