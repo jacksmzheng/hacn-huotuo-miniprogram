@@ -17,13 +17,13 @@
     </view>
     <template is='common-picker' data="{{...department}}"></template>
     <!-- <commonmodal obj='{{modalObj}}' bindconfirm='{{modalObj.confirm}}' /> -->
-    
- <view class="picker-container-view">
+    <template is='common-picker' data="{{...city}}"></template>
+ <!-- <view class="picker-container-view">
     <rich-text class='picker-label' nodes='{{area.label}}'/>
     <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
       <view class='picker-item-label'>{{area.region}}</view>
     </picker>
-  </view>
+  </view> -->
   <i-panel title="{{visits.title}}">
         <i-checkbox-group current="{{visits.current}}" bindchange="handleVisitsChange">
             <i-checkbox wx:for="{{visits.items}}" position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">

@@ -38,6 +38,7 @@
   line-height: 40rpx;
   color: #333333;
   width:100%;
+  text-align: center;
 }
 
 .footer-view {

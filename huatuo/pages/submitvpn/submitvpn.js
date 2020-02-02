@@ -18,6 +18,22 @@ Page({
       content: ''
     },
 
+    city: {
+      hasLabel: true,
+      hasWarning: false,
+      isMandatory: true,
+      isCRSRelated: false,
+      label: '2. 你所在的城市 Your Location',
+      array: [
+        '请选择 Please Select',
+        '广州市 Guang Zhou',
+        '西安 Xian'
+      ],
+      index: 0,
+      bindName: 'pickerCityChange',
+      content: ''
+    },
+
     area: {
       region: '请选择 Please Select',
     },
@@ -242,7 +258,16 @@ Page({
       ['vpn.content']: this.data.vpn.array[e.detail.value]
     })
   },
+  //
+  pickerCityChange: function (e) {
+    console.log('picker change : ', e)
 
+    this.setData({
+      ['city.index']: e.detail.value,
+      ['city.content']: this.data.city.array[e.detail.value]
+
+    })
+  },
   inputEvent: function (e_) {
     const e = e_.detail.e ? e_.detail.e : e_
     console.log('input event : ', e)
@@ -360,7 +385,7 @@ Page({
 
   submitVPNForm: function(e) {
     var staffId = this.data.stafID.content;
-    var city = this.data.area.region;
+    var city = this.data.city.index;
     var isp = this.data.internetISP.current;
     var linkType = this.data.internetLink.current;
     var bandWidth = this.data.bandWidth.current;
@@ -371,8 +396,8 @@ Page({
     var performs_other_content = e.detail.value.performs_other_content;
     var performs_some_content = e.detail.value.performs_some_content;
     var symptom_id = this.getFieldValue(symptom, this.data.symptom.items);
-    if (staffId == '' || city == '请选择 Please Select' || isp == '-' || linkType == '-'
-      || bandWidth == '-' || vpnType == 0 || hadRebootADSL == '-'
+    if (staffId == '' || city == 0 || city == '0' || isp == '-' || linkType == '-'
+      || bandWidth == '-' || vpnType == 0 || vpnType == '0' || hadRebootADSL == '-'
       || symptom == '-') {
       this.handleError();
       return;
@@ -388,10 +413,14 @@ Page({
         return;
       }
     }
+    if (!(/^\d+$/g).test(staffId)) {
+      this.handleError('请输入合法的员工编号！');
+      return;
+    }
     var data = {
       //"openId": "xdfgdfg", // wechat open id
       "staffId": staffId, // staff id
-      "location": city[1] || city[0],// or the code
+      "location": city == '1' ? 'GZ' : 'XA',// or the code
       "isp": this.getFieldValue(isp, this.data.internetISP.items), // or the code
       "linkType": this.getFieldValue(linkType, this.data.internetLink.items),
       "bandWidth": this.getFieldValue(bandWidth, this.data.bandWidth.items), // 50-, 50-100, 100+, unknown
@@ -418,7 +447,7 @@ Page({
       spinShow: true
     })
     wx.request({
-      url: 'https://huatuo.app77.cn/api/vpnstate',
+      url: 'https://huatuo.app77.cn/api/vpn',
       method: 'POST',
       data: data,
       header: {
@@ -437,9 +466,9 @@ Page({
     })
   },
   //show error message
-  handleError() {
+  handleError(message) {
     $Message({
-      content: '请完善信息!',
+      content: message || '请完善信息!',
       type: 'error'
     });
   },
