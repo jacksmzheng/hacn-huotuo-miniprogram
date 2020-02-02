@@ -13,6 +13,7 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 8,
+      type: 'number',
       label: '1. 你的员工编号. Your Staff ID.',
       bindInputName: 'inputEvent',
       placeholder: '请输入 Please Enter',
@@ -174,7 +175,7 @@ Page({
         id: 7,
           name: "某些应用程序不能访问 Some application can't access",
       }],
-      title: '9. 使用VPN时有些程序反应慢. Poor performance of some applications when using VPN(多选) *',
+      title: '9. 使用VPN时有些程序反应慢. Poor performance of some applications when using VPN. (多选) *',
       current: [],
       position: 'left',
       checked: false,
@@ -388,7 +389,6 @@ Page({
   },
 
   submitVPNForm: function(e) {
-    wx.showLoading({ title: '正在提交中...' });
     var staffId = this.data.stafID.content;
     var city = this.data.area.region;
     var isp = this.data.internetISP.current;
@@ -448,9 +448,7 @@ Page({
 
   //call api
   request(data) {
-    this.setData({
-      spinShow: true
-    })
+    wx.showLoading({ title: '正在提交中...' });
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
       url: host + '/api/vpn',
@@ -478,7 +476,6 @@ Page({
       content: message || '请完善信息!',
       type: 'error'
     });
-    wx.hideLoading();
   },
   //
   getFieldValue(value, data) {
