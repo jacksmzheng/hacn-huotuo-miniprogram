@@ -24,11 +24,11 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '2. 你所在的城市 Your Location',
+      label: '2. 你所在的城市 Your location',
       array: [
         '请选择 Please Select',
-        '广州市 Guang Zhou',
-        '西安 Xian'
+        '广州 Guangzhou',
+        '西安 Xi\'an'
       ],
       index: 0,
       bindName: 'pickerCityChange',
@@ -108,7 +108,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '6. 你所用的VPN类型 Your VPN Type',
+      label: '6. 你所用的VPN类型 Your VPN type',
       array: ['请选择 Please Select', '中国大陆VPN CN VPN', '香港VPN HK VPN'],
       index: 0,
       bindName: 'vpnPickerChange',
@@ -134,7 +134,7 @@ Page({
     symptom: {
       items: [{
         id: 1,
-        name: '无法登陆VPN Can not login',
+        name: '无法登陆VPN Cannot login VPN',
       }, {
         id: 2,
         name: 'VPN连接经常会断开 Always disconnect',

@@ -47,8 +47,8 @@ Page({
       label: '5. 你或你所报告同事的办公城市 Where is the working city of the reported colleague',
       array: [
         '请选择 Please Select',
-        '广州市 Guang Zhou',
-        '西安 Xian'
+        '广州 Guangzhou',
+        '西安 Xi\'an'
       ],
       index: 0,
       bindName: 'pickerCityChange',
@@ -149,7 +149,7 @@ Page({
         name: 'TKH OT2'
       }, {
         id: 4,
-        name: 'Jiang Wan Office (We Work)'
+        name: 'Jiangwan Office (Wework)'
       }, {
         id: 5,
         name: 'Pazhou ODC'
@@ -161,9 +161,9 @@ Page({
         name: 'Renfeng ODC'
       }, {
         id: 8,
-        name: 'XiAn Center'
+        name: 'Xi\'an Centre'
       }],
-      title: '6. 你或你所报告的同事14天之内去过的办公地点 Which office did the reported colleagur visit on last 14 days ? (多选) *',
+      title: '6. 你或你所报告的同事14天之内去过的办公地点 Which office did the reported colleague visit on last 14 days ? (多选) *',
       current: [],
       position: 'left',
       checked: false,
