@@ -190,7 +190,7 @@ Page({
   },
   //初始化数据
   initData: function () {
-    var navigateTitle = 'VPN情况调查 V.P.N Survey'
+    var navigateTitle = 'VPN问题 VPN Problem'
     this.setData({
       navigateTitle
     })

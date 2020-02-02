@@ -19,6 +19,7 @@ Page({
         'IT Exceptional Items',
         'IT COO',
         'Data Services',
+        'Finance',
         'Payments & GLCM',
         'Corporate Functions IT',
         'Regional IT',
@@ -205,7 +206,7 @@ Page({
   },
   //初始化数据
   initData: function () {
-    var navigateTitle = '健康问卷调查';
+    var navigateTitle = '报告病例 Report A Case';
     this.setData({
       navigateTitle
     })

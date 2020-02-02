@@ -1,6 +1,7 @@
 //app.js
 App({
   globalData: {
+    prodVersion: false,
     userInfo: null
   },
   goNext(url) {
