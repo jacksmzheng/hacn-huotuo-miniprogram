@@ -2,63 +2,63 @@
   <view class='common-status-container-view'>
 
     <view class="common-status-label-view">
-      <view style="height:24rpx;width:6rpx;background-color:#000000;"></view>
-      <view class="common-status-label">{{name}}</view>
+      <view style="margin: 10rpx 0;height:24rpx;width:6rpx;background-color:#000000;"></view>
+      <view class="common-status-label">{{buildingName}}</view>
     </view>
     <view class="common-status-content">
       <view class="common-status-tab">
-        <block wx:if="{{definiteCount==0}}">
-          <view class="common-status-num common-status-green-num">{{definiteCount}}</view>
+        <block wx:if="{{confirmed==0}}">
+          <view class="common-status-num common-status-green-num">{{confirmed}}</view>
           <view class="common-status-desc common-status-green-desc">确诊人数/Confirm</view>
         </block>
-        <block wx:if="{{definiteCount > 0 && definiteCount < 50}}">
-          <view class="common-status-num common-status-red-num-20">{{definiteCount}}</view>
+        <block wx:if="{{confirmed > 0 && confirmed < 50}}">
+          <view class="common-status-num common-status-red-num-20">{{confirmed}}</view>
           <view class="common-status-desc common-status-red-desc-20">确诊人数/Confirm</view>
         </block>
-        <block wx:if="{{definiteCount >= 50 && definiteCount < 100}}">
-          <view class="common-status-num common-status-red-num-40">{{definiteCount}}</view>
+        <block wx:if="{{confirmed >= 50 && confirmed < 100}}">
+          <view class="common-status-num common-status-red-num-40">{{confirmed}}</view>
           <view class="common-status-desc common-status-red-desc-40">确诊人数/Confirm</view>
         </block>
-        <block wx:if="{{definiteCount >= 100}}">
-          <view class="common-status-num common-status-red-num-60">{{definiteCount}}</view>
+        <block wx:if="{{confirmed >= 100}}">
+          <view class="common-status-num common-status-red-num-60">{{confirmed}}</view>
           <view class="common-status-desc common-status-red-desc-60">确诊人数/Confirm</view>
         </block>
       </view>
       <!-- 疑似人数 0 0~50 50~100 100+ -->
       <view class="common-status-tab">
-        <block wx:if="{{suspectedCount==0}}">
-          <view class="common-status-num common-status-green-num">{{suspectedCount}}</view>
+        <block wx:if="{{suspect==0}}">
+          <view class="common-status-num common-status-green-num">{{suspect}}</view>
           <view class="common-status-desc common-status-green-desc">疑似人数/Suspect</view>
         </block>
-        <block wx:if="{{suspectedCount > 0 && suspectedCount < 50}}">
-          <view class="common-status-num common-status-yellow-num-20">{{suspectedCount}}</view>
+        <block wx:if="{{suspect > 0 && suspect < 50}}">
+          <view class="common-status-num common-status-yellow-num-20">{{suspect}}</view>
           <view class="common-status-desc common-status-yellow-desc-20">疑似人数/Suspect</view>
         </block>
-        <block wx:if="{{suspectedCount >= 50 && suspectedCount < 100}}">
-          <view class="common-status-num common-status-yellow-num-40">{{suspectedCount}}</view>
+        <block wx:if="{{suspect >= 50 && suspect < 100}}">
+          <view class="common-status-num common-status-yellow-num-40">{{suspect}}</view>
           <view class="common-status-desc common-status-yellow-desc-40">疑似人数/Suspect</view>
         </block>
-        <block wx:if="{{suspectedCount >= 100}}">
-          <view class="common-status-num common-status-yellow-num-60">{{suspectedCount}}</view>
+        <block wx:if="{{suspect >= 100}}">
+          <view class="common-status-num common-status-yellow-num-60">{{suspect}}</view>
           <view class="common-status-desc common-status-yellow-desc-60">疑似人数/Suspect</view>
         </block>
       </view>
       <!-- 发烧人数 0 0~50 50~100 100+ -->
       <view class="common-status-tab">
-        <block wx:if="{{feverCount==0}}">
-          <view class="common-status-num common-status-green-num">{{feverCount}}</view>
+        <block wx:if="{{fever==0}}">
+          <view class="common-status-num common-status-green-num">{{fever}}</view>
           <view class="common-status-desc common-status-green-desc">发烧人数/Fever</view>
         </block>
-        <block wx:if="{{feverCount > 0 && feverCount < 50}}">
-          <view class="common-status-num common-status-blue-num-20">{{feverCount}}</view>
+        <block wx:if="{{fever > 0 && fever < 50}}">
+          <view class="common-status-num common-status-blue-num-20">{{fever}}</view>
           <view class="common-status-desc common-status-blue-desc-20">发烧人数/Fever</view>
         </block>
-        <block wx:if="{{feverCount >= 50 && feverCount < 100}}">
-          <view class="common-status-num common-status-blue-num-40">{{feverCount}}</view>
+        <block wx:if="{{fever >= 50 && fever < 100}}">
+          <view class="common-status-num common-status-blue-num-40">{{fever}}</view>
           <view class="common-status-desc common-status-blue-desc-40">发烧人数/Fever</view>
         </block>
-        <block wx:if="{{feverCount >= 100}}">
-          <view class="common-status-num common-status-blue-num-60">{{feverCount}}</view>
+        <block wx:if="{{fever >= 100}}">
+          <view class="common-status-num common-status-blue-num-60">{{fever}}</view>
           <view class="common-status-desc common-status-blue-desc-60">发烧人数/Fever</view>
         </block>
       </view>

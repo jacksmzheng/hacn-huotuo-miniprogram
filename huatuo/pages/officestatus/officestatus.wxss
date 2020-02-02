@@ -37,8 +37,10 @@
 
 .button-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  align-content: center;
+  align-self: center;
   background-color: white;
   margin: 20rpx;
   border-radius: 10rpx;
@@ -126,6 +128,11 @@
 .common-status-green-desc{
   background-color:rgba(54,223,165, 0.6);
   color:#36DFA5;
+}
+
+
+.common-status-tab .common-status-green-desc {
+  color: #000000;
 }
 
 .common-status-blue-num{

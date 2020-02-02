@@ -12,8 +12,9 @@ Page({
       isMandatory: true,
       isCRSRelated: false,
       maxlength: 8,
-      label: '1. 员工号 Staf ID',
+      label: '1. 你的员工编号 Your Staf ID',
       bindInputName: 'inputEvent',
+      placeholder: '请输入 Please Enter',
       content: ''
     },
 
@@ -90,8 +91,8 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      label: '6. 你在使用中国大陆 V.P.N 还是 香港V.P.N You are using CN V.P.N or HK V.P.N?',
-      array: ['请选择 Please Select', '中国大陆V.P.N CN V.P.N', '香港V.P.N HK V.P.N'],
+      label: '6. 你所用的VPN类型 Your VPN Type',
+      array: ['请选择 Please Select', '中国大陆VPN CN VPN', '香港VPN HK VPN'],
       index: 0,
       bindName: 'vpnPickerChange',
       content: ''
@@ -103,10 +104,10 @@ Page({
         name: '已经重启 YES',
       }, {
         id: 2,
-        name: '没有重启 NO',
+        name: '没有重启 NO',//note:Suggest to try again after reboot 建议重启再试
       }
       ],
-      title: '7. 你重启ADSL基带猫了吗？ Have you try to reboot your ADSL modem?',
+      title: '7. 你重启ADSL基带猫了吗？ Have you rebooted your ADSL modem ?',
       current: '-',
       position: 'left',
       checked: false,
@@ -116,16 +117,16 @@ Page({
     symptom: {
       items: [{
         id: 1,
-        name: '无法登陆V.P.N Can not login',
+        name: '无法登陆VPN Can not login',
       }, {
         id: 2,
-        name: 'V.P.N连接经常会断开 Always disconnect',
+        name: 'VPN连接经常会断开 Always disconnect',
       }, {
         id: 3,
         name: '其他，请填写第9题 Others, please fill in Question #9',
       }
       ],
-      title: '8. What is the symptom? 有什么症状？',
+      title: '8. 有什么症状？ What is the symptom ?',
       current: '-',
       position: 'left',
       checked: false,
@@ -135,27 +136,27 @@ Page({
     performs: {
       items: [{
         id: 1,
-        name: 'Outlook 电邮',
+        name: '电邮 Outlook',
       }, {
         id: 2,
-        name: 'Jabber 打电话'
+        name: '打电话 Jabber',
       }, {
         id: 3,
-        name: 'Sametime 即时通讯'
+        name: '即时通讯 Sametime',
       }, {
         id: 4,
-        name: 'Video Conference 视频会议',
+        name: '视频会议 Video Conference',
       }, {
         id: 5,
-        name: 'Sharepoint；Shared Folder 公盘',
+          name: '公盘 Sharepoint；Shared Folder',
       }, {
         id: 6,
-        name: 'Other applications perform very slow 其他应用程序反应很慢',
+          name: '其他应用程序反应很慢 Other applications perform very slow',
       }, {
         id: 7,
-        name: "Some application can't access 某些应用程序不能访问",
+          name: "某些应用程序不能访问 Some application can't access",
       }],
-      title: '9. 使用V.P.N.时，有些应用程序反应很慢 Using V.P.N. some application performs very slow:',
+      title: '9. 使用VPN时有些程序反应慢 Poor performance of some applications when using VPN',
       current: [],
       position: 'left',
       checked: false,
@@ -164,66 +165,6 @@ Page({
     isHideOtherAppSlow: true,
     isHideSomeAppSlow: true,
     spinShow: true
-    // wfh: {
-    //   hasLabel: true,
-    //   hasWarning: false,
-    //   isMandatory: true,
-    //   isCRSRelated: false,
-    //   label: '10. 是否有带电脑回家办公：',
-    //   array: ['请选择 Please Select', '是 YES', '否 NO'],
-    //   index: 0,
-    //   bindName: 'wfhPickerChange',
-    //   content: ''
-    // },
-
-    // token: {
-    //   hasLabel: true,
-    //   hasWarning: false,
-    //   isMandatory: true,
-    //   isCRSRelated: false,
-    //   label: '11. 是否拥有token：',
-    //   array: ['请选择 Please Select', '是 YES', '否 NO'],
-    //   index: 0,
-    //   bindName: 'tokenPickerChange',
-    //   content: ''
-    // },
-
-    // vpnType: {
-    //   hasLabel: true,
-    //   hasWarning: false,
-    //   isMandatory: true,
-    //   isCRSRelated: false,
-    //   label: '12. 所用VPN类型',
-    //   array: ['请选择 Please Select', 'CN', 'HK'],
-    //   index: 0,
-    //   bindName: 'vpnTypePickerChange',
-    //   content: ''
-    // },
-    // support: {
-    //   hasLabel: true,
-    //   hasWarning: false,
-    //   isMandatory: true,
-    //   isCRSRelated: false,
-    //   maxlength: 50,
-    //   label: '13. 是否需要公司提供Token协助：',
-    //   bindInputName: 'supportInputEvent',
-    //   content: ''
-    // },
-
-    // remoteWork: {
-    //   items: [{
-    //     id: 1,
-    //     name: '可以远程工作 Yes, can work from home',
-    //   }, {
-    //     id: 2,
-    //     name: '无法远程工作(请提供具体原因）No, cannot work from home (please describe your current status)'
-    //   }],
-    //   title: '4. 你或者被你报告的同事，现在的情况是 What is the current circumstance of the reported colleague? *',
-    //   current: '-',
-    //   position: 'left',
-    //   checked: false,
-    //   disabled: false,
-    // },
 
   },
 
@@ -468,11 +409,9 @@ Page({
       "cannotAccessApplications": performs_some_content, // wording
       "reporterStaffId": staffId // staff id
     }
-    // wx.navigateTo({
-    //   url: '/pages/successful/successful',
-    // })
     this.request({vpnStateInfo: data});
   },
+
   //call api
   request(data) {
     this.setData({
