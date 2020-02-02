@@ -155,7 +155,7 @@ Page({
         name: 'Pazhou ODC'
       }, {
         id: 6,
-        name: 'Tanchu ODC'
+        name: 'Tancun ODC'
       }, {
         id: 7,
         name: 'Renfeng ODC'
