@@ -37,7 +37,21 @@ Page({
       bindName: 'pickerChange',
       content: ''
     },
-
+    city: {
+      hasLabel: true,
+      hasWarning: false,
+      isMandatory: true,
+      isCRSRelated: false,
+      label: '5. 你或你所报告同事的办公城市 Where is the working city of the reported colleague',
+      array: [
+        '请选择 Please Select',
+        '广州市 Guang Zhou',
+        '西安 Xian'
+      ],
+      index: 0,
+      bindName: 'pickerCityChange',
+      content: ''
+    },
     stafID: {
       hasLabel: true,
       hasWarning: false,
@@ -258,7 +272,16 @@ Page({
 
     })
   },
+  //
+  pickerCityChange: function (e) {
+    console.log('picker change : ', e)
 
+    this.setData({
+      ['city.index']: e.detail.value,
+      ['city.content']: this.data.city.array[e.detail.value]
+
+    })
+  },
   inputEvent: function (e_) {
     const e = e_.detail.e ? e_.detail.e : e_
     console.log('input event : ', e)
@@ -339,15 +362,15 @@ Page({
     var others_id = this.data.othersStaffId.content;
     var status = this.data.status.current;
     var status_content = e.detail.value.status_content;
-    var area = this.data.area.region;
+    var city = this.data.city.index;
     var visits = this.data.visits.current;
     //var date = this.data.date;
     //var supports = this.data.supports.current;
     //var supports_content = e.detail.value.supports_content;
     //var remote = this.data.remote.current;
     //var remote_content = e.detail.value.remote_content;
-    if (staffId == '' || mobile == '' || others == '' || department == '' || status == '-' 
-      || area == '请选择 Please Select' || visits.length == 0) {
+    if (staffId == '' || mobile == '' || others == '-' || department == '' || status == '-' 
+      || city == '0' || visits.length == 0) {
       this.handleError();
       return;
     }
@@ -359,11 +382,11 @@ Page({
       this.handleError();
       return;
     }
-    var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, area, visits);
+    var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, city, visits);
     this.request(data);
   },
   //build post data
-  buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, area, visits) {
+  buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, city, visits) {
     var arrs = [];
     for(var i = 0; i < visits.length; i++) {
       var v = this.getFieldValue(visits[i], this.data.visits.items);
@@ -379,7 +402,7 @@ Page({
       reporter: others == 2 ? staffId : others_id,
       healthStatus: this.getFieldValue(status, this.data.status.items),
       other: status_content,
-      city: area[1] || area[0],
+      city: city == '1' ? 'GZ' : 'XA',
       workplace: arrs.join(',')
     };
     return data;
