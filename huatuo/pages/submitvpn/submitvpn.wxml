@@ -39,13 +39,13 @@
 
     <i-panel title="{{adslModem.title}}">
       <i-radio-group current="{{adslModem.current}}" bindchange="handleadslModemChange">
-          <block wx:for="{{adslModem.items}}">
+          <block wx:for="{{adslModem.items}}" wx:key="{{index}}">
             <i-radio position="{{adslModem.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
             </i-radio>
-            <view wx:if="{{item.id == '2'}}">
-                <view class='picker-label-notes'>建议重启再试 Suggest to try again after reboot</view>
-            </view>
           </block>
+          <view wx:if="{{adslModemFlag}}">
+            <view class='picker-label-notes'>建议重启再试 Suggest to try again after reboot</view>
+          </view>
       </i-radio-group>
     </i-panel>
 
@@ -58,7 +58,7 @@
 
     <i-panel title="{{performs.title}}">
       <i-checkbox-group current="{{performs.current}}" bindchange="handlePerformsChange">
-          <block wx:for="{{performs.items}}">
+          <block wx:for="{{performs.items}}" wx:key="{{index}}">
             <i-checkbox position="{{performs.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
             </i-checkbox>
             <view wx:if="{{item.id == '6'}}">
