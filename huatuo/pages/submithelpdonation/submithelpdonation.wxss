@@ -1,0 +1,39 @@
+/* pages/submithelpdonation/submithelpdonation.wxss */
+@import "/pages/common/template/commonpicker/commonpicker.wxss";
+
+textarea {
+  width: 675rpx;
+  height: 4em;
+}
+
+#default-btn {
+  margin-left: 0rpx;
+}
+
+#primary-btn {
+  margin-right: 0rpx;
+}
+
+.form-textarea {
+  border: 1px #b2b2b2 solid;
+  margin: 10px 0;
+}
+
+.health-picker {
+  font-family: 'Open Sans';
+  color: #333;
+  font-size: 11pt;
+  font-weight: normal;
+}
+
+.help-num-btn {
+  margin-bottom: 0.5em;
+  background-color: transparent;
+  border: 1px green solid;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-bottom: 48rpx;
+}
