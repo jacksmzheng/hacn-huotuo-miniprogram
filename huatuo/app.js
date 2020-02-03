@@ -2,8 +2,8 @@
 App({
   api: {
     isProdEnv: false,
-    devUrl: 'https://huatuo.app77.cn',
-    prodUrl: ''
+    devUrl: 'https://huatuo-test.app77.cn',
+    prodUrl: 'https://huatuo.app77.cn'
   },
   globalData: {
     prodVersion: false,
