@@ -8,7 +8,7 @@
     <commoninput obj="{{stafID}}" bindinputEvent='{{stafID.bindInputName}}'/>
     <!-- <template is='common-picker' data="{{...city}}"></template> -->
     <view class="picker-container-view">
-      <rich-text class='picker-label' nodes='2. 你所在的城市. Your location. *'/>
+      <rich-text class='picker-label' nodes='2. 你所在的城市 Your location:*'/>
       <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
         <view class='picker-item-label'>{{area.region}}</view>
       </picker>
