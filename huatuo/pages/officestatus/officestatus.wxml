@@ -23,7 +23,7 @@
           <text class="icon-text">旅行记录</text>
           <text class="icon-desc">Travel History</text>
         </view>
-        <view class="icon-view">
+        <view class="icon-view" data-url="/pages/submithelpdonation/submithelpdonation" bindtap="submitHelpDonation">
           <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
           <text class="icon-text">求助&捐赠</text>
           <text class="icon-desc">Help & Donation</text>

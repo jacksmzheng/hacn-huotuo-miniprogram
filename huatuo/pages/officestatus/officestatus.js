@@ -293,5 +293,10 @@ Page({
   submitVPN: function(e) {
     console.log(e)
     app.goNext(e.currentTarget.dataset.url)
+  },
+
+  submitHelpDonation(e){
+    console.log(e)
+    app.goNext(e.currentTarget.dataset.url)
   }
 })
