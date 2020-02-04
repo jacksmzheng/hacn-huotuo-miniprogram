@@ -1,0 +1,61 @@
+<!--pages/submithelpdonation/submithelpdonation.wxml-->
+
+<import src="/pages/common/template/commonpicker/commonpicker.wxml" />
+
+<view class='page-section'>
+  <i-message id="message" />
+  <view class='top-separate-line'></view>
+
+  <!-- <i-panel title="{{helpOrDonation.title}}">
+    <i-radio-group current="{{helpOrDonation.current}}" bindchange="helpOrDonationChange">
+      <i-radio wx:for="{{helpOrDonation.items}}" color="green" position="{{helpOrDonation.position}}" wx:key="id" value="{{item.name}}">
+      </i-radio>
+    </i-radio-group>
+  </i-panel> -->
+
+  <!-- <block wx:if="{{helpOrDonation.current == '求助 Help'}}"> -->
+    <form bindsubmit="submitHelp">
+      <!-- 1. staff ID -->
+      <commoninput obj="{{staffID}}" bindinputEvent='{{staffID.bindInputName}}' />
+      <!-- 2. mask help -->
+      <template is='common-picker' data="{{...maskHelp}}"></template>
+      <!-- 3. mask num -->
+      <template is='common-picker' data="{{...maskNum}}"></template>
+      <!-- 4. additional help -->
+      <i-panel title="4. Additional help （其他帮助）">
+        <textarea class="form-textarea" name="textarea" bindinput="addHelpInput"></textarea>
+      </i-panel>
+      <!-- 5. help number -->
+      <i-panel title="5. Help number （帮助热线）">
+        <button class="help-num-btn" bindtap="callHelpNumber">{{helpNumber}}</button>
+      </i-panel>
+      <!-- 6. help address -->
+      <commoninput obj="{{helpAddr}}" bindinputEvent='{{helpAddr.bindInputName}}' />
+
+      <button class="primary-btn submit-btn" type="primary" form-type="submit">提交</button>
+    </form>
+  <!-- </block> -->
+
+  <!-- <block wx:else> -->
+    <!-- <form bindsubmit="submitDonation"> -->
+      <!-- 1. staff ID -->
+      <!-- <commoninput obj="{{staffID}}" bindinputEvent='{{staffID.bindInputName}}' /> -->
+      <!-- 2. mask donation -->
+      <!-- <template is='common-picker' data="{{...maskDonation}}"></template> -->
+      <!-- 3. mask donation num -->
+      <!-- <template is='common-picker' data="{{...maskDonationNum}}"></template> -->
+      <!-- 4. additional donation -->
+      <!-- <i-panel title="4. Additional donation （其他捐赠）">
+        <textarea class="form-textarea" name="textarea" bindinput="addDonationInput"></textarea>
+      </i-panel> -->
+      <!-- 5. donation number -->
+      <!-- <i-panel title="5. Donation number （捐赠热线）">
+        <button class="help-num-btn" bindtap="callDonationNumber">{{donationNumber}}</button>
+      </i-panel> -->
+      <!-- 6. donation address -->
+      <!-- <commoninput obj="{{donationAddr}}" bindinputEvent='{{donationAddr.bindInputName}}' /> -->
+
+      <!-- <button class="primary-btn submit-btn" type="primary" form-type="submit">提交</button> -->
+    <!-- </form> -->
+  <!-- </block> -->
+</view>
