@@ -1,20 +1,26 @@
 /* pages/login/login.wxss */
 
+.logo {
+  width: 128rpx;
+  height: 128rpx;
+  display: block;
+  margin: 100rpx auto 0 auto;
+}
+
 .input-row {
   display: flex;
   align-items: center;
-  background: #f5f5f5;
-  border-radius: 6rpx;
+  border-bottom: 1rpx #e6e6e6 solid;
   width: 650rpx;
   margin: 50rpx auto 0 auto;
 }
 
 .input-row image {
   flex: none;
-  width: 48rpx;
-  height: 48rpx;
+  width: 56rpx;
+  height: 56rpx;
   padding: 12rpx;
-  margin-right: 16rpx;
+  margin-right: 12rpx;
 }
 
 .input-row input {
@@ -23,11 +29,13 @@
 
 .btn-get-captcha {
   font-size: 24rpx;
-  width: 9em;
+  width: 172rpx;
+  height: 64rpx;
+  line-height: 64rpx;
   text-align: center;
-  height: 72rpx;
-  line-height: 72rpx;
-  color: #1ab654;
+  background: #1ab654;
+  border-radius: 6rpx;
+  color: white;
 }
 
 .btn-get-captcha:active {
@@ -39,7 +47,7 @@
 }
 
 .btn-login {
-  background: #1ab654;
+  background:linear-gradient(180deg,rgba(94,198,92,1) 0%,rgba(41,165,39,1) 100%);
   color: white;
   border-radius: 6rpx;
   width: 650rpx !important;

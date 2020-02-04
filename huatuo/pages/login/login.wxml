@@ -1,9 +1,11 @@
 <!--pages/login/login.wxml-->
 
-<i-message id="message" />
 <view class='top-separate-line'></view>
+<i-message id="message" />
 
-<view class="satff-id input-row" style="margin-top: 200rpx;">
+<image class="logo" src="/pages/common/resources/images/login-logo.png" mode="widthFix"></image>
+
+<view class="satff-id input-row" style="margin-top: 100rpx;">
   <image src="/pages/common/resources/images/icon-staffid.png" mode="widthFix"></image>
   <input placeholder="请输入员工编号" bindinput="inputStaffId"></input>
 </view>
