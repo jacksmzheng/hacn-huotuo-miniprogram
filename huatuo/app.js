@@ -2,7 +2,7 @@
 App({
   api: {
     isProdEnv: false,
-    devUrl: 'https://huatuo.app77.cn',
+    devUrl: 'https://huatuo-test.app77.cn',
     prodUrl: ''
   },
   globalData: {
