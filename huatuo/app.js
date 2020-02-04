@@ -6,6 +6,7 @@ App({
     prodUrl: ''
   },
   globalData: {
+    appId: 'wxf60257610325b729',
     prodVersion: false,
     userInfo: null
   },

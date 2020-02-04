@@ -9,10 +9,6 @@
   margin: 50rpx auto 0 auto;
 }
 
-.input-row:first-of-type {
-  margin-top: 200rpx;
-}
-
 .input-row image {
   flex: none;
   width: 48rpx;
