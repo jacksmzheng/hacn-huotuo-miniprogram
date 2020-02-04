@@ -1,0 +1,19 @@
+<!--pages/login/login.wxml-->
+
+<view class="account input-row">
+  <image src="/pages/common/resources/images/icon-account.png" mode="widthFix"></image>
+  <input placeholder="请输入员工编号"></input>
+</view>
+
+<view class="phone input-row">
+  <image src="/pages/common/resources/images/icon-phone.png" mode="widthFix"></image>
+  <input placeholder="请输入手机号码"></input>
+</view>
+
+<view class="captcha input-row">
+  <image src="/pages/common/resources/images/icon-captcha.png" mode="widthFix"></image>
+  <input placeholder="请输入验证码"></input>
+  <view class="btn-get-captcha {{btnLock ? 'btn-lock' : ''}}" bindtap="tapGetCaptcha">{{btnText}}</view>
+</view>
+
+<button class="btn-login">登陆</button>

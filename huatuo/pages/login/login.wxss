@@ -1,0 +1,55 @@
+/* pages/login/login.wxss */
+
+.input-row {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 6rpx;
+  width: 650rpx;
+  margin: 50rpx auto 0 auto;
+}
+
+.input-row:first-of-type {
+  margin-top: 200rpx;
+}
+
+.input-row image {
+  flex: none;
+  width: 48rpx;
+  height: 48rpx;
+  padding: 12rpx;
+  margin-right: 16rpx;
+}
+
+.input-row input {
+  flex: auto;
+}
+
+.btn-get-captcha {
+  font-size: 24rpx;
+  width: 9em;
+  text-align: center;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #1ab654;
+}
+
+.btn-get-captcha:active {
+  opacity: 0.5;
+}
+
+.btn-lock {
+  color: #8a8a8a;
+}
+
+.btn-login {
+  background: #1ab654;
+  color: white;
+  border-radius: 6rpx;
+  width: 650rpx !important;
+  margin: 200rpx auto 0 auto;
+}
+
+.btn-login:active {
+  opacity: 0.5;
+}

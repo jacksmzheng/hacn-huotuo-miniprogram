@@ -5,6 +5,15 @@
 
   <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.jpg" />
 
+  <view class="real-time-news">
+    <view style="width: 4rpx; height: 24rpx; background: #fff;border-radius:2rpx;margin-right: 14rpx;"></view>
+    <text>{{realTimeNews}}</text>
+    <view style="display: flex; align-items: center; margin-left: auto;" bindtap="readRTNews">
+      <text>更多/more</text>
+      <image class="icon-more" src="/pages/common/resources/images/icon-right.png" mode="widthFix"></image>
+    </view>
+  </view>
+
   <view class="button-container">
     <view style="display: flex; justify-content: space-evenly; align-items: baseline; width: 100%;">
       <view class="icon-view">

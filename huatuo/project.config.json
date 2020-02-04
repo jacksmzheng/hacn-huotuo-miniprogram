@@ -60,6 +60,13 @@
 					"id": -1,
 					"name": "help & donation",
 					"pathName": "pages/submithelpdonation/submithelpdonation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
 					"scene": null
 				}
 			]

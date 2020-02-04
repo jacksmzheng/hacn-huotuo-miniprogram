@@ -192,7 +192,8 @@ Page({
         suspect: 2,
         fever: 3,
       }
-    ]
+    ],
+    realTimeNews: '2.10日所有网点恢复营业'
   },
 
   /**
@@ -423,5 +424,9 @@ Page({
   submitHelpDonation(e) {
     console.log(e)
     app.goNext(e.currentTarget.dataset.url)
+  },
+
+  readRTNews(){
+    
   }
 })
