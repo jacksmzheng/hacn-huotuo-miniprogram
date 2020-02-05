@@ -26,7 +26,7 @@
         <text class="icon-text">行所疫情</text>
         <text class="icon-desc">Branches Situation</text>
       </view>
-      <view class="icon-view" data-url="" bindtap="submitCase">
+      <view class="icon-view" data-url="/pages/employeereport/employeereport" bindtap="submitHealth">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
         <text class="icon-text">员工上报</text>
         <text class="icon-desc">Report A Case</text>
