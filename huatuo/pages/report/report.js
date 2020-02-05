@@ -123,5 +123,4 @@ Page({
         (this.data.showNewSurvey ? '/pages/submitepidemic/submitepidemic?id=' : '/pages/travelReport/travelReport?id=') + id,
     })
   }
-
 })
