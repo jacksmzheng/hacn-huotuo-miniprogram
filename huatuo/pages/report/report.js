@@ -120,8 +120,7 @@ Page({
     console.log(this.data.showNewSurvey)
     wx.navigateTo({
       url:
-        (this.data.showNewSurvey ? 'pages/submitepidemic/submitepidemic?id=' : '/pages/travelReport/travelReport?id=') + id,
+        (this.data.showNewSurvey ? '/pages/submitepidemic/submitepidemic?id=' : '/pages/travelReport/travelReport?id=') + id,
     })
   }
-
 })
