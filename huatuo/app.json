@@ -6,6 +6,7 @@
     "pages/submithelpdonation/submithelpdonation",
     "pages/submitepidemic/submitepidemic",
     "pages/travelReport/travelReport",
+    "pages/report/report",
     "pages/employeereport/employeereport",
     "pages/successful/successful",
     "pages/errors/errors",
