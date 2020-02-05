@@ -1,0 +1,55 @@
+/* pages/home/home.wxss */
+@import "/pages/common/template/commonpicker/commonpicker.wxss";
+
+.survey-contain {
+
+}
+.survey-list {
+  display: flex;
+  flex-direction: row;
+  font-size: 10pt;
+  color: #666;
+  font-family: 'Open Sans';
+  padding: 15px 0;
+  margin: 10px 0;
+  /* box-shadow: 0px -20px 10px rgba(0,0,0,0.9); */
+  border-bottom: 2px #f3f3f3 solid;
+}
+.survey-list-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1 auto;
+}
+.survey-list-time {
+  color: #afafaf;
+  font-size: 10pt;
+}
+.survey-list-right {
+  display: flex;
+  align-items: center;
+}
+.survey-list-right-image {
+  width: 10px;
+  height: 15px;
+}
+.survey-tab {
+  display: flex;
+  flex-direction: row;
+}
+
+.survey-tab-button {
+  margin: 0!important;
+  border-radius: 0;
+  background-color: #f3f3f3;
+  color: #afafaf;
+  padding: 10px 5px;
+  line-height: 1.41176471;
+  font-size: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.survey-tab-button-selected {
+  /* background-color: #db0011!important; */
+  color: green;
+}
