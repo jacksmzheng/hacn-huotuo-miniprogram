@@ -49,18 +49,18 @@ Page({
           }
         ]
       },
-      // {
-      //   area:'西安办公室情况',
-      //   areaen: "Xi'An Office Status",
-      //   buildingReports: [
-      //     {
-      //       buildingName: '',
-      //       confirmed: 0,
-      //       suspect: 0,
-      //       fever: 0,
-      //     }
-      //   ]
-      // }
+      {
+        area:'西安办公室情况',
+        areaen: "Xi'An Office Status",
+        buildingReports: [
+          {
+            buildingName: '',
+            confirmed: 0,
+            suspect: 0,
+            fever: 0,
+          }
+        ]
+      }
     ],
     vpnStatus: [{
       vpn: [{
@@ -192,7 +192,8 @@ Page({
         suspect: 2,
         fever: 3,
       }
-    ]
+    ],
+    realTimeNews: '2.10日所有网点恢复营业'
   },
 
   /**
@@ -206,55 +207,44 @@ Page({
       imageWidth,
       imageHeight
     })
+    this.wechatLogin()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
     this.refreshData()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function() {
     clearInterval(this.data.refreshEvent)
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  wechatLogin() {
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    new Promise((resolve, reject) => {
+      wx.login({
+        success: (res) => {
+          if (res.code) resolve(res.code)
+          else reject('登录失败！' + res.errMsg)
+        }
+      })
+    }).then(resolve => {
+      wx.request({
+        url: host + '/api/wechat-login',
+        method: 'POST',
+        data: {
+          "appId": app.globalData.appId,
+          "code": resolve
+        },
+        success: res => {
+          app.globalData.session = res.data.session
+          app.globalData.userInfo = res.data.userInfo
+        },
+        fail: res => console.log('health status fail res : ', res),
+        complete: res => { }
+      });
+    }, reject => {
+      console.log(reject)
+    })
   },
 
   refreshData: function() {
@@ -423,5 +413,14 @@ Page({
   submitHelpDonation(e) {
     console.log(e)
     app.goNext(e.currentTarget.dataset.url)
+  },
+
+  submitCase(e) {
+    if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
+    else app.goNext(e.currentTarget.dataset.url)
+  },
+
+  readRTNews() {
+
   }
 })

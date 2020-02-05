@@ -166,6 +166,25 @@
   border-radius: 4rpx;
 }
 
+.real-time-news {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 14rpx;
+  margin: 14rpx;
+  height: 48rpx;
+  background: rgba(26, 182, 84, 1);
+  border-radius: 8rpx;
+  font-size: 18rpx;
+  color: white;
+}
+
+.real-time-news .icon-more {
+  width: 18rpx;
+  height: 18rpx;
+  margin-left: 12rpx;
+}
+
 .desc-and-label {
   display: flex;
   align-items: center;
