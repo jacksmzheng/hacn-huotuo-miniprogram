@@ -1,0 +1,60 @@
+<!--pages/home/home.wxml-->
+<import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
+<import src="/pages/common/template/commondatepicker/commondatepicker.wxml"/>
+<view class='page-section'>
+  <i-message id="message"/>
+  <view class='top-separate-line'></view>
+  <form bindsubmit="submitEpidemic">
+    <commoninput obj="{{staffID}}" bindinputEvent='{{staffID.bindInputName}}'/>
+    <commoninput obj="{{staffName}}" bindinputEvent='{{staffName.bindInputName}}'/>
+    <commoninput obj="{{mobileNo}}" bindinputEvent='{{mobileNo.bindInputName}}'/>
+    <i-panel title="{{others.title}}">
+      <i-radio-group current="{{others.current}}" bindchange="handleOthersChange">
+          <i-radio wx:for="{{others.items}}" color="green" position="{{others.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <view hidden="{{isOthersFlag}}">
+      <commoninput obj="{{othersStaffId}}" bindinputEvent='{{othersStaffId.bindInputName}}'/>
+    </view>
+    <template is='common-picker' data="{{...city}}"></template>
+    <template is='common-picker' data="{{...department}}"></template>
+    <template is='common-picker' data="{{...visits}}"></template>
+    <i-panel title="{{status.title}}">
+      <i-radio-group current="{{status.current}}" bindchange="handleStatusMoreChange">
+          <block wx:for="{{status.items}}">
+            <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx" hidden="{{isHideMoreSymptom}}">
+              <i-radio-group current="{{moreStatus.current}}" bindchange="handleStatusOtherChange">
+                <block wx:for="{{moreStatus.items}}">
+                  <i-radio position="{{moreStatus.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+                  </i-radio>
+                  <view wx:if="{{item.id == '6'}}">
+                    <textarea hidden="{{isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
+                  </view>
+                </block>
+              </i-radio-group>
+            </view>
+          </block>
+      </i-radio-group>
+    </i-panel>
+    <i-panel title="{{isolationOrNot.title}}">
+      <i-radio-group current="{{isolationOrNot.current}}" bindchange="handleIsolationOrNotChange">
+        <i-radio wx:for="{{isolationOrNot.items}}" position="{{isolationOrNot.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+        </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <i-panel title="{{isolationType.title}}">
+      <i-radio-group current="{{isolationType.current}}" bindchange="handleIsolationTypeChange">
+        <i-radio wx:for="{{isolationType.items}}" position="{{isolationType.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+        </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <template is='common-date-picker' data="{{...isolationStartDate}}"></template>
+    <template is='common-date-picker' data="{{...isolationEndDate}}"></template>
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+  </form>
+</view>
+
+
