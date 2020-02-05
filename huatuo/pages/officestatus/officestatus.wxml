@@ -1,18 +1,33 @@
 <!--pages/officestatus/officestatus.wxml-->
-<import src="/pages/common/template/commonhealthstatus/commonhealthstatus.wxml"/>
+<import src="/pages/common/template/commonhealthstatus/commonhealthstatus.wxml" />
 
 <view class="body">
 
-  <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.png"/>
+  <image class="image" mode="widthFix" src="/pages/common/resources/images/banner.jpg" />
 
   <view class="button-container">
-    <view style="display: flex;flex-direction: row;align-items: baseline;">
-      <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
+    <view style="display: flex; justify-content: space-evenly; align-items: baseline; width: 100%;">
+      <view class="icon-view">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
-        <text class="icon-text">报告病例</text>
+        <text class="icon-text">疫情新闻</text>
+        <text class="icon-desc">Latest News</text>
+      </view>
+      <view class="icon-view">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
+        <text class="icon-text">行所疫情</text>
+        <text class="icon-desc">Branches Situation</text>
+      </view>
+      <view class="icon-view" data-url="/pages/employeereport/employeereport" bindtap="submitHealth">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
+        <text class="icon-text">员工上报</text>
         <text class="icon-desc">Report A Case</text>
       </view>
-      <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
+      <view class="icon-view" data-url="/pages/submithelpdonation/submithelpdonation" bindtap="submitHelpDonation">
+        <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
+        <text class="icon-text">需求收集</text>
+        <text class="icon-desc">Needs Collection</text>
+      </view>
+      <!-- <view class="icon-view" data-url="/pages/submitvpn/submitvpn" bindtap="submitVPN">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
         <text class="icon-text">VPN问题</text>
         <text class="icon-desc">VPN Problem</text>
@@ -23,21 +38,61 @@
           <text class="icon-text">旅行记录</text>
           <text class="icon-desc">Travel History</text>
         </view>
-        <view class="icon-view" data-url="/pages/submithelpdonation/submithelpdonation" bindtap="submitHelpDonation">
-          <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
-          <text class="icon-text">求助&捐赠</text>
-          <text class="icon-desc">Help & Donation</text>
-        </view>
         <view class="icon-view">
           <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon5.png"></image>
           <text class="icon-text">员工调研</text>
           <text class="icon-desc">Research</text>
         </view>
-      </block>
+      </block> -->
     </view>
   </view>
 
-  <view class="page-section">
+  <view class="hacn-page-section">
+    <view class="office-area">全国疫情实时状况</view>
+    <view class="desc-and-label">
+      <view class="office-desc">Novel Coronavirus-China</view>
+      <view style="display: flex; align-items: center;">
+        <view class="label-color-tip" style="background: #36DEA3"></view>
+        <text class="label-text">发烧/Fever</text>
+        <view class="label-color-tip" style="background: #FFC525"></view>
+        <text class="label-text">疑似/Suspect</text>
+        <view class="label-color-tip" style="background: #F26478"></view>
+        <text class="label-text">确诊/Confirm</text>
+      </view>
+    </view>
+
+    <view class="branch-label">
+      <view></view>
+      <text>分行</text>
+    </view>
+    <view class="branch-situaction-row" wx:for="{{branches}}" wx:key="">
+      <template is="branch-situation" data="{{status:item, fontSize:20}}"></template>
+    </view>
+
+    <view class="branch-label" style="margin-top: 12rpx;">
+      <view></view>
+      <text>支行</text>
+    </view>
+    <view class="branch-situaction-row" style="border: none;">
+      <template is="branch-situation" data="{{status:subBranches, fontSize:16}}"></template>
+    </view>
+  </view>
+
+  <view class="isolation">
+    <view class="active">
+      <text>主动隔离</text>
+      <text>Active</text>
+      <text>0</text>
+    </view>
+    <view class="divi"></view>
+    <view class="passive">
+      <text>被动隔离</text>
+      <text>Passvie</text>
+      <text>0</text>
+    </view>
+  </view>
+
+  <!-- <view class="page-section">
     <block wx:for="{{healthStatus}}" wx:key="{{item}}">
       <view class="office-area">{{item.area}}</view>
       <view class="office-desc">{{item.areaen}}</view>
@@ -49,9 +104,9 @@
     </block>
     <view class="office-area">VPN状态</view>
     <view class="office-desc">VPN Status</view>
-    <view class="common-vpn-status-content">
-      <!-- VPN-HK -->
-      <view class="common-vpn-status-tab">
+    <view class="common-vpn-status-content"> -->
+  <!-- VPN-HK -->
+  <!-- <view class="common-vpn-status-tab">
         <view class="common-vpn-status-sub-tab {{vpnStatus[0].vpn[0].count == 0 ? 'common-status-green-num' : 'common-status-blue-num' }} ">
           <view class="common-vpn-status-sub-sub-tab">
             <view class="label">{{vpnStatus[0].vpn[0].count}}</view>
@@ -62,10 +117,10 @@
           <view class="label">{{vpnStatus[0].vpn[0].name}}</view>
           <view class="desc">Count of VPN Problem</view>
         </view>
-      </view>
+      </view> -->
 
-      <!-- VPN-CN -->
-      <view class="common-vpn-status-tab">
+  <!-- VPN-CN -->
+  <!-- <view class="common-vpn-status-tab">
         <view class="common-vpn-status-sub-tab {{vpnStatus[0].vpn[1].count == 0 ? 'common-status-green-num' : 'common-status-orange-num' }} ">
           <view class="common-vpn-status-sub-sub-tab">
             <view class="label">{{vpnStatus[0].vpn[1].count}}</view>
@@ -79,6 +134,20 @@
       </view>
     </view>
 
-  </view>
+  </view> -->
 
 </view>
+
+<template name="branch-situation">
+  <view class="branch-situaction" style="font-size: {{fontSize}}rpx;" wx:for="{{status}}">
+    <view>
+      <text class="city-name">{{item.area}}</text>
+      <text class="city-name-en">{{item.area_en}}</text>
+    </view>
+    <view>
+      <text class="fever-num">{{item.fever}}</text>
+      <text class="suspect-num">{{item.suspect}}</text>
+      <text class="confirm-num">{{item.confirmed}}</text>
+    </view>
+  </view>
+</template>

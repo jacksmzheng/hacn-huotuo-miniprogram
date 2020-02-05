@@ -1,0 +1,15 @@
+<!--pages/officestatus/officestatus.wxml-->
+<import src="/pages/common/template/commonhealthstatus/commonhealthstatus.wxml"/>
+
+<view class="body">
+  <view class="button-container">
+    <view class="icon-view" data-url="/pages/submithealth/submithealth" bindtap="submitHealth">
+      <image class="icon-image" style="width: 55px; height: 55px;" src="/pages/common/resources/images/icon1.png"></image>
+      <text class="icon-text">疫情上报</text>
+    </view>
+    <view class="icon-view" data-url="/pages/travelReport/travelReport" bindtap="submitTravel">
+      <image class="icon-image" style="width: 55px; height: 55px;" src="/pages/common/resources/images/icon2.png"></image>
+      <text class="icon-text">出行记录报备</text>
+    </view>
+  </view>
+</view>

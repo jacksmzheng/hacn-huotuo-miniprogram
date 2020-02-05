@@ -1,0 +1,123 @@
+<!--pages/home/home.wxml-->
+<import src="/pages/common/template/commonpicker/commonpicker.wxml"/>
+<view class='page-section'>
+  <i-message id="message"/>
+  <view class='top-separate-line'></view>
+  <form bindsubmit="submitHealthForm">
+    <commoninput obj="{{staffId}}" bindinputEvent='{{staffId.bindInputName}}'/>
+    <commoninput obj="{{staffName}}" bindinputEvent='{{staffName.bindInputName}}'/>
+    <commoninput obj="{{mobileNo}}" bindinputEvent='{{mobileNo.bindInputName}}'/>
+    <view class="picker-container-view">
+      <rich-text class='picker-label' nodes='{{location.label}}'/>
+      <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
+        <view class='picker-item-label'>当前选择: {{location.content}}</view>
+      </picker>
+    </view>
+    <commoninput obj="{{temperature}}" bindinputEvent='{{temperature.bindInputName}}'/>
+    <i-panel title="{{aloneOrNot.title}}">
+      <i-radio-group current="{{aloneOrNot.current}}" bindchange="handleAloneOrNotChange">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{aloneOrNot.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <view hidden="{{!aloneOrNot.flag}}">
+      <i-panel title="{{familyContact.title}}">
+        <i-radio-group current="{{familyContact.current}}" bindchange="handleFamilyContactChange">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyContact.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            </i-radio>
+        </i-radio-group>
+      </i-panel>
+      <i-panel title="{{familyCondiction.title}}">
+        <i-radio-group current="{{familyCondiction.current}}" bindchange="handleFamilyCondictionChange">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyCondiction.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            </i-radio>
+        </i-radio-group>
+      </i-panel>
+    </view>
+    <commoninput obj="{{transitCity}}" bindinputEvent='{{transitCity.bindInputName}}'/>
+    <i-panel title="{{transitMethod.title}}">
+      <i-radio-group current="{{transitMethod.current}}" bindchange="handleTransitMethodChange">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitMethod.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <view hidden="{{transitMethod.flag}}">
+      <commoninput obj="{{transitNo}}" bindinputEvent='{{transitNo.bindInputName}}'/>
+      <i-panel title="{{date.label}}">
+        <picker mode="date" value="{{date.content}}" start="2020-02-01" end="2020-09-01" bindchange="bindDateChange">
+          <view class="picker health-picker">
+            当前选择: {{date.content}}
+          </view>
+        </picker>
+      </i-panel>
+    </view>
+    <i-panel title="{{wuhanOrNot.title}}">
+      <i-radio-group current="{{wuhanOrNot.current}}" bindchange="handleWuhanOrNotChange">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{wuhanOrNot.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+      </i-radio-group>
+    </i-panel>
+    <view hidden="{{!wuhanOrNot.flag}}">
+      <i-panel title="{{hubeiOrNot.title}}">
+        <i-radio-group current="{{hubeiOrNot.current}}" bindchange="handleHubeiOrNotChange">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{hubeiOrNot.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            </i-radio>
+        </i-radio-group>
+      </i-panel>
+      <view hidden="{{hubeiOrNot.flag}}">
+        <i-panel title="{{hubei.title}}">
+          <i-checkbox-group current="{{hubei.current}}" bindchange="handleHubeiChange">
+            <block wx:for="{{hubei.items}}">
+                <i-checkbox position="{{hubei.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+                </i-checkbox>
+            </block>
+          </i-checkbox-group>
+        </i-panel>
+      </view>
+    </view>
+    <i-panel title="{{contactHistory.title}}">
+        <i-checkbox-group current="{{contactHistory.current}}" bindchange="handleContactHistoryChange">
+          <block wx:for="{{contactHistory.items}}">
+              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+          </block>
+        </i-checkbox-group>
+    </i-panel>
+    <i-panel title="{{bodyHistory.title}}">
+        <i-checkbox-group current="{{bodyHistory.current}}" bindchange="handleBodyHistoryChange">
+          <block wx:for="{{bodyHistory.items}}">
+              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+          </block>
+        </i-checkbox-group>
+    </i-panel>
+ 
+
+  <!-- <i-panel title="{{supports.title}}">
+        <i-radio-group current="{{supports.current}}" bindchange="handleSupportsChange">
+          <block wx:for="{{supports.items}}">
+            <i-radio position="{{supports.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <view wx:if="{{item.id == '1'}}">
+              <textarea class="form-textarea" name="supports_content"></textarea>
+            </view>
+          </block>
+        </i-radio-group>
+    </i-panel>
+
+    <i-panel title="{{remote.title}}">
+        <i-radio-group current="{{remote.current}}" bindchange="handleRemoteChange">
+            <i-radio wx:for="{{remote.items}}" position="{{remote.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-radio>
+            <textarea class="form-textarea" name="remote_content"></textarea>
+        </i-radio-group>
+    </i-panel> -->
+    <!-- <i-panel title="如有，请具体说明：*">
+      <textarea class="form-textarea" name="textarea"></textarea>
+    </i-panel> -->
+
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+  </form>
+</view>
+
+
