@@ -1,0 +1,59 @@
+/* pages/login/login.wxss */
+
+.logo {
+  width: 128rpx;
+  height: 128rpx;
+  display: block;
+  margin: 100rpx auto 0 auto;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx #e6e6e6 solid;
+  width: 650rpx;
+  margin: 50rpx auto 0 auto;
+}
+
+.input-row image {
+  flex: none;
+  width: 56rpx;
+  height: 56rpx;
+  padding: 12rpx;
+  margin-right: 12rpx;
+}
+
+.input-row input {
+  flex: auto;
+}
+
+.btn-get-captcha {
+  font-size: 24rpx;
+  width: 172rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  background: #1ab654;
+  border-radius: 6rpx;
+  color: white;
+}
+
+.btn-get-captcha:active {
+  opacity: 0.5;
+}
+
+.btn-lock {
+  color: #8a8a8a;
+}
+
+.btn-login {
+  background:linear-gradient(180deg,rgba(94,198,92,1) 0%,rgba(41,165,39,1) 100%);
+  color: white;
+  border-radius: 6rpx;
+  width: 650rpx !important;
+  margin: 200rpx auto 0 auto;
+}
+
+.btn-login:active {
+  opacity: 0.5;
+}

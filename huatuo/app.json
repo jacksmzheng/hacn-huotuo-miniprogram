@@ -6,8 +6,10 @@
     "pages/submithealth/submithealth",
     "pages/submitvpn/submitvpn",
     "pages/submithelpdonation/submithelpdonation",
+    "pages/submitepidemic/submitepidemic",
     "pages/successful/successful",
-    "pages/errors/errors"
+    "pages/errors/errors",
+    "pages/login/login"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFF",

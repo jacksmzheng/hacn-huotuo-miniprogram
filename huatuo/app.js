@@ -6,6 +6,7 @@ App({
     prodUrl: 'https://huatuo.app77.cn'
   },
   globalData: {
+    appId: 'wxf60257610325b729',
     prodVersion: false,
     userInfo: null
   },
