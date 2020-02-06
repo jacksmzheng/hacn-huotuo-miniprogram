@@ -1,0 +1,57 @@
+/* pages/newslist/newslist.wxss */
+
+.newslist_page {
+  width: 100%;
+  background: #efefef;
+}
+
+.newslist_content {
+  padding: 2rpx 0;
+}
+
+.newslist_list {
+  margin: 8rpx 0;
+  padding: 8rpx 0rpx 8rpx 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fefefe;
+}
+
+.newslist_list_box {
+  width: 650rpx;
+}
+
+.newslist_list_title {
+  font-size: 32rpx;
+  color: #333;
+  margin: 12rpx 0;
+}
+
+.newslist_list_time {
+  font-size: 28rpx;
+  color: #939393;
+  margin: 10rpx 0;
+}
+
+.newslist_image_box {
+  width: 80rpx;
+  text-align: center;
+}
+
+.newslist_image {
+  width: 20rpx;
+  /* position: relative;
+  top: -26rpx; */
+}
+
+.nonews {
+  font-size: 28rpx;
+  color: #939393;
+  text-align: center;
+  padding: 10rpx;
+  background: #fefefe;
+}
+.unread_style{
+  background: #f8f8f8;
+}

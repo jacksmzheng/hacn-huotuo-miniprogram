@@ -1,0 +1,15 @@
+<!--pages/newslist/newslist.wxml-->
+<view class='newslist_page'>
+  <view class="newslist_content">
+    <view class="newslist_list {{item.a == 'Y' ? 'unread_style' : '' }}" wx:for="{{newsList}}" wx:key="{{index}}" bindtap="getDatail" data-id="{{item.id}}">
+      <view class="newslist_list_box">
+        <view class="newslist_list_title ">{{item.title}}</view>
+        <view class="newslist_list_time">{{item.date}}</view>
+      </view>
+      <view class="newslist_image_box">
+        <image class="newslist_image" mode="widthFix" src="/pages/common/resources/images/huotuo_arrow.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="nonews">没有更多消息了</view>
+</view>
