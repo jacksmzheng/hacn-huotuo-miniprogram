@@ -80,8 +80,8 @@ Page({
       content: ''
     },
     addHelp: '',
-    helpNumber: 'unknown',
-    helpCenterAddr: 'unknown'
+    helpNumber: '(unknown)',
+    helpCenterAddr: '(unknown)'
   },
 
   /**************************************************************************************
