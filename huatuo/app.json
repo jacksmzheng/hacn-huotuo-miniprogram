@@ -8,6 +8,8 @@
     "pages/travelReport/travelReport",
     "pages/report/report",
     "pages/employeereport/employeereport",
+    "pages/newslist/newslist",
+    "pages/newdetail/newdetail",
     "pages/successful/successful",
     "pages/errors/errors",
     "pages/login/login"
