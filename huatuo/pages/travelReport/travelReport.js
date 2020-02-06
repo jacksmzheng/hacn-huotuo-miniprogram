@@ -95,7 +95,7 @@ Page({
     },
     familyCondiction: {
       title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？',
-      current: '-',
+      current: '不是 No',
       position: 'left',
       checked: false,
       disabled: false,
@@ -244,16 +244,16 @@ Page({
         id: 4,
         name: '乏力',
       }, {
-        id: 4,
+        id: 5,
         name: '呼吸困难',
       }, {
-        id: 4,
+        id: 6,
         name: '腹泻',
       }, {
-        id: 4,
+        id: 7,
         name: '其他',
       }, {
-        id: 4,
+        id: 8,
         name: '以上均无',
       }],
       title: '14.过去两周您是否有出现任何身体不适的症状？*',
@@ -261,14 +261,52 @@ Page({
       position: 'left',
       checked: false,
       disabled: false,
-    }
+    },
+    isHideContactHistory: false,
+    isHideBodyHistory: false,
+    id: '',
+    isDisbaled: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.id) {
+      this.setData({
+        ["id"]: options.id,
+        ["staffId.content"]: 45088312,
+        ["staffId.content"]: 'robin',
+        ["staffId.content"]: 'robin',
+        ["mobileNo.content"]: '155554554',
+        ["location.content"]: 'GZ',
+        ["temperature.content"]: '36.5',
+        ["transitCity.content"]: 'GUANGZHOU',
+        ["transitNo.content"]: 'robin',
+        ["date.content"]: '2020-02-15',
+        ["aloneOrNot.current"]: '是 Yes',
+        ["transitMethod.current"]: '是 Yes',
+        ["bodyHistory.current"]: ['感冒'],
+        ["transitCity.current"]: '不是 No',
+        ["wuhanOrNot.current"]: '是 Yes',
+      })
+      var staffName = this.data.staffName.content;
+      var mobileNo = this.data.mobileNo.content;
+      var location = this.data.location.content;
+      var temperature = this.data.temperature.content;
+      var aloneOrNot = this.data.aloneOrNot.current;
+      var familyContact = this.data.familyContact.current;
+      var familyCondiction = this.data.familyCondiction.current;
+      var transitCity = this.data.transitCity.content;
+      var transitMethod = this.data.transitMethod.current;
+      var transitNo = this.data.transitNo.content;
+      var date = this.data.date.content;
+      var wuhanOrNot = this.data.wuhanOrNot.current;
+      var hubeiOrNot = this.data.hubeiOrNot.current;
+      var hubei = this.data.hubei.current;
+      var contactHistory = this.data.contactHistory.current;
+      var bodyHistory = this.data.bodyHistory.current;
+    }
   },
 
   /**
@@ -420,7 +458,11 @@ Page({
   handleContactHistoryChange({ detail = {} }) {
     const index = this.data.contactHistory.current.indexOf(detail.value);
     var id = this.getFieldValue(detail.value, this.data.contactHistory.items);
-    
+    if (id == 4) {
+      this.setData({
+        isHideContactHistory: index == -1
+      })
+    }
     index === -1 ? this.data.contactHistory.current.push(detail.value) : this.data.contactHistory.current.splice(index, 1);
     this.setData({
       ['contactHistory.current']: this.data.contactHistory.current
@@ -430,7 +472,11 @@ Page({
   handleBodyHistoryChange({ detail = {} }) {
     const index = this.data.bodyHistory.current.indexOf(detail.value);
     var id = this.getFieldValue(detail.value, this.data.bodyHistory.items);
-
+    if (id == 8) {
+      this.setData({
+        isHideBodyHistory: index == -1
+      })
+    }
     index === -1 ? this.data.bodyHistory.current.push(detail.value) : this.data.bodyHistory.current.splice(index, 1);
     this.setData({
       ['bodyHistory.current']: this.data.bodyHistory.current
@@ -464,26 +510,6 @@ Page({
     var contactHistory = this.data.contactHistory.current;
     var bodyHistory = this.data.bodyHistory.current;
 
-    var data = {
-      staffId: staffId,
-      staffName: staffName,
-      mobileNo: mobileNo,
-      location: location,
-      temperature: temperature,
-      aloneOrNot: aloneOrNot,
-      familyContact: familyContact,
-      familyCondiction: familyCondiction,
-      transitCity: transitCity,
-      transitMethod: transitMethod,
-      transitNo: transitNo,
-      date: date,
-      wuhanOrNot: wuhanOrNot,
-      hubeiOrNot: hubeiOrNot,
-      hubei: hubei,
-      contactHistory: contactHistory,
-      bodyHistory: bodyHistory,
-    }
-    console.log(data)
     if (staffId == '' 
     || staffName == '' 
     || mobileNo == '' 
