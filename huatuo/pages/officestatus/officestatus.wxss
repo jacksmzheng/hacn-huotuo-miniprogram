@@ -302,14 +302,14 @@
   color: #333;
 }
 
-.isolation .active text:nth-of-type(2), .isolation .passive text:nth-of-type(2) {
+/* .isolation .active text:nth-of-type(2), .isolation .passive text:nth-of-type(2) {
   font-size: 22rpx;
   line-height: 1;
   margin-top: 8rpx;
   color: #666;
-}
+} */
 
-.isolation .active text:nth-of-type(3), .isolation .passive text:nth-of-type(3) {
+.isolation .active text:nth-of-type(2), .isolation .passive text:nth-of-type(2) {
   font-size: 60rpx;
   line-height: 1;
   margin-top: 16rpx;
