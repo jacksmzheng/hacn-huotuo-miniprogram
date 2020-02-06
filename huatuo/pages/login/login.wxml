@@ -18,7 +18,7 @@
 <view class="captcha input-row">
   <image src="/pages/common/resources/images/icon-captcha.png" mode="widthFix"></image>
   <input placeholder="请输入验证码" bindinput="inputCaptcha"></input>
-  <view class="btn-get-captcha {{btnLock ? 'btn-lock' : ''}}" bindtap="tapGetCaptcha">{{btnText}}</view>
+  <view class="btn-get-captcha" bindtap="tapGetCaptcha">{{btnText}}</view>
 </view>
 
 <button class="btn-login" bindtap="tapLogin">登陆</button>
