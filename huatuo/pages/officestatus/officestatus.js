@@ -183,6 +183,9 @@ Page({
     if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
     else app.goNext(e.currentTarget.dataset.url)
   },
+  readNews(e) {
+    app.goNext(e.currentTarget.dataset.url)
+  },
   readRTNews() {
 
   }

@@ -42,10 +42,6 @@
   opacity: 0.5;
 }
 
-.btn-lock {
-  color: #8a8a8a;
-}
-
 .btn-login {
   background:linear-gradient(180deg,rgba(94,198,92,1) 0%,rgba(41,165,39,1) 100%);
   color: white;
