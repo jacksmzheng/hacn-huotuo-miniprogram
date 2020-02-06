@@ -15,7 +15,7 @@ Page({
       placeholder: '请输入 Please Enter',
       maxlength: 8,
       type: 'number',
-      label: '1.Your Staff ID （你的员工编号）',
+      label: '1.请输入你的员工编号。',
       bindInputName: 'inputEvent',
       num: '1',
       content: ''
@@ -28,7 +28,7 @@ Page({
       placeholder: '请输入 Please Enter',
       maxlength: 4,
       type: 'text',
-      label: '2.Your CN Name （你的中文名字）',
+      label: '2.请输入你的中文姓名。',
       bindInputName: 'inputEvent',
       num: '1',
       content: ''
@@ -41,7 +41,7 @@ Page({
       maxlength: 11,
       placeholder: '请输入 Please Enter',
       type: 'number',
-      label: '3.Your cell phone for emergency call（你的紧急联系电话）',
+      label: '3.请输入你的紧急联系电话。',
       confirmLabel: '3.Your cell phone for emergency call（你的紧急联系电话）',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter cell phone (请输入紧急联系电话)',
@@ -56,7 +56,7 @@ Page({
         id: 2,
         name: '不是 No'
       }],
-      title: '4.Are you reporting for other colleague? （你为其他同事报告吗）',
+      title: '4.你为其他同事报告吗？',
       current: '-',
       position: 'left',
       checked: false,
@@ -66,11 +66,11 @@ Page({
     othersStaffId: {
       hasLabel: true,
       hasWarning: false,
-      isMandatory: true,
+      isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入 Please Enter',
       maxlength: 8,
-      label: '5.The Staff ID of reported colleague （你所报告同事的员工编号）',
+      label: '5.你所报告同事的员工编号是？',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
       num: '8',
@@ -81,27 +81,27 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '6.Where is the working cIty of the reported colleague（你或你所报告的同事在哪个办公城市？）',
+      label: '6.你或你所报告的同事在哪个办公城市？',
       array: [
         '请选择 Please Select',
-        '上海市 Shanghai',
-        '北京市 Beijing',
-        '成都市 Chengdu',
-        '东莞市 Dongguan',
-        '佛山市 Foshan',
-        '福州市 Fuzhou',
-        '广州市 Guangzhou',
-        '杭州市 Hangzhou',
-        '惠州市 Huizhou',
-        '江门市 Jiangmen',
-        '济南市 Jinan',
-        '昆明市 Kunming',
-        '南京市 Nanjing',
-        '宁波市 Ningbo',
-        '深圳市 Shenzhen',
-        '天津市 Tianjin',
-        '厦门市 Xiamen',
-        '中山市 Zhongshan'
+        '上海市 SH',
+        '北京市 BJ',
+        '成都市 CD',
+        '东莞市 DG',
+        '佛山市 FS',
+        '福州市 FZ',
+        '广州市 GZ',
+        '杭州市 HaZ',
+        '惠州市 HuZ',
+        '江门市 JM',
+        '济南市 JN',
+        '昆明市 KM',
+        '南京市 NJ',
+        '宁波市 NB',
+        '深圳市 SZ',
+        '天津市 TJ',
+        '厦门市 XM',
+        '中山市 ZS'
       ],
       index: 0,
       bindName: 'pickerCityChange',
@@ -112,7 +112,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '7.What is the department of the reported colleague? （你或你所报告同事的部门）',
+      label: '7.你或你所报告同事的部门是？',
       array: [
         '请选择 Please Select', 
         'RB',
@@ -132,164 +132,103 @@ Page({
         'NETWORK'
         ],
       index: 0,
-      bindName: 'pickerChange',
+      bindName: 'pickerDepartmentChange',
       content: ''
     },
     visits: {
-      hasLabel: true,
-      hasWarning: false,
-      isMandatory: false,
-      isCRSRelated: false,
-      label: '8.Which  bank office did the reported colleague visit on last 14 days? (你或你所报告的同事14天内去过的办公行所)（多选）',
-      array: [
-        '请选择 Please Select'
-      ],
-      index: 0,
-      bindName: 'pickerVisitsChange',
-      content: ''
+      items: [{
+        id: 1,
+        name: '无 None'
+      }],
+      title: '8.你或你所报告的同事14天内去过的办公行所。（可多选）',
+      current: [],
+      position: 'left',
+      checked: false,
+      disabled: false
     },
     workplaces: [
-      {
-        id: 0,
-        name: 'default',
-        items: []
-      },
-      {
-        id: 1,
-        name: '上海市 Shanghai',
-        items: [
-          '恒生银行（中国）有限公司',
-          '上海分行',
-          '上海静安嘉里中心支行',
-          '上海自贸试验区支行',
-          '上海安福路支行',
-          '上海徐家汇支行',
-          '上海娄山关路支行',
-          '上海大拇指支行',
-          '上海淮海路支行',
-          '上海中山公园支行',
-          '上海黄浦区瑞金路支行',
-          '上海人民广场支行'
-        ]
-      },{
-        id: 2,
-        name: '北京市 Beijing',
-        items: [
-          '北京分行',
-          '北京中关村支行',
-          '北京酒仙桥支行',
-          '北京工体北路支行',
-          '北京嘉里中心支行',
-          '北京金融街支行'
-        ]
-      },{
-        id: 3,
-        name: '成都市 Chengdu',
-        items: [
-          '成都分行'
-        ]
-      },{
-        id: 4,
-        name: '东莞市 Dongguan',
-        items: [
-          '东莞分行'
-        ]
-      },{
-        id: 5,
-        name: '佛山市 Foshan',
-        items: [
-          '佛山支行',
-          '顺德支行'
-        ]
-      },{
-        id: 6,
-        name: '福州市 Fuzhou',
-        items: [
-          '福州分行',
-          '福州鼓楼支行'
-        ]
-      },{
-        id: 7,
-        name: '广州市 Guangzhou',
-        items: [
-          '广州分行',
-          '广州珠江新城支行',
-          '广州中信广场支行',
-          '广州江南西路支行',
-          '广州东山支行'
-        ]
-      },{
-        id: 8,
-        name: '杭州市 Hangzhou',
-        items: [
-          '杭州分行'
-        ]
-      },{
-        id: 9,
-        name: '惠州市 Huizhou',
-        items: [
-          '惠州支行'
-        ]
-      },{
-        id: 10,
-        name: '江门市 Jiangmen',
-        items: [
-          '江门支行'
-        ]
-      },{
-        id: 11,
-        name: '济南市 Jinan',
-        items: [
-          '济南分行'
-        ]
-      },{
-        id: 12,
-        name: '昆明市 Kunming',
-        items: [
-          '昆明分行'
-        ]
-      },{
-        id: 13,
-        name: '南京市 Nanjing',
-        items: [
-          '南京分行'
-        ]
-      },{
-        id: 14,
-        name: '宁波市 Ningbo',
-        items: [
-          '宁波分行'
-        ]
-      },{
-        id: 15,
-        name: '深圳市 Shenzhen',
-        items: [
-          '深圳分行',
-          '深圳前海支行',
-          '深圳后海支行',
-          '深圳福田中心区支行',
-          '深圳罗湖支行',
-          '深圳高新区支行'
-        ]
-      },{
-        id: 16,
-        name: '天津市 Tianjin',
-        items: [
-          '天津分行'
-        ]
-      },{
-        id: 17,
-        name: '厦门市 Xiamen',
-        items: [
-          '厦门分行'
-        ]
-      },{
-        id: 18,
-        name: '中山市 Zhongshan',
-        items: [
-          '中山支行'
-        ]
-      },
+      ['无 None'],
+      [
+        '恒生银行（中国）有限公司',
+        '上海分行',
+        '上海静安嘉里中心支行',
+        '上海自贸试验区支行',
+        '上海安福路支行',
+        '上海徐家汇支行',
+        '上海娄山关路支行',
+        '上海大拇指支行',
+        '上海淮海路支行',
+        '上海中山公园支行',
+        '上海黄浦区瑞金路支行',
+        '上海人民广场支行'
+      ],
+      [
+        '北京分行',
+        '北京中关村支行',
+        '北京酒仙桥支行',
+        '北京工体北路支行',
+        '北京嘉里中心支行',
+        '北京金融街支行'
+      ],
+      [
+        '成都分行'
+      ],
+      [
+        '东莞分行'
+      ],
+      [
+        '佛山支行',
+        '顺德支行'
+      ],
+      [
+        '福州分行',
+        '福州鼓楼支行'
+      ],
+      [
+        '广州分行',
+        '广州珠江新城支行',
+        '广州中信广场支行',
+        '广州江南西路支行',
+        '广州东山支行'
+      ],
+      [
+        '杭州分行'
+      ],
+      [
+        '惠州支行'
+      ],
+      [
+        '江门支行'
+      ],
+      [
+        '济南分行'
+      ],
+      [
+        '昆明分行'
+      ],
+      [
+        '南京分行'
+      ],
+      [
+        '宁波分行'
+      ],
+      [
+        '深圳分行',
+        '深圳前海支行',
+        '深圳后海支行',
+        '深圳福田中心区支行',
+        '深圳罗湖支行',
+        '深圳高新区支行'
+      ],
+      [
+        '天津分行'
+      ],
+      [
+        '厦门分行'
+      ],
+      [
+        '中山支行'
+      ]
     ],
     status: {
       items: [{
@@ -311,7 +250,7 @@ Page({
         id: 6,
         name: '居住楼或小区被有关部门限制出入 The building or residential estate lived in is being restricted.'
       }],
-      title: '9.What is the current circumstance of the reported colleague? （你或你所报告的同事目前的情况是？）',
+      title: '9.你或你所报告的同事目前的健状态？',
       current: '-',
       position: 'left',
       checked: false,
@@ -337,7 +276,7 @@ Page({
         id: 6,
         name: '其他'
       }],
-      current: '-',
+      current: [],
       position: 'left',
       checked: false,
       disabled: false
@@ -353,7 +292,7 @@ Page({
         id: 2,
         name: 'no'
       }],
-      title: '10.Has the reported colleague ever begun physical isolation?人员是否已经开始隔离？)',
+      title: '10.你或你所报告的员工是否已经开始隔离？',
       current: '-',
       position: 'left',
       checked: false,
@@ -367,7 +306,7 @@ Page({
         id: 2,
         name: 'Passive Isolation'
       }],
-      title: '11.Are the reported colleague   isolated at home  voluntarily(Active Isolation)or being isolated by relevant personnel (Passive Isolation)?你所报告的员工正在进行自我主动隔离还是被动隔离？',
+      title: '11.你或你所报告的员工正在进行自我主动隔离？还是被医疗机构或者疾控部门收治的被动隔离？',
       current: '-',
       position: 'left',
       checked: false,
@@ -378,37 +317,27 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '12.What is the start date of the Isolation?你所报告的员工的隔离起始日期是？',
+      label: '12.你所报告的员工的隔离起始日期是？',
       current: '请选择 Please Select',
       index: 0,
       bindName: 'pickerStartDateChange',
-      content: ''
+      content: '',
+      start: '2020-01-01',
+      end: '2021-01-01'
     },
     isolationEndDate: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '13.What is the expected end  date of Isolation?你所报告的员工的预期隔离结束时间是？',
+      label: '13.你所报告的员工的预期隔离结束时间是？',
       current: '请选择 Please Select',
       index: 0,
       bindName: 'pickerEndDateChange',
-      content: ''
+      content: '',
+      start: '2020-01-01',
+      end: '2021-01-01'
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**
@@ -417,6 +346,7 @@ Page({
   onShow: function () {
     this.initData();
   },
+
   //初始化数据
   initData: function () {
     var navigateTitle = '疫情上报 Report Epidemic';
@@ -428,42 +358,8 @@ Page({
       title: navigateTitle,
     })
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  pickerChange: function (e) {
+  pickerDepartmentChange: function (e) {
     console.log('picker change : ',e)
 
     this.setData({
@@ -472,8 +368,8 @@ Page({
 
     })
   },
-  //
-  pickerChange: function (e) {
+  
+  pickerVisitsChange: function (e) {
     console.log('picker change : ',e)
 
     this.setData({
@@ -482,17 +378,17 @@ Page({
 
     })
   },
-  //
+  
   pickerCityChange: function (e) {
-    console.log('picker change : ', e)
+    console.log('picker change : ',e)
 
     this.setData({
       ['city.index']: e.detail.value,
       ['city.content']: this.data.city.array[e.detail.value],
-      ['visits.array']: ['请选择 Please Select'].concat(this.data.workplaces[e.detail.value].items)
+      ['visits.items']: this.buildItems(this.data.workplaces[e.detail.value])
     })
   },
-  //
+  
   pickerStartDateChange: function (e) {
     console.log('picker change : ', e)
 
@@ -500,7 +396,7 @@ Page({
       ['isolationStartDate.current']: e.detail.value
     })
   },
-  //
+  
   pickerEndDateChange: function (e) {
     console.log('picker change : ', e)
 
@@ -508,7 +404,7 @@ Page({
       ['isolationEndDate.current']: e.detail.value
     })
   },
-  //
+  
   inputEvent: function (e_) {
     const e = e_.detail.e ? e_.detail.e : e_
     console.log('input event : ', e)
@@ -523,7 +419,7 @@ Page({
       [field]: e.detail.value
     })
   },
-  //
+  
   handleOthersChange({ detail = {} }) {
     console.log(detail.value)
     this.setData({
@@ -534,80 +430,48 @@ Page({
       isOthersFlag: value == 2
     })
   },
-  //
+  
   handleStatusMoreChange({ detail = {} }) {
     console.log(detail.value)
     var v = this.getFieldValue(detail.value, this.data.status.items);
     this.setData({
       ['status.current']: detail.value,
-      ['moreStatus.current']: '-',
+      ['moreStatus.current']: [],
       isHideMoreSymptom: v !== 5
     });
   },
-  //
+  
   handleStatusOtherChange({ detail = {} }) {
     console.log(detail.value)
+    const index = this.data.moreStatus.current.indexOf(detail.value);
     var v = this.getFieldValue(detail.value, this.data.moreStatus.items);
+    index === -1 ? this.data.moreStatus.current.push(detail.value) : this.data.moreStatus.current.splice(index, 1);
     this.setData({
-      ['moreStatus.current']: detail.value,
-      isHideOtherSymptom: v !== 6
+      ['moreStatus.current']: this.data.moreStatus.current,
+      isHideOtherSymptom: (v == 6 ? !this.data.isHideOtherSymptom : this.data.isHideOtherSymptom)
     });
   },
-  //
-  handleSupportsChange({ detail = {} }) {
-    console.log(detail.value)
-    this.setData({
-      ['supports.current']: detail.value
-    });
-  },
-  //
-  handleRemoteChange({ detail = {} }) {
-    console.log(detail.value)
-    this.setData({
-      ['remote.current']: detail.value
-    });
-  },
-  //
-  regionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      ['area.region']: e.detail.value
-    })
-  },
-  //
+  
   handleVisitsChange({ detail = {} }) {
     const index = this.data.visits.current.indexOf(detail.value);
     var id = this.getFieldValue(detail.value, this.data.visits.items);
-    if(id == 1) {
-      this.setData({
-        isHideOtherWorkPlace: index == -1
-      })
-    }
     index === -1 ? this.data.visits.current.push(detail.value) : this.data.visits.current.splice(index, 1);
     this.setData({
       ['visits.current']: this.data.visits.current
     });
   },
-  //
+  
   handleIsolationOrNotChange: function ({ detail = {} }) {
     console.log(detail.value)
     this.setData({
       ['isolationOrNot.current']: detail.value
     })
   },
-  //
+  
   handleIsolationTypeChange: function ({ detail = {} }) {
     console.log(detail.value)
     this.setData({
       ['isolationType.current']: detail.value
-    })
-  },
-  //
-
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
     })
   },
 
@@ -653,7 +517,7 @@ Page({
     var data = this.buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, city, visits);
     this.request(data);
   },
-  //build post data
+
   buildHealthReportData(staffId, mobile, department, others, others_id, status, status_content, city, visits) {
     var arrs = [];
     for(var i = 0; i < visits.length; i++) {
@@ -675,7 +539,7 @@ Page({
     };
     return data;
   },
-  //call api
+  
   request(data) {
     wx.showLoading({ title: '数据处理中...' });
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
@@ -701,14 +565,14 @@ Page({
       }
     })
   },
-  //show error message
+  
   handleError(message) {
     $Message({
       content: message || '请完善信息!',
       type: 'error'
     });
   },
-  //
+  
   getFieldValue(value, data) {
     for(var i = 0; i < data.length; i++) {
       if(value == data[i].name) {
@@ -716,5 +580,18 @@ Page({
       }
     }
     return null;
+  },
+
+  buildItems(arr) {
+    const res = []
+    if (arr) {
+      arr.forEach((ele, index) => {
+        res.push({
+          id: index,
+          name: ele
+        })
+      })
+    }
+    return res
   }
 })
