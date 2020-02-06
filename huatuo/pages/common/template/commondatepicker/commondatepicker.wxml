@@ -2,7 +2,7 @@
   <view class='picker-container-view'>
     <rich-text style="display:{{hasLabel ? 'block' : 'none' }}" class='picker-label' nodes='{{label}}{{isMandatory ? "<sup>*</sup>" : ""}}{{isCRSRelated ? "<sup>#</sup>" : ""}}'/>
     <view style="display:{{hasLabel && notes ? 'block' : 'none' }}" class='picker-label-notes'>{{notes}}</view>
-    <picker mode="date" style='border-color: {{ hasWarning && index == 0 ? "#CC0000" : "#B2B2B2" }}' id='' data-num='{{num}}' value='{{current}}' disabled='{{isDisabled}}' bindchange='{{bindName}}'>
+    <picker mode="date" start="{{start}}" end="{{end}}" style='border-color: {{ hasWarning && index == 0 ? "#CC0000" : "#B2B2B2" }}' id='' data-num='{{num}}' value='{{current}}' disabled='{{isDisabled}}' bindchange='{{bindName}}'>
       <view class='picker-item' >
         <view class='picker-item-label'>{{current}}</view>
         <image style='display:{{ isDisabled ? "none" : "block"}}' class='picker-item-image' src='/pages/common/resources/images/icon_chevron_down.png'></image>
