@@ -9,7 +9,7 @@
     <view style="width: 4rpx; height: 24rpx; background: #fff;border-radius:2rpx;margin-right: 14rpx;"></view>
     <text>{{realTimeNews}}</text>
     <view style="display: flex; align-items: center; margin-left: auto;" bindtap="readRTNews">
-      <text>更多/more</text>
+      <text>更多</text>
       <image class="icon-more" src="/pages/common/resources/images/icon-right.png" mode="widthFix"></image>
     </view>
   </view>
@@ -19,22 +19,22 @@
       <view class="icon-view" data-url="/pages/newslist/newslist" bindtap="readNews">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
         <text class="icon-text">疫情新闻</text>
-        <text class="icon-desc">Latest News</text>
+        <!-- <text class="icon-desc">Latest News</text> -->
       </view>
       <view class="icon-view">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
         <text class="icon-text">行所疫情</text>
-        <text class="icon-desc">Branches Situation</text>
+        <!-- <text class="icon-desc">Branches Situation</text> -->
       </view>
       <view class="icon-view" data-url="/pages/report/report" bindtap="submitCase">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon3.png"></image>
         <text class="icon-text">员工上报</text>
-        <text class="icon-desc">Report A Case</text>
+        <!-- <text class="icon-desc">Report A Case</text> -->
       </view>
       <view class="icon-view" data-url="/pages/submithelpdonation/submithelpdonation" bindtap="submitHelpDonation">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon4.png"></image>
         <text class="icon-text">需求收集</text>
-        <text class="icon-desc">Needs Collection</text>
+        <!-- <text class="icon-desc">Needs Collection</text> -->
       </view>
     </view>
   </view>
@@ -42,14 +42,14 @@
   <view class="hacn-page-section">
     <view class="office-area">全国疫情实时状况</view>
     <view class="desc-and-label">
-      <view class="office-desc">Novel Coronavirus-China</view>
+      <view class="office-desc"></view>
       <view style="display: flex; align-items: center;">
         <view class="label-color-tip" style="background: #36DEA3"></view>
-        <text class="label-text">发烧/Fever</text>
+        <text class="label-text">发烧</text>
         <view class="label-color-tip" style="background: #FFC525"></view>
-        <text class="label-text">疑似/Suspect</text>
+        <text class="label-text">疑似</text>
         <view class="label-color-tip" style="background: #F26478"></view>
-        <text class="label-text">确诊/Confirm</text>
+        <text class="label-text">确诊</text>
       </view>
     </view>
 
@@ -73,13 +73,13 @@
   <view class="isolation">
     <view class="active">
       <text>主动隔离</text>
-      <text>Active</text>
+      <!-- <text>Active</text> -->
       <text>0</text>
     </view>
     <view class="divi"></view>
     <view class="passive">
       <text>被动隔离</text>
-      <text>Passvie</text>
+      <!-- <text>Passvie</text> -->
       <text>0</text>
     </view>
   </view>

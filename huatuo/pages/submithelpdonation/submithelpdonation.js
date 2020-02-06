@@ -58,14 +58,14 @@ Page({
       isCRSRelated: false,
       label: '4. 所需口罩数量',
       array: [
-        '请选择 Please Select',
+        '请选择',
         '1',
         '2',
         '3'
       ],
       index: 0,
       bindName: 'maskNumPickerChange',
-      content: '请选择 Please Select'
+      content: '请选择'
     },
     helpAddr: {
       hasLabel: true,
@@ -80,8 +80,8 @@ Page({
       content: ''
     },
     addHelp: '',
-    helpNumber: '(unknown)',
-    helpCenterAddr: '(unknown)'
+    helpNumber: '4008308008',
+    helpCenterAddr: '上海市浦东南路528号'
   },
 
   /**************************************************************************************
@@ -174,7 +174,7 @@ Page({
    */
   initData() {
     wx.setNavigationBarTitle({
-      title: '求助和捐赠 Help & Donation'
+      title: '求助和捐赠'
     })
   },
 
@@ -204,12 +204,12 @@ Page({
       this.handleError('请填写staffID')
       return
     }
-    if (maskHelp != '请选择 Please Select' && maskNum == '请选择 Please Select') {
+    if (maskHelp != '请选择' && maskNum == '请选择') {
       this.handleError('请选择口罩数量')
       return
     }
-    if (maskHelp == '请选择 Please Select') data.maskHelp = ''
-    if (maskNum == '请选择 Please Select') data.maskNum = ''
+    if (maskHelp == '请选择') data.maskHelp = ''
+    if (maskNum == '请选择') data.maskNum = ''
 
     console.log(data)
 

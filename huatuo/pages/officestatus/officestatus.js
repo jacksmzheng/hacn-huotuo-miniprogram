@@ -108,6 +108,7 @@ Page({
         success: res => {
           app.globalData.session = res.data.session
           app.globalData.userInfo = res.data.userInfo
+          console.log(app.globalData)
         },
         fail: res => console.log('health status fail res : ', res),
         complete: res => {}

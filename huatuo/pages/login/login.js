@@ -67,6 +67,9 @@ Page({
 
     this.doLogin(data).then(resolve => {
       if (resolve.data.code == 200) {
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        prevPage.wechatLogin()
         wx.navigateBack({})
       } else {
         this.handleError('注册失败，请退出小程序重试')
