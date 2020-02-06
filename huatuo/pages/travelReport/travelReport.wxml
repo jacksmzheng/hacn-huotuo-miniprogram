@@ -78,16 +78,32 @@
     <i-panel title="{{contactHistory.title}}">
         <i-checkbox-group current="{{contactHistory.current}}" bindchange="handleContactHistoryChange">
           <block wx:for="{{contactHistory.items}}">
+            <!-- <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+            </i-checkbox> -->
+            <view wx:if="{{index < 3}}" hidden="{{isHideContactHistory}}">
               <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
               </i-checkbox>
+            </view>
+             <view wx:if="{{index == 3}}">
+              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+            </view>
           </block>
         </i-checkbox-group>
     </i-panel>
     <i-panel title="{{bodyHistory.title}}">
         <i-checkbox-group current="{{bodyHistory.current}}" bindchange="handleBodyHistoryChange">
           <block wx:for="{{bodyHistory.items}}">
+              <!-- <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox> -->
+              <view wx:if="{{index < 7}}" hidden="{{isHideBodyHistory}}">
               <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
               </i-checkbox>
+            </view>
+             <view wx:if="{{index == 7}}">
+              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              </i-checkbox>
+            </view>
           </block>
         </i-checkbox-group>
     </i-panel>
@@ -116,7 +132,7 @@
       <textarea class="form-textarea" name="textarea"></textarea>
     </i-panel> -->
 
-    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit">提交</button>
+    <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" form-type="submit" hidden="{{id}}">提交</button>
   </form>
 </view>
 

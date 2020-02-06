@@ -116,7 +116,7 @@ Page({
   },
   //
   toubmit: function (e) {
-    var id = e.target.id;
+    var id = e.currentTarget.id;
     console.log(this.data.showNewSurvey)
     wx.navigateTo({
       url:
