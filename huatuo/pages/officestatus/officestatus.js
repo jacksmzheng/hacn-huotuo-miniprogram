@@ -1,5 +1,25 @@
 // pages/officestatus/officestatus.js
 const app = getApp()
+const cityMap = {
+  'SH': ['上海', 'Shanghai'],
+  'BJ': ['北京', 'Beijing'],
+  'CD': ['成都', 'Chengdu'],
+  'DG': ['东莞', 'Dongguan'],
+  'FZ': ['福州', 'Fuzhou'],
+  'GZ': ['广州', 'Guangzhou'],
+  'HaZ': ['杭州', 'Hangzhou'],
+  'JN': ['济南', 'Jinan'],
+  'KM': ['昆明', 'Kunming'],
+  'NJ': ['南京', 'Nanjing'],
+  'NB': ['宁波', 'Ningbo'],
+  'SZ': ['深圳', 'Shenzhen'],
+  'XM': ['厦门', 'Xiamen'],
+  'TJ': ['天津', 'Tianjin'],
+  'FS': ['佛山', 'Foshan'],
+  'HuZ': ['惠州', 'Huizhou'],
+  'JM': ['江门', 'Jiangmen'],
+  'ZS': ['中山', 'Zhongshan']
+}
 
 Page({
   /**
@@ -8,162 +28,7 @@ Page({
    */
   data: {
     prodVersion: app.globalData.prodVersion,
-    healthStatus: [{
-        area: '城市状况',
-        areaen: 'City Status',
-        buildingReports: [{
-            buildingName: '上海 Shanghai',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          },
-          {
-            buildingName: '北京 Beijing',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          },
-          {
-            buildingName: '成都 Chengdu',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          },
-          {
-            buildingName: '东莞 Dongguan',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          },
-          {
-            buildingName: '佛山 Foshan',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          },
-          {
-            buildingName: '福州 Fuzhou',
-            confirmed: 1,
-            suspect: 2,
-            fever: 3,
-          }
-        ]
-      },
-      {
-        area:'西安办公室情况',
-        areaen: "Xi'An Office Status",
-        buildingReports: [
-          {
-            buildingName: '',
-            confirmed: 0,
-            suspect: 0,
-            fever: 0,
-          }
-        ]
-      }
-    ],
-    vpnStatus: [{
-      vpn: [{
-          name: 'VPN-HK',
-          count: 0
-        },
-        {
-          name: 'VPN-CN',
-          count: 0
-        }
-      ]
-    }],
-    branches: [
-      [{
-        area: '上海',
-        area_en: 'Shanghai',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '北京',
-        area_en: 'Beijing',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '成都',
-        area_en: 'Chengdu',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }],
-      [{
-        area: '东莞',
-        area_en: 'Dongguan',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '福州',
-        area_en: 'Fuzhou',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '广州',
-        area_en: 'Guangzhou',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }],
-      [{
-        area: '杭州',
-        area_en: 'Hnagzhou',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '济南',
-        area_en: 'Jinan',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '昆明',
-        area_en: 'Kunming',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }],
-      [{
-        area: '南京',
-        area_en: 'Nanjing',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '宁波',
-        area_en: 'Ningbo',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '深圳',
-        area_en: 'Shenzhen',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }],
-      [{
-        area: '厦门',
-        area_en: 'Xiamen',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }, {
-        area: '天津',
-        area_en: 'Tianjin',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }]
-    ],
+    branches: [],
     subBranches: [{
         area: '佛山',
         area_en: 'Foshan',
@@ -196,8 +61,8 @@ Page({
     realTimeNews: '2.10日所有网点恢复营业'
   },
 
-  /**
-   * 生命周期函数--监听页面加载
+  /**************************************************************************************
+   * 生命周期函数
    */
   onLoad: function(options) {
     const screenWidth = wx.getSystemInfoSync().windowWidth
@@ -211,6 +76,7 @@ Page({
   },
 
   onShow: function() {
+    this.getHealthStatus()
     this.refreshData()
   },
 
@@ -218,8 +84,12 @@ Page({
     clearInterval(this.data.refreshEvent)
   },
 
+
+  /**************************************************************************************
+   * 其他功能
+   */
   wechatLogin() {
-    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    let host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     new Promise((resolve, reject) => {
       wx.login({
         success: (res) => {
@@ -240,7 +110,7 @@ Page({
           app.globalData.userInfo = res.data.userInfo
         },
         fail: res => console.log('health status fail res : ', res),
-        complete: res => { }
+        complete: res => {}
       });
     }, reject => {
       console.log(reject)
@@ -248,178 +118,71 @@ Page({
   },
 
   refreshData: function() {
-    const that = this
     wx.showLoading({
       title: '数据加载中...'
     })
-    that.requestDict()
-    that.setData({
-      refreshEvent: setInterval(function() {
-        that.requestDict()
+    this.setData({
+      refreshEvent: setInterval(() => {
+        this.getHealthStatus()
       }, 5 * 60 * 1000),
     })
   },
 
-  requestDict: function() {
-    const that = this
-    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+  getHealthStatus() {
+    let host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: host + '/api/datadict',
+      url: host + '/api/hacn/health',
       method: 'GET',
       data: {},
-      header: {
-        'content-type': 'application/json',
-        'X-IS-DUMMY': false
-      },
-      success(res) {
-        console.log('dictionary success res :', res)
-        if (res.statusCode == 200) {
-          that.setData({
-            areaDic: res.data.area,
-            buildingDic: res.data.building,
-            vpnDic: res.data.vpn
-          })
-          wx.showLoading({
-            title: '数据加载中...',
-          })
-          that.requestHealthStatus()
-          that.requestVPNStatus()
-        }
-
-      },
-      fail(res) {
+      success: res => {
         wx.hideLoading()
-        console.log('dictionary fail res : ', res)
+        let tmp1 = []
+        let tmp2 = []
+        res.data.branches.forEach((e, i, a) => {
+          e.area_cn = cityMap[e.area][0]
+          e.area_en = cityMap[e.area][1]
+          tmp2.push(e)
+          if (tmp2.length == 3 || i + 1 >= a.length) {
+            tmp1.push(tmp2)
+            tmp2 = []
+          }
+        })
+        let tmp3 = []
+        res.data.subBranches.forEach((e, i, a) => {
+          e.area_cn = cityMap[e.area][0]
+          e.area_en = cityMap[e.area][1]
+          tmp3.push(e)
+        })
+        this.setData({
+          branches: tmp1,
+          subBranches: tmp3
+        })
       },
-      complete(res) {
-        wx.hideLoading()
-      }
-    });
-
-  },
-
-  requestHealthStatus: function() {
-    const that = this
-    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
-    wx.request({
-      url: host + '/api/health',
-      method: 'GET',
-      data: {},
-      header: {
-        'content-type': 'application/json',
-        'X-IS-DUMMY': false
-      },
-      success(res) {
-        console.log('health status success res :', res)
-        if (res.statusCode == 200 && res.data) {
-          const healthStatus = that.formatHealthData(res.data)
-          that.setData({
-            healthStatus
-          })
-        }
-      },
-      fail(res) {
-        console.log('health status fail res : ', res)
-      },
-      complete(res) {
-        wx.hideLoading()
-      }
+      fail: res => console.log(res),
+      complete: res => {}
     });
   },
 
-  requestVPNStatus: function() {
-    const that = this
-    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
-    wx.request({
-      url: host + '/api/vpn/report',
-      method: 'POST',
-      data: {
-        "day": 0
-      },
-      header: {
-        'content-type': 'application/json',
-        'X-IS-DUMMY': false
-      },
-      success(res) {
-        console.log('vpn status success res :', res)
-        if (res.statusCode == 200 && res.data) {
-          const vpnStatus = that.formatVPNData(res.data)
-          that.setData({
-            vpnStatus
-          })
-        }
-      },
-      fail(res) {
-        console.log('vpn status fail res : : ', res)
-      },
-      complete(res) {
-        wx.hideLoading()
-      }
-    })
-  },
-
-  formatHealthData: function(responseData) {
-    const areaDic = this.data.areaDic
-    const buildingDic = this.data.buildingDic
-    for (let i = 0; i < responseData.length; i++) {
-      if (areaDic && responseData[i].area == 'GZ') {
-        responseData[i].area = areaDic.GZ["zh-cn"]
-        responseData[i].areaen = areaDic.GZ["en-hk"]
-        responseData[i].buildingReports[0].buildingName = buildingDic["2"]
-        responseData[i].buildingReports[1].buildingName = buildingDic["3"]
-        responseData[i].buildingReports[2].buildingName = buildingDic["4"]
-        responseData[i].buildingReports[3].buildingName = buildingDic["5"]
-        responseData[i].buildingReports[4].buildingName = buildingDic["6"]
-        responseData[i].buildingReports[5].buildingName = buildingDic["7"]
-
-      }
-      if (areaDic && responseData[i].area == 'XA') {
-        responseData[i].area = areaDic.XA["zh-cn"]
-        responseData[i].areaen = areaDic.XA["en-hk"]
-        for (let j = 0; j < responseData[i].buildingReports.length; j++) {
-          responseData[i].buildingReports[j].buildingName = buildingDic["8"]
-        }
-      }
-    }
-    return responseData
-  },
-
-  formatVPNData: function(responseData) {
-    const vpnReports = responseData.vpnReports
-    const vpnStatus = this.data.vpnStatus
-    const vpnDic = this.data.vpnDic
-
-    for (let i = 0; i < vpnReports.length; i++) {
-      if (vpnDic[vpnReports[i].vpnType]) {
-        vpnStatus[0].vpn[i].name = vpnDic[vpnReports[i].vpnType]['en-hk']
-        vpnStatus[0].vpn[i].cnname = vpnDic[vpnReports[i].vpnType]['zh-cn']
-        vpnStatus[0].vpn[i].count = vpnReports[i].count
-      }
-    }
-
-    return vpnStatus
-  },
-
+  /****************************************************************************************
+   * 页面事件
+   */
   submitHealth: function(e) {
     console.log(e)
     app.goNext(e.currentTarget.dataset.url)
   },
-
   submitVPN: function(e) {
     console.log(e)
     app.goNext(e.currentTarget.dataset.url)
   },
-
   submitHelpDonation(e) {
     console.log(e)
-    app.goNext(e.currentTarget.dataset.url)
+    if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
+    else app.goNext(e.currentTarget.dataset.url)
   },
-
   submitCase(e) {
     if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
     else app.goNext(e.currentTarget.dataset.url)
   },
-
   readRTNews() {
 
   }
