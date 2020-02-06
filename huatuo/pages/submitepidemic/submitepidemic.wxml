@@ -19,24 +19,31 @@
     </view>
     <template is='common-picker' data="{{...city}}"></template>
     <template is='common-picker' data="{{...department}}"></template>
-    <template is='common-picker' data="{{...visits}}"></template>
+    <i-panel title="{{visits.title}}">
+      <i-checkbox-group current="{{visits.current}}" bindchange="handleVisitsChange">
+        <block wx:for="{{visits.items}}">
+          <i-checkbox position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+          </i-checkbox>
+        </block>
+      </i-checkbox-group>
+    </i-panel>
     <i-panel title="{{status.title}}">
       <i-radio-group current="{{status.current}}" bindchange="handleStatusMoreChange">
-          <block wx:for="{{status.items}}">
-            <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-            </i-radio>
-            <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx" hidden="{{isHideMoreSymptom}}">
-              <i-radio-group current="{{moreStatus.current}}" bindchange="handleStatusOtherChange">
-                <block wx:for="{{moreStatus.items}}">
-                  <i-radio position="{{moreStatus.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
-                  </i-radio>
-                  <view wx:if="{{item.id == '6'}}">
-                    <textarea hidden="{{isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
-                  </view>
-                </block>
-              </i-radio-group>
-            </view>
-          </block>
+        <block wx:for="{{status.items}}">
+          <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+          </i-radio>
+          <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx" hidden="{{isHideMoreSymptom}}">
+            <i-checkbox-group current="{{moreStatus.current}}" bindchange="handleStatusOtherChange">
+              <block wx:for="{{moreStatus.items}}">
+                <i-checkbox position="{{moreStatus.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+                </i-checkbox>
+                <view wx:if="{{item.id == '6'}}">
+                  <textarea hidden="{{isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
+                </view>
+              </block>
+            </i-checkbox-group>
+          </view>
+        </block>
       </i-radio-group>
     </i-panel>
     <i-panel title="{{isolationOrNot.title}}">
