@@ -37,7 +37,7 @@
               <block wx:for="{{status.moreStatus.items}}">
                 <i-checkbox position="{{status.moreStatus.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
                 </i-checkbox>
-                <view wx:if="{{item.id == '6'}}">
+                <view wx:if="{{item.id == '12'}}">
                   <textarea hidden="{{status.moreStatus.isHideOtherSymptom}}" class="form-textarea" name="status_content"></textarea>
                 </view>
               </block>
