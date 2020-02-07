@@ -1,5 +1,6 @@
 // pages/submithelpdonation/submithelpdonation.js
 
+const app = getApp()
 const {
   $Message
 } = require('../dist/base/index');
@@ -27,7 +28,7 @@ Page({
       hasWarning: false,
       isMandatory: true,
       isCRSRelated: false,
-      maxlength: 8,
+      maxlength: 11,
       type: 'number',
       label: '2. 您的联系电话',
       bindInputName: 'inputEvent',
@@ -136,7 +137,7 @@ Page({
       materialHelp.current = materialHelp.current.filter((e, i, a) => {
         return this.getFieldValue(e, materialHelp.items) != 1
       })
-    }    
+    }
     this.setData({
       ['materialHelp.current']: materialHelp.current
     });
@@ -176,6 +177,11 @@ Page({
     wx.setNavigationBarTitle({
       title: '求助和捐赠'
     })
+    if (app.globalData.userInfo) {
+      this.setData({
+        ['staffID.content']: app.globalData.userInfo.staffId
+      })
+    }
   },
 
   handleError(message) {
@@ -186,15 +192,17 @@ Page({
   },
 
   submitHelp(e) {
-    let staffID = this.data.staffID.content
-    let maskHelp = this.data.maskHelp.content
+    let staffId = this.data.staffID.content
+    let mobileNumber = this.data.yourPhone.content
+    let materialHelp = this.data.materialHelp.content
     let maskNum = this.data.maskNum.content
     let addHelp = this.data.addHelp
     let helpAddr = this.data.helpAddr.content
 
     let data = {
-      staffID,
-      maskHelp,
+      staffId,
+      mobileNumber,
+      materialHelp,
       maskNum,
       addHelp,
       helpAddr
@@ -204,15 +212,33 @@ Page({
       this.handleError('请填写staffID')
       return
     }
-    if (maskHelp != '请选择' && maskNum == '请选择') {
+
+    let selectedMask = this.data.materialHelp.current.some((e, i, a) => {
+      return e == '医用口罩（1人至多3个/1天）' || e == 'N95口罩（1人至多1个/2天）'
+    })
+    if (selectedMask && maskNum == '请选择') {
       this.handleError('请选择口罩数量')
       return
     }
-    if (maskHelp == '请选择') data.maskHelp = ''
-    if (maskNum == '请选择') data.maskNum = ''
+
+    if (!selectedMask) data.materialHelp = ''
+    if (!selectedMask || maskNum == '请选择') data.maskNum = ''
 
     console.log(data)
 
+    // wx.request({
+    //   url: host + '/api/hacn/needs-collection',
+    //   method: 'POST',
+    //   data: data,
+    //   success: res => {
+
+    //     wx.navigateTo({
+    //       url: '/pages/successful/successful',
+    //     })
+    //   },
+    //   fail: res => {},
+    //   complete: res => {}
+    // });
   },
 
   /**************************************************************************************

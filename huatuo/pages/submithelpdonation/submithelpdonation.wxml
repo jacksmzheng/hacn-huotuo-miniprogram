@@ -8,9 +8,9 @@
 
   <form bindsubmit="submitHelp">
     <!-- 1. staff ID -->
-    <commoninput obj="{{staffID}}" bindinputEvent='{{staffID.bindInputName}}' />
+    <commoninput obj="{{staffID}}" type="number" bindinputEvent='{{staffID.bindInputName}}' />
     <!-- 2. your phone -->
-    <commoninput obj="{{yourPhone}}" bindinputEvent='{{yourPhone.bindInputName}}' />
+    <commoninput obj="{{yourPhone}}" type="number" bindinputEvent='{{yourPhone.bindInputName}}' />
     <!-- 3. material help -->
     <i-panel title="{{materialHelp.title}}">
       <i-checkbox-group current="{{materialHelp.current}}" bindchange="handleMaterialHelpChange">

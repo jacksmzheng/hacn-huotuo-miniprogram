@@ -29,36 +29,13 @@ Page({
   data: {
     prodVersion: app.globalData.prodVersion,
     branches: [],
-    subBranches: [{
-        area: '佛山',
-        area_en: 'Foshan',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      },
-      {
-        area: '惠州',
-        area_en: 'Huizhou',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      },
-      {
-        area: '江门',
-        area_en: 'Jiangmen',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      },
-      {
-        area: '中山',
-        area_en: 'Zhongshan',
-        confirmed: 1,
-        suspect: 2,
-        fever: 3,
-      }
-    ],
-    realTimeNews: '2.10日所有网点恢复营业'
+    subBranches: [],
+    activeIsolation: 0,
+    passiveIsolation: 0,
+    realTimeNews: '2.10日所有网点恢复营业',
+    realTimeNewsList: [],
+    scrollInterval: null,
+    unreadNum: 2
   },
 
   /**************************************************************************************
@@ -78,10 +55,16 @@ Page({
   onShow: function() {
     this.getHealthStatus()
     this.refreshData()
+    this.getNewsList({
+      openId: app.globalData.userInfo ? app.globalData.userInfo.openId : '',
+      appId: app.globalData.appId
+    })
+    this.scrollNews()
   },
 
   onHide: function() {
     clearInterval(this.data.refreshEvent)
+    clearInterval(this.data.scrollInterval)
   },
 
 
@@ -108,7 +91,16 @@ Page({
         success: res => {
           app.globalData.session = res.data.session
           app.globalData.userInfo = res.data.userInfo
-          console.log(app.globalData)
+          if (app.globalData.userInfo == null) {
+            wx.redirectTo({
+              url: '/pages/login/login',
+            })
+          } else {
+            this.getNewsList({
+              openId: app.globalData.userInfo.openId,
+              appId: app.globalData.appId
+            })
+          }
         },
         fail: res => console.log('health status fail res : ', res),
         complete: res => {}
@@ -156,7 +148,9 @@ Page({
         })
         this.setData({
           branches: tmp1,
-          subBranches: tmp3
+          subBranches: tmp3,
+          activeIsolation: res.data.activeIsolation || 0,
+          passiveIsolation: res.data.passiveIsolation || 0
         })
       },
       fail: res => console.log(res),
@@ -164,30 +158,56 @@ Page({
     });
   },
 
+  getNewsList(data) {
+    if (!data.openId) return
+    let host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    wx.request({
+      url: host + '/api/important-news',
+      method: 'POST',
+      data: data,
+      success: res => {
+        console.log(res)
+        this.setData({
+          realTimeNewsList: res.data.returnObject.importantNewsResponseList,
+          realTimeNews: res.data.returnObject.importantNewsResponseList[0],
+          unreadNum: res.data.returnObject.unReadCount
+        })
+      },
+      fail: res => console.log(res),
+      complete: res => {}
+    });
+  },
+
+  scrollNews() {
+    let time = 0;
+    this.data.scrollInterval = setInterval(() => {
+      let realTimeNewsList = this.data.realTimeNewsList
+      let listLen = this.data.realTimeNewsList.length
+      if (listLen > 0) {
+        this.setData({
+          realTimeNews: realTimeNewsList[time % listLen]
+        })
+        time++
+      }
+    }, 7 * 1000)
+  },
+
   /****************************************************************************************
    * 页面事件
    */
-  submitHealth: function(e) {
-    console.log(e)
+  submitHealth(e) {
     app.goNext(e.currentTarget.dataset.url)
   },
-  submitVPN: function(e) {
-    console.log(e)
+  submitVPN(e) {
     app.goNext(e.currentTarget.dataset.url)
   },
   submitHelpDonation(e) {
-    console.log(e)
-    if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
-    else app.goNext(e.currentTarget.dataset.url)
+    app.goNext(e.currentTarget.dataset.url)
   },
   submitCase(e) {
-    if (app.globalData.userInfo == null) app.goNext('/pages/login/login')
-    else app.goNext(e.currentTarget.dataset.url)
+    app.goNext(e.currentTarget.dataset.url)
   },
   readNews(e) {
     app.goNext(e.currentTarget.dataset.url)
-  },
-  readRTNews() {
-
   }
 })
