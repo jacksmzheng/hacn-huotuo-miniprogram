@@ -659,7 +659,7 @@ Page({
         if(res.statusCode !== 200) {
           page = '/pages/errors/errors';
         }
-        wx.navigateTo({
+        wx.redirectTo({
           url: page
         })
       },

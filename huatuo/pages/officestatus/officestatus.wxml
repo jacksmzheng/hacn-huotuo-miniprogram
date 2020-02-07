@@ -20,13 +20,13 @@
     <view style="display: flex; justify-content: space-evenly; align-items: baseline; width: 100%;">
       <view class="icon-view" data-url="/pages/newslist/newslist" bindtap="readNews">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
-        <text class="icon-text">疫情新闻</text>
+        <text class="icon-text">通告</text>
         <!-- <text class="icon-desc">Latest News</text> -->
         <view class="unread-tag" wx:if="{{unreadNum > 0}}">{{unreadNum}}</view>
       </view>
       <view class="icon-view">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
-        <text class="icon-text">行所疫情</text>
+        <text class="icon-text">行所情况</text>
         <!-- <text class="icon-desc">Branches Situation</text> -->
       </view>
       <view class="icon-view" data-url="/pages/report/report" bindtap="submitCase">
