@@ -333,7 +333,7 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       label: '12.你所报告的员工的隔离起始日期是？',
-      current: '请选择 Please Select',
+      current: '请选择',
       bindName: 'pickerStartDateChange',
       content: '',
       start: '2020-01-01',
@@ -345,7 +345,7 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       label: '13.你所报告的员工的预期隔离结束日期是？',
-      current: '请选择 Please Select',
+      current: '请选择',
       bindName: 'pickerEndDateChange',
       content: '',
       start: '2020-01-01',
@@ -362,7 +362,7 @@ Page({
 
   //初始化数据
   initData: function () {
-    var navigateTitle = '疫情上报 Report Epidemic';
+    var navigateTitle = '疫情上报';
     this.setData({
       navigateTitle
     })
@@ -460,8 +460,7 @@ Page({
     var v = this.getItemId(detail.value, this.data.status.moreStatus.items);
     index === -1 ? this.data.status.moreStatus.current.push(detail.value) : this.data.status.moreStatus.current.splice(index, 1);
     this.setData({
-      ['status.moreStatus.current']: this.data.status.moreStatus.current,
-      ['status.moreStatus.isHideOtherSymptom']: (v == 6 ? !this.data.status.moreStatus.isHideOtherSymptom : this.data.status.moreStatus.isHideOtherSymptom)
+      ['status.moreStatus.isHideOtherSymptom']: (v == 12 ? !this.data.status.moreStatus.isHideOtherSymptom : this.data.status.moreStatus.isHideOtherSymptom)
     });
   },
 
@@ -566,7 +565,7 @@ Page({
       }
   
       if (!(/^\d{8}$/g).test(reportStaffId)) {
-        this.handleError('你所报告同事的员工编号不能重复!');
+        this.handleError('请输入合法的同事员工编号！');
         return;
       }
     }
@@ -596,24 +595,26 @@ Page({
       return;
     }
 
-    if (!isolationType) {
-      this.handleError('请选择隔离类型！');
-      return;
-    }
+    if (isIsolation == 'Y') {
+      if (!isolationType) {
+        this.handleError('请选择隔离类型！');
+        return;
+      }
+  
+      if (!isolationStartDate) {
+        this.handleError('请选择隔离起始日期！');
+        return;
+      }
+  
+      if (!isolationEndDate) {
+        this.handleError('请选择隔离结束日期！');
+        return;
+      }
 
-    if (!isolationStartDate) {
-      this.handleError('请选择隔离起始日期！');
-      return;
-    }
-
-    if (!isolationEndDate) {
-      this.handleError('请选择隔离结束日期！');
-      return;
-    }
-
-    if (isolationStartDate > isolationEndDate) {
-      this.handleError('结束日期不能小于起始日期！');
-      return;
+      if (isolationStartDate > isolationEndDate) {
+        this.handleError('结束日期不能小于起始日期！');
+        return;
+      }
     }
     
     var data = this.buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate,);
