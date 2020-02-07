@@ -9,20 +9,20 @@ Page({
   data: {
     booleanitems: [{
       id: 1,
-      name: '是 Yes',
+      name: '是',
     }, {
       id: 2,
-      name: '不是 No'
+      name: '否'
     }],
     staffId: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       maxlength: 8,
       type: 'number',
-      label: '1. 你的员工编号 Your Staff ID:*',
+      label: '1. 你的员工编号:*',
       bindInputName: 'inputEvent',
       num: 'staffId',
       content: ''
@@ -32,7 +32,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       maxlength: 8,
       type: 'text',
       label: '2. 你的中文名字:*',
@@ -40,19 +40,19 @@ Page({
       num: 'staffName',
       content: ''
     },
-    mobileNo: {
+    mobileNumber: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
       maxlength: 11,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       type: 'number',
-      label: '3. 你的联系电话 Your cell phone for emergency call:*',
-      confirmLabel: '2. 你的联系电话 Your cell phone for emergency call:',
+      label: '3. 你的联系电话:*',
+      confirmLabel: '2. 你的联系电话:',
       bindInputName: 'inputEvent',
-      warningLabel: 'Please Enter cell phone (请输入联系电话)',
-      num: 'mobileNo',
+      warningLabel: '请输入联系电话',
+      num: 'mobileNumber',
       content: ''
     },
     location: {
@@ -63,14 +63,14 @@ Page({
       label: '4.您的当前所在地* ',
       index: 0,
       bindName: 'pickerCityChange',
-      content: ''
+      content: []
     },
     temperature: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       maxlength: 8,
       type: 'number',
       label: '5.您今天的体温（单位：摄氏度℃）',
@@ -80,7 +80,7 @@ Page({
     },
     aloneOrNot: {
       title: '6.您当前是否独居*',
-      current: '-',
+      current: '',
       position: 'left',
       flag: true,
       checked: false,
@@ -93,9 +93,9 @@ Page({
       checked: false,
       disabled: false,
     },
-    familyCondiction: {
+    familyCondition: {
       title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？',
-      current: '不是 No',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -105,7 +105,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       maxlength: 35,
       type: 'text',
       label: '8.自2020年1月18日起，您还去过哪个/哪些城市？*',
@@ -115,7 +115,7 @@ Page({
     },
     transitMethod: {
       title: '9.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？',
-      current: '-',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -126,7 +126,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      placeholder: '请输入 Please Enter',
+      placeholder: '请输入',
       maxlength: 35,
       type: 'text',
       label: '10.1.请提供您上述乘坐过的公共交通工具的详细班次信息',
@@ -134,27 +134,27 @@ Page({
       num: 'transitNo',
       content: ''
     },
-    date:{
+    transitDate:{
       label: '10.2.请提供您上述乘坐过的公共交通工具的详细日期',
       content: ''
     },
-    wuhanOrNot: {
+    transitWuHan: {
       title: '11.自2020年1月18日起，您是否途径/中转/停留武汉？',
-      current: '-',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
       flag: true
     },
-    hubeiOrNot: {
+    transitHuBei: {
       title: '12.自2020年1月18日起，您是否途径/中转/停留湖北省？',
-      current: '-',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
       flag: true
     },
-    hubei: {
+    transitCityOfHuBei: {
       items: [{
         id: 1,
         name: '黄冈',
@@ -264,6 +264,7 @@ Page({
     },
     isHideContactHistory: false,
     isHideBodyHistory: false,
+    now: new Date(),
     id: '',
     isDisbaled: false
   },
@@ -273,39 +274,48 @@ Page({
    */
   onLoad: function (options) {
     if (options.id) {
-      this.setData({
-        ["id"]: options.id,
-        ["staffId.content"]: 45088312,
-        ["staffId.content"]: 'robin',
-        ["staffId.content"]: 'robin',
-        ["mobileNo.content"]: '155554554',
-        ["location.content"]: 'GZ',
-        ["temperature.content"]: '36.5',
-        ["transitCity.content"]: 'GUANGZHOU',
-        ["transitNo.content"]: 'robin',
-        ["date.content"]: '2020-02-15',
-        ["aloneOrNot.current"]: '是 Yes',
-        ["transitMethod.current"]: '是 Yes',
-        ["bodyHistory.current"]: ['感冒'],
-        ["transitCity.current"]: '不是 No',
-        ["wuhanOrNot.current"]: '是 Yes',
+      wx.showLoading({ title: '数据处理中...' });
+      var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+      var that = this
+      wx.request({
+        url: host + '/api/hacn/trip/detail',
+        method: 'POST',
+        data: { "serailNumber": options.id },
+        header: {
+          'content-type': 'application/json'
+        },
+        success(res) {
+          console.log(res.data);
+          var data = res.data.returnObject
+          if (res.statusCode == 200) {
+            that.setData({
+              ["id"]: options.id,
+              ["staffId.content"]: data.staffId,
+              ["staffName.content"]: data.staffName,
+              ["mobileNumber.content"]: data.mobileNumber,
+              ["location.content"]: data.location.split(','),
+              ["temperature.content"]: data.temperature,
+              ["aloneOrNot.current"]: data.aloneOrNot === '0' ? '是' : '否',
+              ["familyCondition.current"]: data.familyCondition === '0' ? '是' : '否',
+              ["familyContact.current"]: data.familyContact === '0' ? '是' : '否',
+              ["transitCity.content"]: data.transitCity,
+              ["transitMethod.current"]: data.transitMethod === '0' ? '是' : '否',
+              ["transitNo.content"]: data.transitNo,
+              ["transitDate.content"]: data.transitDate,
+              ["transitWuHan.current"]: data.transitWuHan === '0' ? '是' : '否',
+              ["transitHuBei.current"]: data.transitHuBei === '0' ? '是' : '否',
+              ["transitCityOfHuBei.current"]: data.transitCityOfHuBei.split(','),
+              ["bodyHistory.current"]: data.bodyHistory.split(','),
+              ["contactHistory.current"]: data.contactHistory.split(','),
+            })
+          } else {
+            that.handleError(res.data.message);
+          }
+        },
+        complete(res) {
+          wx.hideLoading();
+        }
       })
-      var staffName = this.data.staffName.content;
-      var mobileNo = this.data.mobileNo.content;
-      var location = this.data.location.content;
-      var temperature = this.data.temperature.content;
-      var aloneOrNot = this.data.aloneOrNot.current;
-      var familyContact = this.data.familyContact.current;
-      var familyCondiction = this.data.familyCondiction.current;
-      var transitCity = this.data.transitCity.content;
-      var transitMethod = this.data.transitMethod.current;
-      var transitNo = this.data.transitNo.content;
-      var date = this.data.date.content;
-      var wuhanOrNot = this.data.wuhanOrNot.current;
-      var hubeiOrNot = this.data.hubeiOrNot.current;
-      var hubei = this.data.hubei.current;
-      var contactHistory = this.data.contactHistory.current;
-      var bodyHistory = this.data.bodyHistory.current;
     }
   },
 
@@ -324,7 +334,7 @@ Page({
   },
   //初始化数据
   initData: function () {
-    var navigateTitle = '出行记录报备 Report A Case';
+    var navigateTitle = '出行记录报备';
     this.setData({
       navigateTitle
     })
@@ -387,6 +397,7 @@ Page({
   },
   //
   handleAloneOrNotChange({ detail = {} }) {
+    console.log(detail)
     this.setData({
       ['aloneOrNot.current']: detail.value
     });
@@ -403,9 +414,9 @@ Page({
     });
   },
   //
-  handleFamilyCondictionChange({ detail = {} }) {
+  handlefamilyConditionChange({ detail = {} }) {
     this.setData({
-      ['familyCondiction.current']: detail.value
+      ['familyCondition.current']: detail.value
     });
   },
   //
@@ -421,21 +432,21 @@ Page({
   //
   handleWuhanOrNotChange({ detail = {} }) {
     this.setData({
-      ['wuhanOrNot.current']: detail.value
+      ['transitWuHan.current']: detail.value
     });
     var value = this.getFieldValue(detail.value, this.data.booleanitems);
     this.setData({
-      ['wuhanOrNot.flag']: value == 2
+      ['transitWuHan.flag']: value == 2
     })
   },
   //
   handleHubeiOrNotChange({ detail = {} }) {
     this.setData({
-      ['hubeiOrNot.current']: detail.value
+      ['transitHuBei.current']: detail.value
     });
     var value = this.getFieldValue(detail.value, this.data.booleanitems);
     this.setData({
-      ['hubeiOrNot.flag']: value == 2
+      ['transitHuBei.flag']: value == 2
     })
   },
   regionChange: function (e) {
@@ -446,12 +457,12 @@ Page({
   },
   //
   handleHubeiChange({ detail = {} }) {
-    const index = this.data.hubei.current.indexOf(detail.value);
-    var id = this.getFieldValue(detail.value, this.data.hubei.items);
+    const index = this.data.transitCityOfHuBei.current.indexOf(detail.value);
+    var id = this.getFieldValue(detail.value, this.data.transitCityOfHuBei.items);
 
-    index === -1 ? this.data.hubei.current.push(detail.value) : this.data.hubei.current.splice(index, 1);
+    index === -1 ? this.data.transitCityOfHuBei.current.push(detail.value) : this.data.transitCityOfHuBei.current.splice(index, 1);
     this.setData({
-      ['hubei.current']: this.data.hubei.current
+      ['transitCityOfHuBei.current']: this.data.transitCityOfHuBei.current
     });
   },
   //
@@ -486,84 +497,81 @@ Page({
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      ['date.content']: e.detail.value
+      ['transitDate.content']: e.detail.value
     })
   },
 
   submitHealthForm(e) {
-    console.log(this.data, e);
+    console.log(this.data);
     var staffId = this.data.staffId.content;
     var staffName = this.data.staffName.content;
-    var mobileNo = this.data.mobileNo.content;
+    var mobileNumber = this.data.mobileNumber.content;
     var location = this.data.location.content;
     var temperature = this.data.temperature.content;
     var aloneOrNot = this.data.aloneOrNot.current;
     var familyContact = this.data.familyContact.current;
-    var familyCondiction = this.data.familyCondiction.current;
+    var familyCondition = this.data.familyCondition.current;
     var transitCity = this.data.transitCity.content;
     var transitMethod = this.data.transitMethod.current;
     var transitNo = this.data.transitNo.content;
-    var date = this.data.date.content;
-    var wuhanOrNot = this.data.wuhanOrNot.current;
-    var hubeiOrNot = this.data.hubeiOrNot.current;
-    var hubei = this.data.hubei.current;
+    var transitDate = this.data.transitDate.content;
+    var transitWuHan = this.data.transitWuHan.current;
+    var transitHuBei = this.data.transitHuBei.current;
+    var transitCityOfHuBei = this.data.transitCityOfHuBei.current;
     var contactHistory = this.data.contactHistory.current;
     var bodyHistory = this.data.bodyHistory.current;
 
     if (staffId == '' 
     || staffName == '' 
-    || mobileNo == '' 
+    || mobileNumber == '' 
     || location == '' 
     || !temperature 
     || aloneOrNot == '-' 
-    || (aloneOrNot == '不是 No' && (familyContact == '-' || familyCondiction == '-'))
+    || (aloneOrNot == '否' && (familyContact == '-' || familyCondition == '-'))
     || !transitCity 
     || transitMethod == '-' 
-    || (hubeiOrNot == '是 Yes' &&(!transitNo || !date) ) 
-    || wuhanOrNot == '-' 
-    || (wuhanOrNot == '不是 No' && hubeiOrNot == '-' )
-    || (hubeiOrNot == '是 Yes' && !hubei )
-    || !contactHistory 
-    || !bodyHistory) {
+    || (transitMethod == '是' &&(!transitNo || !transitDate) ) 
+    || transitWuHan == '-' 
+    || (transitWuHan == '否' && transitHuBei == '-' )
+    || (transitHuBei == '是' && transitCityOfHuBei == [] )
+    || contactHistory.length == 0
+    || bodyHistory.length == 0) {
       this.handleError();
       return;
     }
     //var reg = new RegExp('^\\d+$', 'gi');
-    if (!(/^\d{8}$/g).test(staffId) || !(/^\d{11}$/g).test(mobileNo)) {
+    if (!(/^\d{8}$/g).test(staffId) || !(/^\d{11}$/g).test(mobileNumber)) {
       this.handleError('请输入合法的员工编号或者电话号码！');
       return;
     }
     var data = {
       staffId: staffId,
       staffName: staffName,
-      mobileNo: mobileNo,
-      location: location,
+      mobileNumber: mobileNumber,
+      location: location.join(','),
       temperature: temperature,
-      aloneOrNot: aloneOrNot,
-      familyContact: familyContact,
-      familyCondiction: familyCondiction,
+      aloneOrNot: aloneOrNot == '是' ? '0' : '1',
+      familyContact: familyContact == '是' ? '0' : '1',
+      familyCondition: familyCondition == '是' ? '0' : '1',
       transitCity: transitCity,
-      transitMethod: transitMethod,
+      transitMethod: transitMethod == '是' ? '0' : '1',
       transitNo: transitNo,
-      date: date,
-      wuhanOrNot: wuhanOrNot,
-      hubeiOrNot: hubeiOrNot,
-      hubei: hubei,
-      contactHistory: contactHistory,
-      bodyHistory: bodyHistory,
+      transitDate: transitDate,
+      transitWuHan: transitWuHan == '是' ? '0' : '1',
+      transitHuBei: transitHuBei == '是' ? '0' : '1',
+      transitCityOfHuBei: transitCityOfHuBei.join(','),
+      contactHistory: contactHistory.join(','),
+      bodyHistory: bodyHistory.join(','),
     }
+    console.log(data)
     this.request(data);
   },
   //call api
   request(data) {
     wx.showLoading({ title: '数据处理中...' });
-    wx.navigateTo({
-      url: '/pages/successful/successful'
-    })
-    
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
-      url: host + '/api/health',
+      url: host + '/api/hacn/trip/survey',
       method: 'POST',
       data: data,
       header: {
