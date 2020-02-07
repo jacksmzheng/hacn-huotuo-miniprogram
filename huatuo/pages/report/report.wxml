@@ -11,7 +11,7 @@
     出行记录报备 Trip Survey
    </view>
   </view>
-  <image class="image" style="width:100%;margin:8rpx 0;" mode="widthFix" src="/pages/common/resources/images/banner.jpg" />
+  <image class="image" style="width:100%;margin:8rpx 0;" mode="widthFix" src="/pages/common/resources/images/banner.png" />
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" bindtap="toubmit">提交表单</button>
   <view hidden="{{!showNewSurvey}}" class="survey-contain">
     <view bindtap="toubmit" id="1" class="survey-list">
