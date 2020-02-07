@@ -10,14 +10,47 @@ Page({
   data: {
     showNewSurvey: true,
     newStyle: 'survey-tab-button-selected',
-    doneStyle: ''
+    doneStyle: '',
+    tripList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showLoading({ title: '数据处理中...' });
+    var userInfo = getApp().globalData.userInfo || {}
+    if (!userInfo.staffId) {
+      $Message({
+        content: '获取个人信息失败!',
+        type: 'error'
+      });
+      wx.hideLoading();
+      // return
+    }
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    var that = this
+    wx.request({
+      url: host + '/api/hacn/trip/history',
+      method: 'POST',
+      data: { "staffId": userInfo.staffId || "43862696" },
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+        console.log(res.data);
+        if (res.statusCode == 200) {
+          that.setData({
+            tripList: res.data.returnObject
+          })
+        } else {
+          this.handleError(res.data.message);
+        }
+      },
+      complete(res) {
+        wx.hideLoading();
+      }
+    })
   },
 
   /**
@@ -35,7 +68,7 @@ Page({
   },
   //初始化数据
   initData: function () {
-    var navigateTitle = '员工上报 Report A Case';
+    var navigateTitle = '员工上报';
     this.setData({
       navigateTitle
     })

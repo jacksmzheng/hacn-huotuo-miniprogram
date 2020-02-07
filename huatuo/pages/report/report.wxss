@@ -52,4 +52,5 @@
 .survey-tab-button-selected {
   /* background-color: #db0011!important; */
   color: green;
+  border-bottom: 1px solid green
 }
