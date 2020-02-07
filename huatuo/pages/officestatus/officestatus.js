@@ -35,7 +35,7 @@ Page({
     realTimeNews: '2.10日所有网点恢复营业',
     realTimeNewsList: [],
     scrollInterval: null,
-    unreadNum: 2
+    unreadNum: 0
   },
 
   /**************************************************************************************
@@ -89,6 +89,7 @@ Page({
           "code": resolve
         },
         success: res => {
+          console.log('wx login : ', res)
           app.globalData.session = res.data.session
           app.globalData.userInfo = res.data.userInfo
           if (app.globalData.userInfo == null) {
