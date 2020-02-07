@@ -11,7 +11,8 @@ Page({
     showNewSurvey: true,
     newStyle: 'survey-tab-button-selected',
     doneStyle: '',
-    tripList: []
+    tripList: [],
+    enquiryList: []
   },
 
   /**
@@ -20,37 +21,68 @@ Page({
   onLoad: function (options) {
     wx.showLoading({ title: '数据处理中...' });
     var userInfo = getApp().globalData.userInfo || {}
-    if (!userInfo.staffId) {
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    var that = this
+    // enquiry history
+    if (!userInfo.openId) {
       $Message({
-        content: '获取个人信息失败!',
+        content: '获取openId失败!',
         type: 'error'
       });
       wx.hideLoading();
-      // return
-    }
-    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
-    var that = this
-    wx.request({
-      url: host + '/api/hacn/trip/history',
-      method: 'POST',
-      data: { "staffId": userInfo.staffId || "43862696" },
-      header: {
-        'content-type': 'application/json'
-      },
-      success(res) {
-        console.log(res.data);
-        if (res.statusCode == 200) {
-          that.setData({
-            tripList: res.data.returnObject
-          })
-        } else {
-          this.handleError(res.data.message);
+    } else {
+      wx.request({
+        url: host + '/api/hacn/health/enquiry',
+        method: 'POST',
+        data: { "openId": userInfo.openId || "ccccccccccccccc" },
+        header: {
+          'content-type': 'application/json'
+        },
+        success(res) {
+          console.log(res.data);
+          if (res.statusCode == 200) {
+            that.setData({
+              enquiryList: res.data.healthReportRecordList
+            })
+          } else {
+            this.handleError(res.data.message);
+          }
+        },
+        complete(res) {
+          wx.hideLoading();
         }
-      },
-      complete(res) {
-        wx.hideLoading();
-      }
-    })
+      })
+    }
+    // trip history
+    if (!userInfo.staffId) {
+      $Message({
+        content: '获取员工编号失败!',
+        type: 'error'
+      });
+      wx.hideLoading();
+    } else {
+      wx.request({
+        url: host + '/api/hacn/trip/history',
+        method: 'POST',
+        data: { "staffId": userInfo.staffId || "43862696" },
+        header: {
+          'content-type': 'application/json'
+        },
+        success(res) {
+          console.log(res.data);
+          if (res.statusCode == 200) {
+            that.setData({
+              tripList: res.data.returnObject
+            })
+          } else {
+            this.handleError(res.data.message);
+          }
+        },
+        complete(res) {
+          wx.hideLoading();
+        }
+      })
+    }
   },
 
   /**

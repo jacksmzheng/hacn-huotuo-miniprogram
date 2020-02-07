@@ -25,7 +25,7 @@ Page({
       label: '1. 你的员工编号:*',
       bindInputName: 'inputEvent',
       num: 'staffId',
-      content: '45088312'
+      content: ''
     },
     staffName: {
       hasLabel: true,
@@ -38,7 +38,7 @@ Page({
       label: '2. 你的中文名字:*',
       bindInputName: 'inputEvent',
       num: 'staffName',
-      content: 'robin'
+      content: ''
     },
     mobileNumber: {
       hasLabel: true,
@@ -53,7 +53,7 @@ Page({
       bindInputName: 'inputEvent',
       warningLabel: '请输入联系电话',
       num: 'mobileNumber',
-      content: '18888888888'
+      content: ''
     },
     location: {
       hasLabel: true,
@@ -63,7 +63,7 @@ Page({
       label: '4.您的当前所在地* ',
       index: 0,
       bindName: 'pickerCityChange',
-      content: ['北京市','北京市','朝阳区']
+      content: []
     },
     temperature: {
       hasLabel: true,
@@ -76,11 +76,11 @@ Page({
       label: '5.您今天的体温（单位：摄氏度℃）',
       bindInputName: 'inputEvent',
       num: 'temperature',
-      content: '36.5'
+      content: ''
     },
     aloneOrNot: {
       title: '6.您当前是否独居*',
-      current: '是',
+      current: '',
       position: 'left',
       flag: true,
       checked: false,
@@ -95,7 +95,7 @@ Page({
     },
     familyCondition: {
       title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？',
-      current: '否',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -111,11 +111,11 @@ Page({
       label: '8.自2020年1月18日起，您还去过哪个/哪些城市？*',
       bindInputName: 'inputEvent',
       num: 'transitCity',
-      content: '杭州'
+      content: ''
     },
     transitMethod: {
       title: '9.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？',
-      current: '否',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -140,7 +140,7 @@ Page({
     },
     transitWuHan: {
       title: '11.自2020年1月18日起，您是否途径/中转/停留武汉？',
-      current: '否',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -148,7 +148,7 @@ Page({
     },
     transitHuBei: {
       title: '12.自2020年1月18日起，您是否途径/中转/停留湖北省？',
-      current: '否',
+      current: '',
       position: 'left',
       checked: false,
       disabled: false,
@@ -264,6 +264,7 @@ Page({
     },
     isHideContactHistory: false,
     isHideBodyHistory: false,
+    now: new Date(),
     id: '',
     isDisbaled: false
   },

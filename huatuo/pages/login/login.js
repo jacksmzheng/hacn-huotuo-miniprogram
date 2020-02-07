@@ -28,7 +28,7 @@ Page({
       this.handleError('请填写手机号码')
       return
     }
-    if (!/^\d{11}$/.test(this.data.mobileNum)){
+    if (!/^\d{11}$/.test(this.data.mobileNum)) {
       this.handleError('请填写11位手机号码')
       return
     }
@@ -56,23 +56,26 @@ Page({
       appId: app.globalData.appId,
       openId: app.globalData.session.openid,
       staffId: this.data.staffId,
-      mobileNum: this.data.mobileNum,
-      verifyCode: this.data.verifyCode
+      // mobileNum: this.data.mobileNum,
+      // verifyCode: this.data.verifyCode
     }
 
-    if (data.staffId == '' || data.mobileNum == '' || data.verifyCode == '') {
+    if (data.staffId == '') {
       this.handleError('请完善信息')
       return
     }
 
     this.doLogin(data).then(resolve => {
       if (resolve.data.code == 200) {
-        let pages = getCurrentPages();
-        let prevPage = pages[pages.length - 2];
-        prevPage.wechatLogin()
-        wx.navigateBack({})
+        // let pages = getCurrentPages();
+        // let prevPage = pages[pages.length - 2];
+        // prevPage.wechatLogin()
+        // wx.navigateBack({})
+        wx.redirectTo({
+          url: '/pages/officestatus/officestatus',
+        })
       } else {
-        this.handleError('注册失败，请退出小程序重试')
+        this.handleError('登陆失败，请退出小程序重试')
       }
     }, reject => {
       this.handleError('网络连接失败')
