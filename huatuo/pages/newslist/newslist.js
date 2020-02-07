@@ -26,7 +26,8 @@ Page({
       url: host + '/api/news-info/lists',
       method: 'POST',
       data: {
-        "openId": app.globalData.openId,
+        "openId": app.globalData.userInfo.openId,
+        "appId": app.globalData.appId
       },
       header: {
         'content-type': 'application/json',

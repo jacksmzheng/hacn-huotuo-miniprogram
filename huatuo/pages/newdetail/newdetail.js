@@ -28,12 +28,10 @@ Page({
       url: host + '/api/news/detail',
       method: 'POST',
       data: {
-        "openId": 'test',
-        "staffId": 'test',
-        "newsId": options.id
-        // "openId": app.globalData.openId,
-        // "staffId": app.globalData.userInfo.staffId,
-        // "newsId": options.id
+        "openId": app.globalData.userInfo.openId,
+        "staffId": app.globalData.userInfo.staffId,
+        "newsId": options.id,
+        "appId": app.globalData.appId
       },
       header: {
         'content-type': 'application/json',
