@@ -7,18 +7,18 @@
 
 <view class="satff-id input-row" style="margin-top: 100rpx;">
   <image src="/pages/common/resources/images/icon-staffid.png" mode="widthFix"></image>
-  <input placeholder="请输入员工编号" bindinput="inputStaffId"></input>
+  <input placeholder="请输入员工编号" type="number" bindinput="inputStaffId"></input>
 </view>
 
-<view class="phone input-row">
+<!-- <view class="phone input-row">
   <image src="/pages/common/resources/images/icon-phone.png" mode="widthFix"></image>
-  <input placeholder="请输入手机号码" bindinput="inputPhone"></input>
-</view>
+  <input placeholder="请输入手机号码" type="number" bindinput="inputPhone"></input>
+</view> -->
 
-<view class="captcha input-row">
+<!-- <view class="captcha input-row">
   <image src="/pages/common/resources/images/icon-captcha.png" mode="widthFix"></image>
-  <input placeholder="请输入验证码" bindinput="inputCaptcha"></input>
+  <input placeholder="请输入验证码" type="number" bindinput="inputCaptcha" maxlength="4"></input>
   <view class="btn-get-captcha" bindtap="tapGetCaptcha">{{btnText}}</view>
-</view>
+</view> -->
 
 <button class="btn-login" bindtap="tapLogin">登陆</button>
