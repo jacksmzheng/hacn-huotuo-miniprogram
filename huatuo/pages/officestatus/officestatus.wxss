@@ -201,6 +201,17 @@
   border-radius: 8rpx;
   font-size: 18rpx;
   color: white;
+  overflow: hidden;
+}
+
+.swiper{
+  flex: auto;
+  height: 48rpx;
+}
+
+.swiper-item {
+  height: 48rpx;
+  line-height: 48rpx;
 }
 
 .real-time-news .icon-more {
@@ -339,4 +350,11 @@
   margin-top: 16rpx;
   font-weight: bold;
   color: #36dea3;
+}
+
+.copyright {
+  margin: 30rpx auto;
+  font-size: 20rpx;
+  text-align: center;
+  color: #8a8a8a;
 }

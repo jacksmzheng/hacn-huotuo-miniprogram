@@ -9,24 +9,26 @@
   <view class="real-time-news">
     <text style="margin-right: 8rpx;font-size: 24rpx;">公告</text>
     <view style="width: 4rpx; height: 24rpx; background: #fff;border-radius:2rpx;margin-right: 14rpx;"></view>
-    <text>{{realTimeNews.newsTitle}}</text>
-    <!-- <view style="display: flex; align-items: center; margin-left: auto;" bindtap="readRTNews">
-      <text>更多</text>
-      <image class="icon-more" src="/pages/common/resources/images/icon-right.png" mode="widthFix"></image>
-    </view> -->
+    <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" circular="{{true}}" vertical="{{true}}" interval="7000" duration="500">
+      <block wx:for="{{realTimeNewsList}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item">{{item.newsTitle}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
 
   <view class="button-container">
     <view style="display: flex; justify-content: space-evenly; align-items: baseline; width: 100%;">
       <view class="icon-view" data-url="/pages/newslist/newslist" bindtap="readNews">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon1.png"></image>
-        <text class="icon-text">疫情新闻</text>
+        <text class="icon-text">疫情通告</text>
         <!-- <text class="icon-desc">Latest News</text> -->
         <view class="unread-tag" wx:if="{{unreadNum > 0}}">{{unreadNum}}</view>
       </view>
       <view class="icon-view">
         <image class="icon-image" style="width: {{imageWidth}}px; height: {{imageHeight}}px;" src="/pages/common/resources/images/icon2.png"></image>
-        <text class="icon-text">行所疫情</text>
+        <text class="icon-text">行所情况</text>
         <!-- <text class="icon-desc">Branches Situation</text> -->
       </view>
       <view class="icon-view" data-url="/pages/report/report" bindtap="submitCase">
@@ -86,6 +88,8 @@
       <text>{{passiveIsolation}}</text>
     </view>
   </view>
+
+  <view class="copyright">Copyright@HASE CN</view>
 </view>
 
 <template name="branch-situation">
