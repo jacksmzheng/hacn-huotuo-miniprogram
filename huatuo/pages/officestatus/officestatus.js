@@ -15,7 +15,7 @@ const cityMap = {
   'SZ': ['深圳', 'Shenzhen'],
   'XM': ['厦门', 'Xiamen'],
   'TJ': ['天津', 'Tianjin'],
-  'FS': ['佛山', 'Foshan'],
+  'FS': ['佛山（含顺德）', 'Foshan'],
   'HuZ': ['惠州', 'Huizhou'],
   'JM': ['江门', 'Jiangmen'],
   'ZS': ['中山', 'Zhongshan']
@@ -35,7 +35,7 @@ Page({
     realTimeNews: '2.10日所有网点恢复营业',
     realTimeNewsList: [],
     scrollInterval: null,
-    unreadNum: 2
+    unreadNum: 0
   },
 
   /**************************************************************************************
@@ -89,6 +89,7 @@ Page({
           "code": resolve
         },
         success: res => {
+          console.log('wx login : ', res)
           app.globalData.session = res.data.session
           app.globalData.userInfo = res.data.userInfo
           if (app.globalData.userInfo == null) {
@@ -209,5 +210,12 @@ Page({
   },
   readNews(e) {
     app.goNext(e.currentTarget.dataset.url)
+  },
+  getDatail(e) {
+    let newId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/newdetail/newdetail?id=' + newId,
+    })
+    console.log(e)
   }
 })

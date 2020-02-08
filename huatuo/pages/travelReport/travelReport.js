@@ -33,7 +33,7 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入',
-      maxlength: 8,
+      maxlength: 15,
       type: 'text',
       label: '2. 你的中文名字:*',
       bindInputName: 'inputEvent',
@@ -49,7 +49,7 @@ Page({
       placeholder: '请输入',
       type: 'number',
       label: '3. 你的联系电话:*',
-      confirmLabel: '2. 你的联系电话:',
+      confirmLabel: '3. 你的联系电话',
       bindInputName: 'inputEvent',
       warningLabel: '请输入联系电话',
       num: 'mobileNumber',
@@ -60,7 +60,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '4.您的当前所在地* ',
+      label: '4.您的当前所在地:* ',
       index: 0,
       bindName: 'pickerCityChange',
       content: []
@@ -71,15 +71,15 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入',
-      maxlength: 8,
+      maxlength: 4,
       type: 'number',
-      label: '5.您今天的体温（单位：摄氏度℃）',
+      label: '5.您今天的体温（单位：摄氏度℃）:*',
       bindInputName: 'inputEvent',
       num: 'temperature',
       content: ''
     },
     aloneOrNot: {
-      title: '6.您当前是否独居*',
+      title: '6.您当前是否独居:*',
       current: '',
       position: 'left',
       flag: true,
@@ -94,7 +94,7 @@ Page({
       disabled: false,
     },
     familyCondition: {
-      title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？',
+      title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？*',
       current: '',
       position: 'left',
       checked: false,
@@ -108,13 +108,13 @@ Page({
       placeholder: '请输入',
       maxlength: 35,
       type: 'text',
-      label: '8.自2020年1月18日起，您还去过哪个/哪些城市？*',
+      label: '8.自2020年1月18日起，您还去过哪个/哪些城市？',
       bindInputName: 'inputEvent',
       num: 'transitCity',
       content: ''
     },
     transitMethod: {
-      title: '9.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？',
+      title: '9.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？*',
       current: '',
       position: 'left',
       checked: false,
@@ -129,17 +129,17 @@ Page({
       placeholder: '请输入',
       maxlength: 35,
       type: 'text',
-      label: '10.1.请提供您上述乘坐过的公共交通工具的详细班次信息',
+      label: '10.1.请提供您上述乘坐过的公共交通工具的详细班次信息:*',
       bindInputName: 'inputEvent',
       num: 'transitNo',
       content: ''
     },
     transitDate:{
-      label: '10.2.请提供您上述乘坐过的公共交通工具的详细日期',
+      label: '10.2.请提供您上述乘坐过的公共交通工具的详细日期:*',
       content: ''
     },
     transitWuHan: {
-      title: '11.自2020年1月18日起，您是否途径/中转/停留武汉？',
+      title: '11.自2020年1月18日起，您是否途径/中转/停留武汉？*',
       current: '',
       position: 'left',
       checked: false,
@@ -147,7 +147,7 @@ Page({
       flag: true
     },
     transitHuBei: {
-      title: '12.自2020年1月18日起，您是否途径/中转/停留湖北省？',
+      title: '12.自2020年1月18日起，您是否途径/中转/停留湖北省？*',
       current: '',
       position: 'left',
       checked: false,
@@ -204,7 +204,7 @@ Page({
         id: 2,
         name: '神农架地区'
       }],
-      title: '12.1.自2020年1月18日起，您途径/中转/停留湖北的城市*',
+      title: '12.1.自2020年1月18日起，您途径/中转/停留湖北的城市:*',
       current: [],
       position: 'left',
       checked: false,
@@ -342,6 +342,13 @@ Page({
     wx.setNavigationBarTitle({
       title: navigateTitle,
     })
+    var userInfo = getApp().globalData.userInfo
+    if (userInfo) {
+      this.setData({
+        ['staffId.content']: app.globalData.userInfo.staffId,
+        ['mobileNumber.content']: app.globalData.userInfo.mobileNum
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -528,7 +535,7 @@ Page({
     || !temperature 
     || aloneOrNot == '-' 
     || (aloneOrNot == '否' && (familyContact == '-' || familyCondition == '-'))
-    || !transitCity 
+    // || !transitCity 
     || transitMethod == '-' 
     || (transitMethod == '是' &&(!transitNo || !transitDate) ) 
     || transitWuHan == '-' 

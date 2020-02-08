@@ -74,7 +74,7 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       maxlength: 140,
-      type: 'number',
+      type: 'text',
       label: '5. 您的办公地址（以便向您提供所需物资或实现办公场地消毒需求）',
       bindInputName: 'inputEvent',
       num: '3',
@@ -175,7 +175,7 @@ Page({
    */
   initData() {
     wx.setNavigationBarTitle({
-      title: '求助和捐赠'
+      title: '需求收集'
     })
     if (app.globalData.userInfo) {
       this.setData({

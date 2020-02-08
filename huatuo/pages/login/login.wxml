@@ -7,7 +7,7 @@
 
 <view class="satff-id input-row" style="margin-top: 100rpx;">
   <image src="/pages/common/resources/images/icon-staffid.png" mode="widthFix"></image>
-  <input placeholder="请输入员工编号" type="number" bindinput="inputStaffId"></input>
+  <input placeholder="请输入员工编号" type="number" maxlength="8" bindinput="inputStaffId"></input>
 </view>
 
 <!-- <view class="phone input-row">
@@ -21,4 +21,4 @@
   <view class="btn-get-captcha" bindtap="tapGetCaptcha">{{btnText}}</view>
 </view> -->
 
-<button class="btn-login" bindtap="tapLogin">登陆</button>
+<button class="btn-login" bindtap="tapLogin">登录</button>

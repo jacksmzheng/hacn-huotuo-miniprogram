@@ -1,6 +1,27 @@
 // pages/submithealth/submithealth.js
 const { $Message } = require('../dist/base/index');
 const app = getApp();
+const cityMap = {
+  'SH':'上海市 SH',
+  'BJ':'北京市 BJ',
+  'CD':'成都市 CD',
+  'DG':'东莞市 DG',
+  'FS':'佛山市 FS',
+  'FZ':'福州市 FZ',
+  'GZ':'广州市 GZ',
+  'HaZ':'杭州市 HaZ',
+  'HuZ':'惠州市 HuZ',
+  'JM':'江门市 JM',
+  'JN':'济南市 JN',
+  'KM':'昆明市 KM',
+  'NJ':'南京市 NJ',
+  'NB':'宁波市 NB',
+  'SZ':'深圳市 SZ',
+  'TJ':'天津市 TJ',
+  'XM':'厦门市 XM',
+  'ZS':'中山市 ZS'
+}
+
 Page({
 
   /**
@@ -15,10 +36,11 @@ Page({
       placeholder: '请输入',
       maxlength: 8,
       type: 'number',
-      label: '1.请输入你的员工编号。',
+      label: '1.请输入你的员工编号。*',
       bindInputName: 'inputEvent',
       num: '1',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     staffName: {
       hasLabel: true,
@@ -26,12 +48,13 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入',
-      maxlength: 4,
+      maxlength: 20,
       type: 'text',
-      label: '2.请输入你的中文姓名。',
+      label: '2.请输入你的中文姓名。*',
       bindInputName: 'inputEvent',
       num: '2',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     mobileNo: {
       hasLabel: true,
@@ -41,12 +64,13 @@ Page({
       maxlength: 11,
       placeholder: '请输入',
       type: 'number',
-      label: '3.请输入你的紧急联系电话。',
+      label: '3.请输入你的紧急联系电话。*',
       confirmLabel: '3.Your cell phone for emergency call（你的紧急联系电话）',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter cell phone (请输入紧急联系电话)',
       num: '3',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     others: {
       items: [{
@@ -58,7 +82,7 @@ Page({
         name: '不是',
         value: 'N'
       }],
-      title: '4.你为其他同事报告吗？',
+      title: '4.你为其他同事报告吗？*',
       current: '-',
       position: 'left',
       checked: false,
@@ -74,18 +98,19 @@ Page({
       isCRSRelated: false,
       placeholder: '请输入',
       maxlength: 8,
-      label: '5.你所报告同事的员工编号是？',
+      label: '5.你所报告同事的员工编号是？*',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
       num: '4',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     city: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '6.你或你所报告的同事在哪个办公城市？',
+      label: '6.你或你所报告的同事在哪个办公城市？*',
       array: [
         '请选择',
         '上海市 SH',
@@ -116,7 +141,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '7.你或你所报告同事的部门是？',
+      label: '7.你或你所报告同事的部门是？*',
       array: [
         '请选择', 
         'RB',
@@ -144,7 +169,7 @@ Page({
         id: 1,
         name: '无 None'
       }],
-      title: '8.你或你所报告的同事14天内去过的办公行所。（可多选）',
+      title: '8.你或你所报告的同事14天内去过的办公行所。（可多选）*',
       current: [],
       index: [],
       position: 'left',
@@ -256,7 +281,7 @@ Page({
         id: 6,
         name: '居住楼或小区被有关部门限制出入'
       }],
-      title: '9.你或你所报告的同事目前的健康状态？',
+      title: '9.你或你所报告的同事目前的健康状态？*',
       current: '-',
       index: 0,
       position: 'left',
@@ -290,17 +315,18 @@ Page({
         checked: false,
         disabled: false,
         isHideOtherSymptom: true,
-        bindName: 'handleStatusOtherChange'
+        bindName: 'handleStatusOtherChange',
+        status_content: ''
       }
     },
     isolationOrNot: {
       items: [{
         id: 1,
-        name: 'yes',
+        name: '是',
         value: 'Y'
       }, {
         id: 2,
-        name: 'no',
+        name: '不是',
         value: 'N'
       }],
       title: '10.你或你所报告的员工是否已经开始隔离？',
@@ -350,6 +376,86 @@ Page({
       content: '',
       start: '2020-01-01',
       end: '2021-01-01'
+    },
+    id: '',
+    isDisabled: false
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if (options.id) {
+      wx.showLoading({ title: '数据处理中...' });
+      var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+      var that = this
+      wx.request({
+        url: host + '/api/hacn/health/detail',
+        method: 'POST',
+        data: { "serailNumber": options.id },
+        header: {
+          'content-type': 'application/json'
+        },
+        success(res) {
+          console.log(res.data);
+          var data = res.data.returnObject
+          if (res.statusCode == 200) {
+            // build data
+            var visitsItems = that.buildItems(that.data.visits.workplaces[(that.data.city.array.indexOf(cityMap[data.cityShortName]))])
+            var visits = []
+            data.workplace.split(',').forEach(val => {
+              visits.push(that.getItemNameById(val, visitsItems))
+            })
+            var status = that.getItemNameById(data.healthStatus.split(',')[0], that.data.status.items)
+            var moreStatus = []
+            var moreStatusArr = data.healthStatus.split(',').slice(1)
+            var status_content = moreStatusArr.pop()
+            moreStatusArr.forEach(val => {
+              moreStatus.push(that.getItemNameById(val, that.data.status.moreStatus.items))
+            })
+            var isolationType = that.getItemNameById(data.isolationType, that.data.isolationType.items)
+
+            that.setData({
+              ["id"]: options.id,
+              ["isDisabled"]: true,
+              ["staffID.isDisabled"]: true,
+              ["staffName.isDisabled"]: true,
+              ["mobileNo.isDisabled"]: true,
+              ["othersStaffId.isDisabled"]: true,
+              
+              ["staffID.content"]: data.staffId,
+              ["staffName.content"]: data.staffName,
+              ["mobileNo.content"]: data.mobileNumber,
+              ["others.current"]: data.isReportOther === 'Y' ? '是' : '不是',
+              ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
+              ["othersStaffId.content"]: data.reportStaffId,
+              ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
+              ["visits.items"]: visitsItems,
+              ["department.index"]: data.department,
+              
+              ["status.current"]: status,
+              ["status.isHideMoreSymptom"]: data.healthStatus.split(',')[0] == 5 ? false : true,
+              ["status.moreStatus.current"]: moreStatus,
+              ["status.moreStatus.isHideOtherSymptom"]: moreStatusArr.indexOf('12') !== -1 ? false : true,
+              ["status.moreStatus.status_content"]: status_content,
+
+              ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '不是',
+              ["isolationType.current"]: isolationType,
+              ["isolationStartDate.current"]: data.isolationStartDate,
+              ["isolationEndDate.current"]: data.isolationEndDate
+            })
+
+            that.setData({
+              ["visits.current"]: visits
+            })
+          } else {
+            that.handleError(res.data.message);
+          }
+        },
+        complete(res) {
+          wx.hideLoading();
+        }
+      })
     }
   },
 
@@ -457,10 +563,14 @@ Page({
   handleStatusOtherChange({ detail = {} }) {
     console.log(detail.value)
     const index = this.data.status.moreStatus.current.indexOf(detail.value);
-    var v = this.getItemId(detail.value, this.data.status.moreStatus.items);
     index === -1 ? this.data.status.moreStatus.current.push(detail.value) : this.data.status.moreStatus.current.splice(index, 1);
+    var id = this.getItemId(detail.value, this.data.status.moreStatus.items);
+    const index2 = this.data.status.moreStatus.index.indexOf(id)
+    index2 === -1 ?  this.data.status.moreStatus.index.push(id) : this.data.status.moreStatus.index.splice(index2, 1)
     this.setData({
-      ['status.moreStatus.isHideOtherSymptom']: (v == 12 ? !this.data.status.moreStatus.isHideOtherSymptom : this.data.status.moreStatus.isHideOtherSymptom)
+      ['status.moreStatus.current']: this.data.status.moreStatus.current,
+      ['status.moreStatus.index']: this.data.status.moreStatus.index,
+      ['status.moreStatus.isHideOtherSymptom']: (id == 12 ? !this.data.status.moreStatus.isHideOtherSymptom : this.data.status.moreStatus.isHideOtherSymptom)
     });
   },
 
@@ -518,6 +628,9 @@ Page({
     var isolationStartDate = this.data.isolationStartDate.content;
     var isolationEndDate = this.data.isolationEndDate.content;
 
+    var healthStatusMore = this.data.status.moreStatus.index;
+    var status_content = e.detail.value.status_content ? e.detail.value.status_content : ''
+
     if (!openId) {
       this.handleError('请重新登陆或重启小程序！');
       return;
@@ -535,6 +648,11 @@ Page({
 
     if (!staffName) {
       this.handleError('中文姓名不能为空！');
+      return;
+    }
+
+    if (!(/^[\u4e00-\u9fa5\·]{1,20}$/g).test(staffName)) {
+      this.handleError('请输入合法的中文姓名！');
       return;
     }
 
@@ -590,7 +708,17 @@ Page({
       return;
     }
 
-    if (!isIsolation) {
+    if (healthStatus == '5' && healthStatusMore.length == 0) {
+      this.handleError('请选择其他身体不适情况！');
+      return;
+    } 
+
+    if (healthStatus == '5' && healthStatusMore.indexOf(12) !== -1 && !status_content) {
+      this.handleError('请补充其他身体不适情况！');
+      return;
+    } 
+
+    if (healthStatus !== 6 && !isIsolation) {
       this.handleError('请选择是否已经隔离！');
       return;
     }
@@ -611,19 +739,20 @@ Page({
         return;
       }
 
-      if (isolationStartDate > isolationEndDate) {
-        this.handleError('结束日期不能小于起始日期！');
-        return;
-      }
+    }
+
+    if (isolationStartDate > isolationEndDate) {
+      this.handleError('结束日期不能小于起始日期！');
+      return;
     }
     
-    var data = this.buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate,);
+    var data = this.buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate, healthStatusMore, status_content);
 
     console.log('data', data)
     this.request(data);
   },
 
-  buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate,) {
+  buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate, healthStatusMore, status_content) {
     var data= {
       openId: openId,
       staffId: staffId,
@@ -634,7 +763,7 @@ Page({
       cityShortName: cityShortName.slice(-3).trim(),
       department: department,
       workplace: workplace.join(','),
-      healthStatus: healthStatus,
+      healthStatus: [healthStatus].concat(healthStatusMore, status_content).join(','),
       isIsolation: isIsolation,
       isolationType: isolationType,
       isolationStartDate: isolationStartDate,
@@ -689,6 +818,15 @@ Page({
     for(var i = 0; i < data.length; i++) {
       if(value == data[i].name) {
         return data[i].value;
+      }
+    }
+    return null;
+  },
+
+  getItemNameById(id, data) {
+    for(var i = 0; i < data.length; i++) {
+      if(id == data[i].id) {
+        return data[i].name;
       }
     }
     return null;
