@@ -1,6 +1,27 @@
 // pages/submithealth/submithealth.js
 const { $Message } = require('../dist/base/index');
 const app = getApp();
+const cityMap = {
+  'SH':'上海市 SH',
+  'BJ':'北京市 BJ',
+  'CD':'成都市 CD',
+  'DG':'东莞市 DG',
+  'FS':'佛山市 FS',
+  'FZ':'福州市 FZ',
+  'GZ':'广州市 GZ',
+  'HaZ':'杭州市 HaZ',
+  'HuZ':'惠州市 HuZ',
+  'JM':'江门市 JM',
+  'JN':'济南市 JN',
+  'KM':'昆明市 KM',
+  'NJ':'南京市 NJ',
+  'NB':'宁波市 NB',
+  'SZ':'深圳市 SZ',
+  'TJ':'天津市 TJ',
+  'XM':'厦门市 XM',
+  'ZS':'中山市 ZS'
+}
+
 Page({
 
   /**
@@ -18,7 +39,8 @@ Page({
       label: '1.请输入你的员工编号。*',
       bindInputName: 'inputEvent',
       num: '1',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     staffName: {
       hasLabel: true,
@@ -26,12 +48,13 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入',
-      maxlength: 15,
+      maxlength: 20,
       type: 'text',
       label: '2.请输入你的中文姓名。*',
       bindInputName: 'inputEvent',
       num: '2',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     mobileNo: {
       hasLabel: true,
@@ -46,7 +69,8 @@ Page({
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter cell phone (请输入紧急联系电话)',
       num: '3',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     others: {
       items: [{
@@ -78,7 +102,8 @@ Page({
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
       num: '4',
-      content: ''
+      content: '',
+      isDisabled: false
     },
     city: {
       hasLabel: true,
@@ -290,17 +315,18 @@ Page({
         checked: false,
         disabled: false,
         isHideOtherSymptom: true,
-        bindName: 'handleStatusOtherChange'
+        bindName: 'handleStatusOtherChange',
+        status_content: ''
       }
     },
     isolationOrNot: {
       items: [{
         id: 1,
-        name: 'yes',
+        name: '是',
         value: 'Y'
       }, {
         id: 2,
-        name: 'no',
+        name: '不是',
         value: 'N'
       }],
       title: '10.你或你所报告的员工是否已经开始隔离？',
@@ -350,6 +376,86 @@ Page({
       content: '',
       start: '2020-01-01',
       end: '2021-01-01'
+    },
+    id: '',
+    isDisabled: false
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if (options.id) {
+      wx.showLoading({ title: '数据处理中...' });
+      var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+      var that = this
+      wx.request({
+        url: host + '/api/hacn/health/detail',
+        method: 'POST',
+        data: { "serailNumber": options.id },
+        header: {
+          'content-type': 'application/json'
+        },
+        success(res) {
+          console.log(res.data);
+          var data = res.data.returnObject
+          if (res.statusCode == 200) {
+            // build data
+            var visitsItems = that.buildItems(that.data.visits.workplaces[(that.data.city.array.indexOf(cityMap[data.cityShortName]))])
+            var visits = []
+            data.workplace.split(',').forEach(val => {
+              visits.push(that.getItemNameById(val, visitsItems))
+            })
+            var status = that.getItemNameById(data.healthStatus.split(',')[0], that.data.status.items)
+            var moreStatus = []
+            var moreStatusArr = data.healthStatus.split(',').slice(1)
+            var status_content = moreStatusArr.pop()
+            moreStatusArr.forEach(val => {
+              moreStatus.push(that.getItemNameById(val, that.data.status.moreStatus.items))
+            })
+            var isolationType = that.getItemNameById(data.isolationType, that.data.isolationType.items)
+
+            that.setData({
+              ["id"]: options.id,
+              ["isDisabled"]: true,
+              ["staffID.isDisabled"]: true,
+              ["staffName.isDisabled"]: true,
+              ["mobileNo.isDisabled"]: true,
+              ["othersStaffId.isDisabled"]: true,
+              
+              ["staffID.content"]: data.staffId,
+              ["staffName.content"]: data.staffName,
+              ["mobileNo.content"]: data.mobileNumber,
+              ["others.current"]: data.isReportOther === 'Y' ? '是' : '不是',
+              ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
+              ["othersStaffId.content"]: data.reportStaffId,
+              ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
+              ["visits.items"]: visitsItems,
+              ["department.index"]: data.department,
+              
+              ["status.current"]: status,
+              ["status.isHideMoreSymptom"]: data.healthStatus.split(',')[0] == 5 ? false : true,
+              ["status.moreStatus.current"]: moreStatus,
+              ["status.moreStatus.isHideOtherSymptom"]: moreStatusArr.indexOf('12') !== -1 ? false : true,
+              ["status.moreStatus.status_content"]: status_content,
+
+              ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '不是',
+              ["isolationType.current"]: isolationType,
+              ["isolationStartDate.current"]: data.isolationStartDate,
+              ["isolationEndDate.current"]: data.isolationEndDate
+            })
+
+            that.setData({
+              ["visits.current"]: visits
+            })
+          } else {
+            that.handleError(res.data.message);
+          }
+        },
+        complete(res) {
+          wx.hideLoading();
+        }
+      })
     }
   },
 
@@ -617,7 +723,7 @@ Page({
       return;
     }
 
-    if (healthStatus !== 6 && isIsolation == 'Y') {
+    if (isIsolation == 'Y') {
       if (!isolationType) {
         this.handleError('请选择隔离类型！');
         return;
@@ -657,7 +763,7 @@ Page({
       cityShortName: cityShortName.slice(-3).trim(),
       department: department,
       workplace: workplace.join(','),
-      healthStatus: [healthStatus].concat(healthStatusMore, (status_content ? status_content : [])).join(','),
+      healthStatus: [healthStatus].concat(healthStatusMore, status_content).join(','),
       isIsolation: isIsolation,
       isolationType: isolationType,
       isolationStartDate: isolationStartDate,
@@ -712,6 +818,15 @@ Page({
     for(var i = 0; i < data.length; i++) {
       if(value == data[i].name) {
         return data[i].value;
+      }
+    }
+    return null;
+  },
+
+  getItemNameById(id, data) {
+    for(var i = 0; i < data.length; i++) {
+      if(id == data[i].id) {
+        return data[i].name;
       }
     }
     return null;
