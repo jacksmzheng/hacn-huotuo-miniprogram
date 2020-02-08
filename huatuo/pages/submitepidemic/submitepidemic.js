@@ -26,7 +26,7 @@ Page({
       isMandatory: false,
       isCRSRelated: false,
       placeholder: '请输入',
-      maxlength: 4,
+      maxlength: 15,
       type: 'text',
       label: '2.请输入你的中文姓名。*',
       bindInputName: 'inputEvent',
