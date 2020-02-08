@@ -61,7 +61,7 @@ Page({
     }
 
     if (data.staffId == '') {
-      this.handleError('请完善信息')
+      this.handleError('请填写员工号')
       return
     }
 
@@ -75,7 +75,7 @@ Page({
           url: '/pages/officestatus/officestatus',
         })
       } else {
-        this.handleError('登陆失败，请退出小程序重试')
+        this.handleError('登录失败，请退出小程序重试')
       }
     }, reject => {
       this.handleError('网络连接失败')
@@ -106,7 +106,7 @@ Page({
    */
   initData() {
     wx.setNavigationBarTitle({
-      title: '登陆'
+      title: '登录'
     })
   },
 

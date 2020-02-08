@@ -9,11 +9,13 @@
   <view class="real-time-news">
     <text style="margin-right: 8rpx;font-size: 24rpx;">公告</text>
     <view style="width: 4rpx; height: 24rpx; background: #fff;border-radius:2rpx;margin-right: 14rpx;"></view>
-    <text>{{realTimeNews.newsTitle}}</text>
-    <!-- <view style="display: flex; align-items: center; margin-left: auto;" bindtap="readRTNews">
-      <text>更多</text>
-      <image class="icon-more" src="/pages/common/resources/images/icon-right.png" mode="widthFix"></image>
-    </view> -->
+    <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" circular="{{true}}" vertical="{{true}}" interval="7000" duration="500">
+      <block wx:for="{{realTimeNewsList}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item">{{item.newsTitle}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
 
   <view class="button-container">
@@ -86,6 +88,8 @@
       <text>{{passiveIsolation}}</text>
     </view>
   </view>
+
+  <view class="copyright">Copyright@HASE CN</view>
 </view>
 
 <template name="branch-situation">

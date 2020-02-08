@@ -175,7 +175,7 @@ Page({
    */
   initData() {
     wx.setNavigationBarTitle({
-      title: '求助和捐赠'
+      title: '需求收集'
     })
     if (app.globalData.userInfo) {
       this.setData({
