@@ -5,26 +5,20 @@
   <view class='top-separate-line'></view>
   <view class="survey-tab">
    <view bindtap="changeTab" id="new" class="survey-tab-button {{newStyle}}">
-    疫情上报 Epidemic Repoting
+    疫情上报
    </view>
    <view bindtap="changeTab" id="done" class="survey-tab-button {{doneStyle}}">
-    出行记录报备 Trip Survey
+    出行记录报备
    </view>
   </view>
-  <image class="image" style="width:100%;margin:8rpx 0;" mode="widthFix" src="/pages/common/resources/images/banner.png" />
+  <image class="image" style="width:100%;margin:8rpx 0;" mode="widthFix" src="/pages/common/resources/images/edpicBanner.png" hidden="{{!showNewSurvey}}"/>
+  <image class="image" style="width:100%;margin:8rpx 0;" mode="widthFix" src="/pages/common/resources/images/tripBanner.png" hidden="{{showNewSurvey}}"/>
   <button class="primary-btn" style="width:100%;margin-bottom:48rpx;" type="primary" bindtap="toubmit">提交表单</button>
   <view hidden="{{!showNewSurvey}}" class="survey-contain">
-    <view bindtap="toubmit" id="1" class="survey-list">
+    <view bindtap="toubmit" class="survey-list" wx:for="{{enquiryList}}" id="{{item.serailNumber}}">
      <view class="survey-list-left">
-      <text class="survey-list-title">2020-02-05 08:08</text>
+      <text class="survey-list-title">{{item.reportDate}}</text>
       <!-- <text class="survey-list-time">2020-02-05 08:08</text> -->
-     </view>
-     <view class="survey-list-right">
-      <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow.png"></image>
-     </view>
-    </view><view bindtap="toubmit" id="1" class="survey-list">
-     <view class="survey-list-left">
-      <text class="survey-list-title">2020-02-05 08:08</text>
      </view>
      <view class="survey-list-right">
       <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow.png"></image>
@@ -32,25 +26,9 @@
     </view>
   </view>
   <view hidden="{{showNewSurvey}}" class="survey-contain">
-    <view bindtap="toubmit" id="1" class="survey-list">
+    <view bindtap="toubmit" class="survey-list" wx:for="{{tripList}}" id="{{item.serail_number}}">
      <view class="survey-list-left">
-      <text class="survey-list-title">2020-02-05 08:08</text>
-      <!-- <text class="survey-list-time">2020-02-05 08:08</text> -->
-     </view>
-     <view class="survey-list-right">
-      <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow.png"></image>
-     </view>
-    </view><view bindtap="toubmit" id="1" class="survey-list">
-     <view class="survey-list-left">
-      <text class="survey-list-title">2020-02-05 08:08</text>
-      <!-- <text class="survey-list-time">2020-02-05 08:08</text> -->
-     </view>
-     <view class="survey-list-right">
-      <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow.png"></image>
-     </view>
-    </view><view bindtap="toubmit" id="1" class="survey-list">
-     <view class="survey-list-left">
-      <text class="survey-list-title">2020-02-05 08:08</text>
+      <text class="survey-list-title">{{item.report_date}}</text>
       <!-- <text class="survey-list-time">2020-02-05 08:08</text> -->
      </view>
      <view class="survey-list-right">
