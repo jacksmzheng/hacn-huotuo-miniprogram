@@ -12,7 +12,7 @@
     <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" circular="{{true}}" vertical="{{true}}" interval="7000" duration="500">
       <block wx:for="{{realTimeNewsList}}" wx:key="*this">
         <swiper-item>
-          <view class="swiper-item">{{item.newsTitle}}</view>
+          <view class="swiper-item" data-id="{{item.newsId}}" bindtap="getDatail">{{item.newsTitle}}</view>
         </swiper-item>
       </block>
     </swiper>
