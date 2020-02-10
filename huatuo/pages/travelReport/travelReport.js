@@ -550,7 +550,8 @@ Page({
     || (transitWuHan == '否' && transitHuBei == '-' )
     || (transitHuBei == '是' && transitCityOfHuBei == [] )
     || contactHistory.length == 0
-    || bodyHistory.length == 0) {
+    || bodyHistory.length == 0
+    || (bodyHistory.indexOf('其他')!==-1 && !otherBodyHistory)) {
       this.handleError();
       return;
     }
@@ -577,6 +578,7 @@ Page({
       transitCityOfHuBei: transitCityOfHuBei.join(','),
       contactHistory: contactHistory.join(','),
       bodyHistory: bodyHistory.join(','),
+      otherBodyHistory: otherBodyHistory
     }
     console.log(data)
     this.request(data);
