@@ -27,21 +27,19 @@
         </block>
       </i-checkbox-group>
     </i-panel>
+    <i-panel title="{{goWorkplace.title}}">
+      <i-radio-group current="{{goWorkplace.current}}" bindchange="{{goWorkplace.bindName}}">
+        <i-radio wx:for="{{goWorkplace.items}}" position="{{goWorkplace.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">
+        </i-radio>
+      </i-radio-group>
+    </i-panel>
     <i-panel title="{{status.title}}">
       <i-radio-group current="{{status.current}}" bindchange="{{status.bindName}}">
         <block wx:for="{{status.items}}">
           <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}"  disabled="{{isDisabled}}">
           </i-radio>
           <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx" hidden="{{status.isHideMoreSymptom}}">
-            <i-checkbox-group current="{{status.moreStatus.current}}" bindchange="{{status.moreStatus.bindName}}">
-              <block wx:for="{{status.moreStatus.items}}">
-                <i-checkbox position="{{status.moreStatus.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">
-                </i-checkbox>
-                <view wx:if="{{item.id == '12'}}">
-                  <textarea hidden="{{status.moreStatus.isHideOtherSymptom}}" class="form-textarea" name="status_content" disabled="{{isDisabled}}" value="{{status.moreStatus.status_content}}"></textarea>
-                </view>
-              </block>
-            </i-checkbox-group>
+            <textarea class="form-textarea" name="status_content" disabled="{{isDisabled}}" value="{{status.status_content}}" placeholder="{{status.placeholder}}"></textarea>
           </view>
         </block>
       </i-radio-group>
@@ -49,12 +47,6 @@
     <i-panel title="{{isolationOrNot.title}}">
       <i-radio-group current="{{isolationOrNot.current}}" bindchange="{{isolationOrNot.bindName}}">
         <i-radio wx:for="{{isolationOrNot.items}}" position="{{isolationOrNot.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">
-        </i-radio>
-      </i-radio-group>
-    </i-panel>
-    <i-panel title="{{isolationType.title}}">
-      <i-radio-group current="{{isolationType.current}}" bindchange="{{isolationType.bindName}}">
-        <i-radio wx:for="{{isolationType.items}}" position="{{isolationType.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">
         </i-radio>
       </i-radio-group>
     </i-panel>
