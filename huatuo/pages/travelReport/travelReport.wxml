@@ -105,7 +105,7 @@
               </i-checkbox>
             </view>
           </block>
-            <textarea hidden="{{bodyHistory.notSeletedOther}}"  class="form-textarea" name="otherBodyHistory"></textarea>
+            <textarea hidden="{{bodyHistory.notSeletedOther}}" value="{{bodyHistory.otherBodyHistory}}" class="form-textarea" name="otherBodyHistory"></textarea>
         </i-checkbox-group>
     </i-panel>
  
