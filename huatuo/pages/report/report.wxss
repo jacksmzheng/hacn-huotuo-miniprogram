@@ -40,7 +40,7 @@
 .survey-tab-button {
   margin: 0!important;
   border-radius: 0;
-  background-color: #f3f3f3;
+  /* background-color: #f3f3f3; */
   color: #afafaf;
   padding: 10px 5px;
   line-height: 1.41176471;
@@ -51,6 +51,6 @@
 
 .survey-tab-button-selected {
   /* background-color: #db0011!important; */
-  color: green;
-  border-bottom: 1px solid green
+  color: #07c160;
+  border-bottom: 1px solid #07c160
 }
