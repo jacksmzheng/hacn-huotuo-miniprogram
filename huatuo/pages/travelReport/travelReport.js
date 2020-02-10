@@ -260,6 +260,7 @@ Page({
       current: [],
       position: 'left',
       notSeletedOther: true,
+      otherBodyHistory:'',
       checked: false,
       disabled: false,
     },
@@ -308,7 +309,29 @@ Page({
               ["transitCityOfHuBei.current"]: data.transitCityOfHuBei.split(','),
               ["bodyHistory.current"]: data.bodyHistory.split(','),
               ["contactHistory.current"]: data.contactHistory.split(','),
+              ["bodyHistory.otherBodyHistory"]: data.otherBodyHistory,
+              
             })
+            if (data.aloneOrNot=='1') {
+              that.setData({
+                ["aloneOrNot.flag"]: true,
+              })
+            }
+            if (data.transitMethod == '0') {
+              that.setData({
+                ["transitMethod.flag"]: false,
+              })
+            }
+            if (data.transitHuBei == '0') {
+              that.setData({
+                ["transitHuBei.flag"]: false,
+              })
+            }
+            if (data.bodyHistory.indexOf('其他')!==-1) {
+              that.setData({
+                ["bodyHistory.notSeletedOther"]: false,
+              })
+            }
           } else {
             that.handleError(res.data.message);
           }
