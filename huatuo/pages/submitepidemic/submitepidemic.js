@@ -565,11 +565,13 @@ Page({
     console.log(e.detail.value);
 
     var openId = app.globalData.userInfo.openId;
-    var staffId = this.data.others.content === 'Y' ? this.data.othersStaffId.content : this.data.staffID.content;
+    // var staffId = this.data.others.content === 'Y' ? this.data.othersStaffId.content : this.data.staffID.content;
+    var staffId = this.data.staffID.content;
     var staffName = this.data.staffName.content;
     var mobileNumber = this.data.mobileNo.content;
     var isReportOther = this.data.others.content;
-    var reportStaffId = this.data.staffID.content;
+    //var reportStaffId = this.data.staffID.content;
+    var reportStaffId = this.data.othersStaffId.content;
     var cityShortName = this.data.city.content;
     var department = this.data.department.index;
     var workplace = this.data.visits.index;
@@ -696,7 +698,7 @@ Page({
   buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, goWorkplace,  healthStatus, healthDescription, isIsolation, isolationStartDate, isolationEndDate) {
     var data= {
       openId: openId,
-      staffId: reportStaffId,
+      staffId: isReportOther == 'N' ? staffId : reportStaffId,
       staffName: staffName,
       mobileNumber: mobileNumber,
       isReportOther: isReportOther,
