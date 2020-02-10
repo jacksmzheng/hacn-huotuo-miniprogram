@@ -438,7 +438,8 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         ['staffID.content']: app.globalData.userInfo.staffId,
-        ['mobileNo.content']: app.globalData.userInfo.mobileNum
+        ['mobileNo.content']: app.globalData.userInfo.mobileNum,
+        ["staffID.isDisabled"]: app.globalData.userInfo.staffId ? true : false
       })
     }
 
