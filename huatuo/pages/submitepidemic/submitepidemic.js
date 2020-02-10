@@ -167,9 +167,13 @@ Page({
     visits: {
       items: [{
         id: 1,
-        name: '无 None'
+        name: '无'
       }],
+<<<<<<< HEAD
       title: '7.你或你所报告同事的办公行所。（可多选）*',
+=======
+      title: '7.你或你所报告的同事14天内去过的办公行所。（可多选）*',
+>>>>>>> 3c20bac98cf924a9e7f52d5af2d2979757cd9c35
       current: [],
       index: [],
       position: 'left',
@@ -177,7 +181,7 @@ Page({
       disabled: false,
       bindName: 'handleVisitsChange',
       workplaces: [
-        ['无 None'],
+        ['无'],
         [
           '恒生银行（中国）有限公司',
           '上海分行',
@@ -330,7 +334,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '11.你所报告的员工的隔离起始日期是？',
+      label: '11.你或你所报告的员工的隔离起始日期是？',
       current: '请选择',
       bindName: 'pickerStartDateChange',
       content: '',
@@ -342,7 +346,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '12.你所报告的员工的预期隔离结束日期是？',
+      label: '12.你或你所报告的员工的预期隔离结束日期是？',
       current: '请选择',
       bindName: 'pickerEndDateChange',
       content: '',
@@ -696,11 +700,11 @@ Page({
   buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, goWorkplace,  healthStatus, healthDescription, isIsolation, isolationStartDate, isolationEndDate) {
     var data= {
       openId: openId,
-      staffId: staffId,
+      staffId: reportStaffId,
       staffName: staffName,
       mobileNumber: mobileNumber,
       isReportOther: isReportOther,
-      reportStaffId: reportStaffId,
+      reportStaffId: staffId,
       cityShortName: cityShortName.slice(-3).trim(),
       department: department,
       workplace: workplace.join(','),
