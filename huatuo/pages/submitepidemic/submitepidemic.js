@@ -79,7 +79,7 @@ Page({
         value: 'Y'
       }, {
         id: 2,
-        name: '不是',
+        name: '否',
         value: 'N'
       }],
       title: '4.你为其他同事报告吗？*',
@@ -261,25 +261,40 @@ Page({
         ]
       ]
     },
+    goWorkplace: {
+      items: [{
+        id: 1,
+        name: '是',
+        value: 'Y'
+      }, {
+        id: 2,
+        name: '否',
+        value: 'N'
+      }],
+      title: '8. 是否14天内去过办公场所。*',
+      current: '-',
+      content: '',
+      position: 'left',
+      checked: false,
+      disabled: false,
+      bindName: 'handleGoWorkplaceChange'
+    },
     status: {
       items: [{
         id: 1,
-        name: '由医疗机构或者疾控部门告知的确诊病毒性肺炎案例',
+        name: '确诊:由医疗机构或疾控部门认定的确诊案例',
       }, {
         id: 2,
-        name: '由医疗机构或者疾控部门告知的疑似病毒性肺炎案例'
+        name: '疑似:由医疗机构或疾控部门认定的疑似案例'
       }, {
         id: 3,
-        name: '由医疗机构或者疾控部门告知的密切接触'
+        name: '死亡:由医疗机构或疾控部门认定的死亡案例'
       }, {
         id: 4,
-        name: '有发烧但不是肺炎',
+        name: '被动隔离: 由医疗机构或疾控部门认定得密切接触者 或 收到隔离通知单',
       }, {
         id: 5,
-        name: '没有发烧，但有其它身体不适的情况（请提供具体的症状）'
-      }, {
-        id: 6,
-        name: '居住楼或小区被有关部门限制出入'
+        name: '主动隔离:根据当地防疫要求或出于自律所采取的主动隔离 (如湖北接触史;与确诊/疑似病例居住同一大楼小区等)'
       }],
       title: '9.你或你所报告的同事目前的健康状态？*',
       current: '-',
@@ -288,36 +303,9 @@ Page({
       checked: false,
       disabled: false,
       isHideMoreSymptom: true,
-      bindName: 'handleStatusMoreChange',
-      moreStatus: {
-        items: [{
-          id: 7,
-          name: '咳嗽',
-        }, {
-          id: 8,
-          name: '感冒'
-        }, {
-          id: 9,
-          name: '乏力'
-        }, {
-          id: 10,
-          name: '呼吸困难',
-        }, {
-          id: 11,
-          name: '腹泻'
-        }, {
-          id: 12,
-          name: '其他'
-        }],
-        current: [],
-        index: [],
-        position: 'left',
-        checked: false,
-        disabled: false,
-        isHideOtherSymptom: true,
-        bindName: 'handleStatusOtherChange',
-        status_content: ''
-      }
+      bindName: 'handleStatusChange',
+      status_content: '',
+      placeholder: '可以描述具体情况'
     },
     isolationOrNot: {
       items: [{
@@ -326,7 +314,7 @@ Page({
         value: 'Y'
       }, {
         id: 2,
-        name: '不是',
+        name: '否',
         value: 'N'
       }],
       title: '10.你或你所报告的员工是否已经开始隔离？',
@@ -337,28 +325,12 @@ Page({
       disabled: false,
       bindName: 'handleIsolationOrNotChange'
     },
-    isolationType: {
-      items: [{
-        id: 1,
-        name: '主动隔离'
-      }, {
-        id: 2,
-        name: '被动隔离'
-      }],
-      title: '11.你或你所报告的员工正在进行自我主动隔离？还是被医疗机构或者疾控部门收治的被动隔离？',
-      current: '-',
-      index: 0,
-      position: 'left',
-      checked: false,
-      disabled: false,
-      bindName: 'handleIsolationTypeChange'
-    },
     isolationStartDate: {
       hasLabel: true,
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '12.你所报告的员工的隔离起始日期是？',
+      label: '11.你所报告的员工的隔离起始日期是？',
       current: '请选择',
       bindName: 'pickerStartDateChange',
       content: '',
@@ -370,7 +342,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '13.你所报告的员工的预期隔离结束日期是？',
+      label: '12.你所报告的员工的预期隔离结束日期是？',
       current: '请选择',
       bindName: 'pickerEndDateChange',
       content: '',
@@ -406,14 +378,6 @@ Page({
             data.workplace.split(',').forEach(val => {
               visits.push(that.getItemNameById(val, visitsItems))
             })
-            var status = that.getItemNameById(data.healthStatus.split(',')[0], that.data.status.items)
-            var moreStatus = []
-            var moreStatusArr = data.healthStatus.split(',').slice(1)
-            var status_content = moreStatusArr.pop()
-            moreStatusArr.forEach(val => {
-              moreStatus.push(that.getItemNameById(val, that.data.status.moreStatus.items))
-            })
-            var isolationType = that.getItemNameById(data.isolationType, that.data.isolationType.items)
 
             that.setData({
               ["id"]: options.id,
@@ -426,21 +390,19 @@ Page({
               ["staffID.content"]: data.staffId,
               ["staffName.content"]: data.staffName,
               ["mobileNo.content"]: data.mobileNumber,
-              ["others.current"]: data.isReportOther === 'Y' ? '是' : '不是',
+              ["others.current"]: data.isReportOther === 'Y' ? '是' : '否',
               ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
               ["othersStaffId.content"]: data.reportStaffId,
               ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
               ["visits.items"]: visitsItems,
+              ["goWorkplace.current"]: data.goWorkplace ==='Y' ? '是' : '否',
               ["department.index"]: data.department,
               
-              ["status.current"]: status,
-              ["status.isHideMoreSymptom"]: data.healthStatus.split(',')[0] == 5 ? false : true,
-              ["status.moreStatus.current"]: moreStatus,
-              ["status.moreStatus.isHideOtherSymptom"]: moreStatusArr.indexOf('12') !== -1 ? false : true,
-              ["status.moreStatus.status_content"]: status_content,
+              ["status.current"]: that.getItemNameById(data.healthStatus, that.data.status.items),
+              ["status.isHideMoreSymptom"]: data.healthStatus == 5 ? false : true,
+              ["status.status_content"]: data.healthDescription,
 
-              ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '不是',
-              ["isolationType.current"]: isolationType,
+              ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '否',
               ["isolationStartDate.current"]: data.isolationStartDate,
               ["isolationEndDate.current"]: data.isolationEndDate
             })
@@ -548,30 +510,28 @@ Page({
     });
   },
 
-  handleStatusMoreChange({ detail = {} }) {
+  handleGoWorkplaceChange: function ({ detail = {} }) {
+    console.log(detail.value)
+    let value = this.getItemValue(detail.value, this.data.isolationOrNot.items);
+    this.setData({
+      ['goWorkplace.current']: detail.value,
+      ['goWorkplace.content']: value
+    })
+  },
+
+  handleStatusChange({ detail = {} }) {
     console.log(detail.value)
     var v = this.getItemId(detail.value, this.data.status.items);
     this.setData({
       ['status.current']: detail.value,
       ['status.index']: v,
-      ['status.moreStatus.current']: [],
-      ['status.isHideMoreSymptom']: v !== 5,
-      ['status.moreStatus.isHideOtherSymptom']: true
+      ['status.isHideMoreSymptom']: v !== 5
     });
-  },
-  
-  handleStatusOtherChange({ detail = {} }) {
-    console.log(detail.value)
-    const index = this.data.status.moreStatus.current.indexOf(detail.value);
-    index === -1 ? this.data.status.moreStatus.current.push(detail.value) : this.data.status.moreStatus.current.splice(index, 1);
-    var id = this.getItemId(detail.value, this.data.status.moreStatus.items);
-    const index2 = this.data.status.moreStatus.index.indexOf(id)
-    index2 === -1 ?  this.data.status.moreStatus.index.push(id) : this.data.status.moreStatus.index.splice(index2, 1)
-    this.setData({
-      ['status.moreStatus.current']: this.data.status.moreStatus.current,
-      ['status.moreStatus.index']: this.data.status.moreStatus.index,
-      ['status.moreStatus.isHideOtherSymptom']: (id == 12 ? !this.data.status.moreStatus.isHideOtherSymptom : this.data.status.moreStatus.isHideOtherSymptom)
-    });
+    if (v !== 5) {
+      this.setData({
+        ['status.status_content']: ''
+      });
+    }
   },
 
   handleIsolationOrNotChange: function ({ detail = {} }) {
@@ -580,15 +540,6 @@ Page({
     this.setData({
       ['isolationOrNot.current']: detail.value,
       ['isolationOrNot.content']: value
-    })
-  },
-  
-  handleIsolationTypeChange: function ({ detail = {} }) {
-    console.log(detail.value)
-    let index = this.getItemId(detail.value, this.data.isolationType.items);
-    this.setData({
-      ['isolationType.current']: detail.value,
-      ['isolationType.index']: index,
     })
   },
   
@@ -622,14 +573,12 @@ Page({
     var cityShortName = this.data.city.content;
     var department = this.data.department.index;
     var workplace = this.data.visits.index;
+    var goWorkplace = this.data.goWorkplace.content;
     var healthStatus = this.data.status.index;
+    var healthDescription = e.detail.value.status_content;
     var isIsolation = this.data.isolationOrNot.content;
-    var isolationType = this.data.isolationType.index;
     var isolationStartDate = this.data.isolationStartDate.content;
     var isolationEndDate = this.data.isolationEndDate.content;
-
-    var healthStatusMore = this.data.status.moreStatus.index;
-    var status_content = e.detail.value.status_content ? e.detail.value.status_content : ''
 
     if (!openId) {
       this.handleError('请重新登陆或重启小程序！');
@@ -703,31 +652,23 @@ Page({
       return;
     }
 
+    if (!goWorkplace) {
+      this.handleError('请选择是否去过办公场所！');
+      return;
+    }
+    
+
     if (healthStatus == '0') {
       this.handleError('请选择健康状态！');
       return;
     }
-
-    if (healthStatus == '5' && healthStatusMore.length == 0) {
-      this.handleError('请选择其他身体不适情况！');
-      return;
-    } 
-
-    if (healthStatus == '5' && healthStatusMore.indexOf(12) !== -1 && !status_content) {
-      this.handleError('请补充其他身体不适情况！');
-      return;
-    } 
-
-    if (healthStatus !== 6 && !isIsolation) {
-      this.handleError('请选择是否已经隔离！');
+    
+    if (!isIsolation) {
+      this.handleError('请选择是否已隔离！');
       return;
     }
 
     if (isIsolation == 'Y') {
-      if (!isolationType) {
-        this.handleError('请选择隔离类型！');
-        return;
-      }
   
       if (!isolationStartDate) {
         this.handleError('请选择隔离起始日期！');
@@ -746,13 +687,13 @@ Page({
       return;
     }
     
-    var data = this.buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate, healthStatusMore, status_content);
+    var data = this.buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, goWorkplace,  healthStatus, healthDescription, isIsolation, isolationStartDate, isolationEndDate);
 
     console.log('data', data)
     this.request(data);
   },
 
-  buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, healthStatus, isIsolation, isolationType, isolationStartDate, isolationEndDate, healthStatusMore, status_content) {
+  buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, goWorkplace,  healthStatus, healthDescription, isIsolation, isolationStartDate, isolationEndDate) {
     var data= {
       openId: openId,
       staffId: staffId,
@@ -763,9 +704,10 @@ Page({
       cityShortName: cityShortName.slice(-3).trim(),
       department: department,
       workplace: workplace.join(','),
-      healthStatus: [healthStatus].concat(healthStatusMore, status_content).join(','),
+      goWorkplace: goWorkplace,
+      healthStatus: healthStatus,
+      healthDescription: healthDescription,
       isIsolation: isIsolation,
-      isolationType: isolationType,
       isolationStartDate: isolationStartDate,
       isolationEndDate: isolationEndDate
     };

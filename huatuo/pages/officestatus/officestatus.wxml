@@ -49,8 +49,8 @@
     <view class="desc-and-label">
       <view class="office-desc"></view>
       <view style="display: flex; align-items: center;">
-        <view class="label-color-tip" style="background: #36DEA3"></view>
-        <text class="label-text">发烧</text>
+        <view class="label-color-tip" style="background: #333"></view>
+        <text class="label-text">死亡</text>
         <view class="label-color-tip" style="background: #FFC525"></view>
         <text class="label-text">疑似</text>
         <view class="label-color-tip" style="background: #F26478"></view>
@@ -99,7 +99,7 @@
       <!-- <text class="city-name-en">{{item.area_en}}</text> -->
     </view>
     <view>
-      <text class="fever-num">{{item.fever}}</text>
+      <text class="death-num">{{item.death}}</text>
       <text class="suspect-num">{{item.suspect}}</text>
       <text class="confirm-num">{{item.confirmed}}</text>
     </view>
