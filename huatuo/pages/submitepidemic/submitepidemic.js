@@ -98,7 +98,7 @@ Page({
       isCRSRelated: false,
       placeholder: '请输入',
       maxlength: 8,
-      label: '5.你所报告同事的员工编号是？*',
+      label: '你所报告同事的员工编号是？',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
       num: '4',
@@ -110,7 +110,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '6.你或你所报告的同事在哪个办公城市？*',
+      label: '5.你或你所报告的同事在哪个办公城市？*',
       array: [
         '请选择',
         '上海市 SH',
@@ -141,7 +141,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '7.你或你所报告同事的部门是？*',
+      label: '6.你或你所报告同事的部门是？*',
       array: [
         '请选择', 
         'RB',
@@ -169,7 +169,7 @@ Page({
         id: 1,
         name: '无 None'
       }],
-      title: '8.你或你所报告的同事14天内去过的办公行所。（可多选）*',
+      title: '7.你或你所报告同事的办公行所。（可多选）*',
       current: [],
       index: [],
       position: 'left',
