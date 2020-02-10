@@ -72,7 +72,7 @@ Page({
       isCRSRelated: false,
       placeholder: '请输入',
       maxlength: 4,
-      type: 'number',
+      type: 'digit',
       label: '5.您今天的体温（单位：摄氏度℃）:*',
       bindInputName: 'inputEvent',
       num: 'temperature',
@@ -82,19 +82,19 @@ Page({
       title: '6.您当前是否独居:*',
       current: '',
       position: 'left',
-      flag: true,
+      flag: false,
       checked: false,
       disabled: false,
     },
     familyContact: {
-      title: '7-1.您的家庭成员/合住成员是否被确诊新型肺炎或有接触病患史？*',
+      title: '6-1.您的家庭成员/合住成员是否被确诊新型肺炎或有接触病患史？*',
       current: '-',
       position: 'left',
       checked: false,
       disabled: false,
     },
     familyCondition: {
-      title: '7-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？*',
+      title: '6-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？*',
       current: '',
       position: 'left',
       checked: false,
@@ -108,13 +108,13 @@ Page({
       placeholder: '请输入',
       maxlength: 35,
       type: 'text',
-      label: '8.自2020年1月18日起，您还去过哪个/哪些城市？',
+      label: '7.自2020年1月18日起，您还去过哪个/哪些城市？',
       bindInputName: 'inputEvent',
       num: 'transitCity',
       content: ''
     },
     transitMethod: {
-      title: '9.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？*',
+      title: '8.自2020年1月18日起，您是否有乘坐飞机/火车等公共长途交通工具？*',
       current: '',
       position: 'left',
       checked: false,
@@ -129,17 +129,17 @@ Page({
       placeholder: '请输入',
       maxlength: 35,
       type: 'text',
-      label: '10.1.请提供您上述乘坐过的公共交通工具的详细班次信息:*',
+      label: '8.1.请提供您上述乘坐过的公共交通工具的详细班次信息:*',
       bindInputName: 'inputEvent',
       num: 'transitNo',
       content: ''
     },
     transitDate:{
-      label: '10.2.请提供您上述乘坐过的公共交通工具的详细日期:*',
+      label: '8.2.请提供您上述乘坐过的公共交通工具的详细日期:*',
       content: ''
     },
     transitWuHan: {
-      title: '11.自2020年1月18日起，您是否途径/中转/停留武汉？*',
+      title: '9.自2020年1月18日起，您是否途径/中转/停留武汉？*',
       current: '',
       position: 'left',
       checked: false,
@@ -147,7 +147,7 @@ Page({
       flag: true
     },
     transitHuBei: {
-      title: '12.自2020年1月18日起，您是否途径/中转/停留湖北省？*',
+      title: '10.自2020年1月18日起，您是否途径/中转/停留湖北省？*',
       current: '',
       position: 'left',
       checked: false,
@@ -204,7 +204,7 @@ Page({
         id: 2,
         name: '神农架地区'
       }],
-      title: '12.1.自2020年1月18日起，您途径/中转/停留湖北的城市:*',
+      title: '10.1.自2020年1月18日起，您途径/中转/停留湖北的城市:*',
       current: [],
       position: 'left',
       checked: false,
@@ -224,7 +224,7 @@ Page({
         id: 4,
           name: '以上均无',
       }],
-      title: '13.过去的两周内您是否有以下情况？*',
+      title: '11.过去的两周内您是否有以下情况？*',
       current: [],
       position: 'left',
       checked: false,
@@ -256,15 +256,16 @@ Page({
         id: 8,
         name: '以上均无',
       }],
-      title: '14.过去两周您是否有出现任何身体不适的症状？*',
+      title: '12.过去两周您是否有出现任何身体不适的症状？*',
       current: [],
       position: 'left',
+      notSeletedOther: true,
       checked: false,
       disabled: false,
     },
     isHideContactHistory: false,
     isHideBodyHistory: false,
-    now: new Date(),
+    nonowDatew: '',
     id: '',
     isDisbaled: false
   },
@@ -349,6 +350,11 @@ Page({
         ['mobileNumber.content']: app.globalData.userInfo.mobileNum
       })
     }
+    // 日期限制
+    var nowDate = new Date()
+    this.setData({
+      ['nowDate']: nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-' + nowDate.getDate()
+    }) 
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -497,7 +503,8 @@ Page({
     }
     index === -1 ? this.data.bodyHistory.current.push(detail.value) : this.data.bodyHistory.current.splice(index, 1);
     this.setData({
-      ['bodyHistory.current']: this.data.bodyHistory.current
+      ['bodyHistory.current']: this.data.bodyHistory.current,
+      ['bodyHistory.notSeletedOther']: this.data.bodyHistory.current.indexOf('其他') == -1 ? true : false
     });
   },
 
@@ -527,6 +534,7 @@ Page({
     var transitCityOfHuBei = this.data.transitCityOfHuBei.current;
     var contactHistory = this.data.contactHistory.current;
     var bodyHistory = this.data.bodyHistory.current;
+    var otherBodyHistory = e.detail.value.otherBodyHistory
 
     if (staffId == '' 
     || staffName == '' 

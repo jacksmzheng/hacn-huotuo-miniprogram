@@ -44,7 +44,7 @@
     <view hidden="{{transitMethod.flag}}">
       <commoninput obj="{{transitNo}}" bindinputEvent='{{transitNo.bindInputName}}'/>
       <i-panel title="{{transitDate.label}}">
-        <picker mode="date" value="{{transitDate.content}}" start="2020-02-01" end="{{now}}" bindchange="bindDateChange">
+        <picker mode="date" value="{{transitDate.content}}" start="2020-02-01" end="{{nowDate}}" bindchange="bindDateChange">
           <view class="picker health-picker">
             当前选择: {{transitDate.content}}
           </view>
@@ -105,6 +105,7 @@
               </i-checkbox>
             </view>
           </block>
+            <textarea hidden="{{bodyHistory.notSeletedOther}}"  class="form-textarea" name="otherBodyHistory"></textarea>
         </i-checkbox-group>
     </i-panel>
  
