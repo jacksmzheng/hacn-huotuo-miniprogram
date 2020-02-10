@@ -292,6 +292,12 @@ Page({
           if (res.statusCode == 200) {
             that.setData({
               ["id"]: options.id,
+              ["staffId.isDisabled"]: true,
+              ["staffName.isDisabled"]: true,
+              ["mobileNumber.isDisabled"]: true,
+              ["temperature.isDisabled"]: true,
+              ["transitCity.isDisabled"]: true,
+              ["transitNo.isDisabled"]: true,
               ["staffId.content"]: data.staffId,
               ["staffName.content"]: data.staffName,
               ["mobileNumber.content"]: data.mobileNumber,
@@ -369,8 +375,9 @@ Page({
     var userInfo = getApp().globalData.userInfo
     if (userInfo) {
       this.setData({
-        ['staffId.content']: app.globalData.userInfo.staffId,
-        ['mobileNumber.content']: app.globalData.userInfo.mobileNum
+        ['staffId.content']: userInfo.staffId,
+        ['mobileNumber.content']: userInfo.mobileNum,
+        ["staffId.isDisabled"]: userInfo.staffId ? true : false
       })
     }
     // 日期限制
