@@ -79,7 +79,7 @@ Page({
         value: 'Y'
       }, {
         id: 2,
-        name: '不是',
+        name: '否',
         value: 'N'
       }],
       title: '4.你为其他同事报告吗？*',
