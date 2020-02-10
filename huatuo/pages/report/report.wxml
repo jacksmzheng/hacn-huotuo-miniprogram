@@ -32,7 +32,7 @@
       <!-- <text class="survey-list-time">2020-02-05 08:08</text> -->
      </view>
      <view class="survey-list-right">
-      <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow.png"></image>
+      <image class="survey-list-right-image" src="/pages/common/resources/images/huotuo_arrow_g.png"></image>
      </view>
     </view>
   </view>
