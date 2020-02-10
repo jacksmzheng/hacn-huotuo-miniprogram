@@ -333,7 +333,7 @@ Page({
               })
             }
           } else {
-            that.handleError(res.data.message);
+            that.handleError(res.data.message || '网络错误');
           }
         },
         complete(res) {
