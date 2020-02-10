@@ -40,7 +40,7 @@ Page({
       bindInputName: 'inputEvent',
       num: '1',
       content: '',
-      isDisabled: false
+      isDisabled: true
     },
     staffName: {
       hasLabel: true,
@@ -565,11 +565,11 @@ Page({
     console.log(e.detail.value);
 
     var openId = app.globalData.userInfo.openId;
-    var staffId = this.data.staffID.content;
+    var staffId = this.data.others.content === 'Y' ? this.data.othersStaffId.content : this.data.staffID.content;
     var staffName = this.data.staffName.content;
     var mobileNumber = this.data.mobileNo.content;
     var isReportOther = this.data.others.content;
-    var reportStaffId = this.data.othersStaffId.content;
+    var reportStaffId = this.data.staffID.content;
     var cityShortName = this.data.city.content;
     var department = this.data.department.index;
     var workplace = this.data.visits.index;
