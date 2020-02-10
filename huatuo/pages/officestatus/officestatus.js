@@ -51,7 +51,7 @@ Page({
     })
   },
 
-  onShow: function () {
+  onShow: function() {
     this.wechatLogin()
     this.getHealthStatus()
     this.refreshData()
@@ -67,6 +67,7 @@ Page({
     clearInterval(this.data.scrollInterval)
   },
 
+  onShareAppMessage: function() {},
 
   /**************************************************************************************
    * 其他功能
