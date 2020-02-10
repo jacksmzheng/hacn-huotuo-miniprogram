@@ -98,7 +98,7 @@ Page({
       isCRSRelated: false,
       placeholder: '请输入',
       maxlength: 8,
-      label: '5.你所报告同事的员工编号是？*',
+      label: '你所报告同事的员工编号是？*',
       bindInputName: 'inputEvent',
       warningLabel: 'Please Enter the staff ID (请输入员工编号)',
       num: '4',
@@ -110,7 +110,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '6.你或你所报告的同事在哪个办公城市？*',
+      label: '5.你或你所报告的同事在哪个办公城市？*',
       array: [
         '请选择',
         '上海市 SH',
@@ -141,7 +141,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '7.你或你所报告同事的部门是？*',
+      label: '6.你或你所报告同事的部门是？*',
       array: [
         '请选择', 
         'RB',
@@ -167,9 +167,9 @@ Page({
     visits: {
       items: [{
         id: 1,
-        name: '无 None'
+        name: '无'
       }],
-      title: '8.你或你所报告的同事14天内去过的办公行所。（可多选）*',
+      title: '7.你或你所报告的同事14天内去过的办公行所。（可多选）*',
       current: [],
       index: [],
       position: 'left',
@@ -177,7 +177,7 @@ Page({
       disabled: false,
       bindName: 'handleVisitsChange',
       workplaces: [
-        ['无 None'],
+        ['无'],
         [
           '恒生银行（中国）有限公司',
           '上海分行',
@@ -330,7 +330,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '11.你所报告的员工的隔离起始日期是？',
+      label: '11.你或你所报告的员工的隔离起始日期是？',
       current: '请选择',
       bindName: 'pickerStartDateChange',
       content: '',
@@ -342,7 +342,7 @@ Page({
       hasWarning: false,
       isMandatory: false,
       isCRSRelated: false,
-      label: '12.你所报告的员工的预期隔离结束日期是？',
+      label: '12.你或你所报告的员工的预期隔离结束日期是？',
       current: '请选择',
       bindName: 'pickerEndDateChange',
       content: '',
@@ -696,11 +696,11 @@ Page({
   buildData(openId, staffId, staffName, mobileNumber, isReportOther, reportStaffId, cityShortName, department, workplace, goWorkplace,  healthStatus, healthDescription, isIsolation, isolationStartDate, isolationEndDate) {
     var data= {
       openId: openId,
-      staffId: staffId,
+      staffId: reportStaffId,
       staffName: staffName,
       mobileNumber: mobileNumber,
       isReportOther: isReportOther,
-      reportStaffId: reportStaffId,
+      reportStaffId: staffId,
       cityShortName: cityShortName.slice(-3).trim(),
       department: department,
       workplace: workplace.join(','),
