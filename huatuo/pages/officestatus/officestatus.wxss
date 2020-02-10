@@ -297,8 +297,8 @@
   color: #333;
 }
 
-.branch-situaction .fever-num {
-  color: #36dea3;
+.branch-situaction .death-num {
+  color: #333;
 }
 
 .branch-situaction .suspect-num {

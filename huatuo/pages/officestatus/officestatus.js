@@ -15,7 +15,7 @@ const cityMap = {
   'SZ': ['深圳', 'Shenzhen'],
   'XM': ['厦门', 'Xiamen'],
   'TJ': ['天津', 'Tianjin'],
-  'FS': ['佛山（含顺德）', 'Foshan'],
+  'FS': ['佛山\n(含顺德)', 'Foshan'],
   'HuZ': ['惠州', 'Huizhou'],
   'JM': ['江门', 'Jiangmen'],
   'ZS': ['中山', 'Zhongshan']
@@ -49,10 +49,10 @@ Page({
       imageWidth,
       imageHeight
     })
-    this.wechatLogin()
   },
 
-  onShow: function() {
+  onShow: function () {
+    this.wechatLogin()
     this.getHealthStatus()
     this.refreshData()
     this.getNewsList({
