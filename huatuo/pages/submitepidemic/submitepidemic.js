@@ -272,7 +272,7 @@ Page({
         value: 'N'
       }],
       title: '8. 是否14天内去过办公场所。*',
-      placeholder: '请填写进入办公场所的具体时间',
+      placeholder: '如果是，请填写具体离开办公场所的时间',
       current: '-',
       content: '',
       position: 'left',
@@ -388,12 +388,12 @@ Page({
               ["mobileNo.isDisabled"]: true,
               ["othersStaffId.isDisabled"]: true,
               
-              ["staffID.content"]: data.staffId,
+              ["staffID.content"]: data.reportStaffId,
               ["staffName.content"]: data.staffName,
               ["mobileNo.content"]: data.mobileNumber,
               ["others.current"]: data.isReportOther === 'Y' ? '是' : '否',
               ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
-              ["othersStaffId.content"]: data.reportStaffId,
+              ["othersStaffId.content"]: data.staffId,
               ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
               ["visits.items"]: visitsItems,
               ["goWorkplace.current"]: data.goWorkplace ==='Y' ? '是' : '否',
