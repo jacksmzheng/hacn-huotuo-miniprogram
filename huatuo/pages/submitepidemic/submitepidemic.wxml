@@ -31,6 +31,9 @@
       <i-radio-group current="{{goWorkplace.current}}" bindchange="{{goWorkplace.bindName}}">
         <i-radio wx:for="{{goWorkplace.items}}" position="{{goWorkplace.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">
         </i-radio>
+        <view  style="padding-left:40rpx">
+            <textarea class="form-textarea" name="goWorkplaceDate" disabled="{{isDisabled}}" value="{{goWorkplaceDate.content}}" placeholder="{{goWorkplace.placeholder}}"></textarea>
+          </view>
       </i-radio-group>
     </i-panel>
     <i-panel title="{{status.title}}">
@@ -38,7 +41,7 @@
         <block wx:for="{{status.items}}">
           <i-radio position="{{status.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}"  disabled="{{isDisabled}}">
           </i-radio>
-          <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx" hidden="{{status.isHideMoreSymptom}}">
+          <view wx:if="{{item.id == '5'}}" style="padding-left:40rpx">
             <textarea class="form-textarea" name="status_content" disabled="{{isDisabled}}" value="{{status.status_content}}" placeholder="{{status.placeholder}}"></textarea>
           </view>
         </block>
