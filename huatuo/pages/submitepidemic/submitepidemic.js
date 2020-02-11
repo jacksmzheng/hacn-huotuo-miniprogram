@@ -2,24 +2,24 @@
 const { $Message } = require('../dist/base/index');
 const app = getApp();
 const cityMap = {
-  'SH':'上海市 SH',
-  'BJ':'北京市 BJ',
-  'CD':'成都市 CD',
-  'DG':'东莞市 DG',
-  'FS':'佛山市 FS',
-  'FZ':'福州市 FZ',
-  'GZ':'广州市 GZ',
-  'HaZ':'杭州市 HaZ',
-  'HuZ':'惠州市 HuZ',
-  'JM':'江门市 JM',
-  'JN':'济南市 JN',
-  'KM':'昆明市 KM',
-  'NJ':'南京市 NJ',
-  'NB':'宁波市 NB',
-  'SZ':'深圳市 SZ',
-  'TJ':'天津市 TJ',
-  'XM':'厦门市 XM',
-  'ZS':'中山市 ZS'
+  'SH':'上海市',
+  'BJ':'北京市',
+  'CD':'成都市',
+  'DG':'东莞市',
+  'FS':'佛山市',
+  'FZ':'福州市',
+  'GZ':'广州市',
+  'HaZ':'杭州市',
+  'HuZ':'惠州市',
+  'JM':'江门市',
+  'JN':'济南市',
+  'KM':'昆明市',
+  'NJ':'南京市',
+  'NB':'宁波市',
+  'SZ':'深圳市',
+  'TJ':'天津市',
+  'XM':'厦门市',
+  'ZS':'中山市'
 }
 
 Page({
@@ -113,24 +113,24 @@ Page({
       label: '5.你或你所报告的同事在哪个办公城市？*',
       array: [
         '请选择',
-        '上海市 SH',
-        '北京市 BJ',
-        '成都市 CD',
-        '东莞市 DG',
-        '佛山市 FS',
-        '福州市 FZ',
-        '广州市 GZ',
-        '杭州市 HaZ',
-        '惠州市 HuZ',
-        '江门市 JM',
-        '济南市 JN',
-        '昆明市 KM',
-        '南京市 NJ',
-        '宁波市 NB',
-        '深圳市 SZ',
-        '天津市 TJ',
-        '厦门市 XM',
-        '中山市 ZS'
+        '上海市',
+        '北京市',
+        '成都市',
+        '东莞市',
+        '佛山市',
+        '福州市',
+        '广州市',
+        '杭州市',
+        '惠州市',
+        '江门市',
+        '济南市',
+        '昆明市',
+        '南京市',
+        '宁波市',
+        '深圳市',
+        '天津市',
+        '厦门市',
+        '中山市'
       ],
       index: 0,
       bindName: 'pickerCityChange',
@@ -272,6 +272,7 @@ Page({
         value: 'N'
       }],
       title: '8. 是否14天内去过办公场所。*',
+      placeholder: '请填写进入办公场所的具体时间',
       current: '-',
       content: '',
       position: 'left',
@@ -438,7 +439,8 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         ['staffID.content']: app.globalData.userInfo.staffId,
-        ['mobileNo.content']: app.globalData.userInfo.mobileNum
+        ['mobileNo.content']: app.globalData.userInfo.mobileNum,
+        ["staffID.isDisabled"]: app.globalData.userInfo.staffId ? true : false
       })
     }
 

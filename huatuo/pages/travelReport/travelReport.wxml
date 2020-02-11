@@ -9,27 +9,27 @@
     <commoninput obj="{{mobileNumber}}" bindinputEvent='{{mobileNumber.bindInputName}}'/>
     <view class="picker-container-view">
       <rich-text class='picker-label' nodes='{{location.label}}'/>
-      <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange'>
+      <picker style='border-color:#B2B2B2' mode="region" bindchange='regionChange' disabled="{{id}}">
         <view class='picker-item-label'>当前选择: {{location.content}}</view>
       </picker>
     </view>
     <commoninput obj="{{temperature}}" bindinputEvent='{{temperature.bindInputName}}'/>
     <i-panel title="{{aloneOrNot.title}}">
       <i-radio-group current="{{aloneOrNot.current}}" bindchange="handleAloneOrNotChange">
-          <i-radio wx:for="{{booleanitems}}" color="green" position="{{aloneOrNot.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{aloneOrNot.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
           </i-radio>
       </i-radio-group>
     </i-panel>
     <view hidden="{{!aloneOrNot.flag}}">
       <i-panel title="{{familyContact.title}}">
         <i-radio-group current="{{familyContact.current}}" bindchange="handleFamilyContactChange">
-            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyContact.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyContact.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
             </i-radio>
         </i-radio-group>
       </i-panel>
       <i-panel title="{{familyCondition.title}}">
         <i-radio-group current="{{familyCondition.current}}" bindchange="handleFamilyCondictionChange">
-            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyCondition.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyCondition.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
             </i-radio>
         </i-radio-group>
       </i-panel>
@@ -37,14 +37,14 @@
     <commoninput obj="{{transitCity}}" bindinputEvent='{{transitCity.bindInputName}}'/>
     <i-panel title="{{transitMethod.title}}">
       <i-radio-group current="{{transitMethod.current}}" bindchange="handleTransitMethodChange">
-          <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitMethod.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitMethod.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
           </i-radio>
       </i-radio-group>
     </i-panel>
     <view hidden="{{transitMethod.flag}}">
       <commoninput obj="{{transitNo}}" bindinputEvent='{{transitNo.bindInputName}}'/>
       <i-panel title="{{transitDate.label}}">
-        <picker mode="date" value="{{transitDate.content}}" start="2020-02-01" end="{{nowDate}}" bindchange="bindDateChange">
+        <picker mode="date" value="{{transitDate.content}}" start="2020-02-01" end="{{nowDate}}" bindchange="bindDateChange" disabled="{{id}}">
           <view class="picker health-picker">
             当前选择: {{transitDate.content}}
           </view>
@@ -53,14 +53,14 @@
     </view>
     <i-panel title="{{transitWuHan.title}}">
       <i-radio-group current="{{transitWuHan.current}}" bindchange="handleWuhanOrNotChange">
-          <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitWuHan.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitWuHan.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
           </i-radio>
       </i-radio-group>
     </i-panel>
     <view hidden="{{!transitWuHan.flag}}">
       <i-panel title="{{transitHuBei.title}}">
         <i-radio-group current="{{transitHuBei.current}}" bindchange="handleHubeiOrNotChange">
-            <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitHuBei.position}}" wx:key="{{item.id}}" value="{{item.name}}">
+            <i-radio wx:for="{{booleanitems}}" color="green" position="{{transitHuBei.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
             </i-radio>
         </i-radio-group>
       </i-panel>
@@ -68,7 +68,7 @@
         <i-panel title="{{transitCityOfHuBei.title}}">
           <i-checkbox-group current="{{transitCityOfHuBei.current}}" bindchange="handleHubeiChange">
             <block wx:for="{{transitCityOfHuBei.items}}">
-                <i-checkbox position="{{transitCityOfHuBei.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+                <i-checkbox position="{{transitCityOfHuBei.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{id}}">
                 </i-checkbox>
             </block>
           </i-checkbox-group>
@@ -81,11 +81,11 @@
             <!-- <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
             </i-checkbox> -->
             <view wx:if="{{index < 3}}" hidden="{{isHideContactHistory}}">
-              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{id}}">
               </i-checkbox>
             </view>
              <view wx:if="{{index == 3}}">
-              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              <i-checkbox position="{{contactHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{id}}">
               </i-checkbox>
             </view>
           </block>
@@ -97,15 +97,15 @@
               <!-- <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
               </i-checkbox> -->
               <view wx:if="{{index < 7}}" hidden="{{isHideBodyHistory}}">
-              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{id}}">
               </i-checkbox>
             </view>
              <view wx:if="{{index == 7}}">
-              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}">
+              <i-checkbox position="{{bodyHistory.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{id}}">
               </i-checkbox>
             </view>
           </block>
-            <textarea hidden="{{bodyHistory.notSeletedOther}}" value="{{bodyHistory.otherBodyHistory}}" class="form-textarea" name="otherBodyHistory"></textarea>
+            <textarea hidden="{{bodyHistory.notSeletedOther || isHideBodyHistory}}" value="{{bodyHistory.otherBodyHistory}}" class="form-textarea" name="otherBodyHistory" disabled="{{id}}"></textarea>
         </i-checkbox-group>
     </i-panel>
  
