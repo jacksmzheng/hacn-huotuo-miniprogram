@@ -95,7 +95,7 @@
 <template name="branch-situation">
   <view class="branch-situaction" style="font-size: {{fontSize}}rpx;" wx:for="{{status}}">
     <view>
-      <text class="city-name">{{item.area_cn}}</text>
+      <text class="city-name">{{item.cityName}}</text>
       <!-- <text class="city-name-en">{{item.area_en}}</text> -->
     </view>
     <view>

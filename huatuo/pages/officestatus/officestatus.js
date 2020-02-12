@@ -1,25 +1,6 @@
 // pages/officestatus/officestatus.js
 const app = getApp()
-const cityMap = {
-  'SH': ['上海', 'Shanghai'],
-  'BJ': ['北京', 'Beijing'],
-  'CD': ['成都', 'Chengdu'],
-  'DG': ['东莞', 'Dongguan'],
-  'FZ': ['福州', 'Fuzhou'],
-  'GZ': ['广州', 'Guangzhou'],
-  'HaZ': ['杭州', 'Hangzhou'],
-  'JN': ['济南', 'Jinan'],
-  'KM': ['昆明', 'Kunming'],
-  'NJ': ['南京', 'Nanjing'],
-  'NB': ['宁波', 'Ningbo'],
-  'SZ': ['深圳', 'Shenzhen'],
-  'XM': ['厦门', 'Xiamen'],
-  'TJ': ['天津', 'Tianjin'],
-  'FS': ['佛山\n(含顺德)', 'Foshan'],
-  'HuZ': ['惠州', 'Huizhou'],
-  'JM': ['江门', 'Jiangmen'],
-  'ZS': ['中山', 'Zhongshan']
-}
+let cityMap = null
 
 Page({
   /**
@@ -53,7 +34,13 @@ Page({
 
   onShow: function() {
     this.wechatLogin()
-    this.getHealthStatus()
+    if (cityMap == null) {
+      this.getCityMap().then(resolve => {
+        this.getHealthStatus()
+      })
+    } else {
+      this.getHealthStatus()
+    }
     this.refreshData()
     this.getNewsList({
       openId: app.globalData.userInfo ? app.globalData.userInfo.openId : '',
@@ -123,6 +110,23 @@ Page({
     })
   },
 
+  getCityMap() {
+    return new Promise((resolve, reject) => {
+      let host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+      wx.request({
+        url: host + '/api/v2/hacn/city/with-branch',
+        method: 'GET',
+        data: {},
+        success: res => {
+          cityMap = res.data.cities
+          resolve()
+        },
+        fail: res => reject(res),
+        complete: res => {}
+      });
+    })
+  },
+
   getHealthStatus() {
     let host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     wx.request({
@@ -134,8 +138,9 @@ Page({
         let tmp1 = []
         let tmp2 = []
         res.data.branches.forEach((e, i, a) => {
-          e.area_cn = cityMap[e.area][0]
-          e.area_en = cityMap[e.area][1]
+          e.cityName = cityMap.find(_e => {
+            return _e.cityShortName == e.area
+          }).cityName
           tmp2.push(e)
           if (tmp2.length == 3 || i + 1 >= a.length) {
             tmp1.push(tmp2)
@@ -144,8 +149,9 @@ Page({
         })
         let tmp3 = []
         res.data.subBranches.forEach((e, i, a) => {
-          e.area_cn = cityMap[e.area][0]
-          e.area_en = cityMap[e.area][1]
+          e.cityName = cityMap.find(_e => {
+            return _e.cityShortName == e.area
+          }).cityName
           tmp3.push(e)
         })
         this.setData({
