@@ -358,6 +358,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({ title: '行所加载中...' });
+    var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+    var that = this
+    wx.request({
+      url: host + '/api/v2/hacn/city/with-branch',
+      method: 'GET',
+      success(res) {
+        console.log(res.data);
+        if (res.statusCode == 200) {
+          var cities = res.data.cities
+          var cityArr = ['请选择']
+          for (var i = 0; i < cities.length; i++){
+            cityArr.push(cities[i].cityName)
+          }
+          that.setData({
+            'cities': cities,
+            ['city.array']: cityArr
+          })
+        } else {
+          that.handleError(res.data.message||'获取行所信息失败');
+        }
+      },
+      complete(res) {
+        wx.hideLoading();
+      }
+    })
     if (options.id) {
       wx.showLoading({ title: '数据处理中...' });
       var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
@@ -480,13 +506,20 @@ Page({
 
   pickerCityChange: function (e) {
     console.log('picker change : ',e)
-
+    if (e.detail.value === '0') {return}
+    var index = parseInt(e.detail.value) - 1
+    var workplace = this.data.cities[index].branches
+    var workplaceArr = []
+    for (var i = 0; i < workplace.length; i++) {
+      workplaceArr.push(workplace[i].branchName)
+    }
     this.setData({
-      ['city.index']: e.detail.value,
+      ['city.index']: index+1,
       ['city.content']: this.data.city.array[e.detail.value],
-      ['visits.items']: this.buildItems(this.data.visits.workplaces[e.detail.value]),
+      ['visits.items']: this.buildItems(workplaceArr),
       ['visits.current']: [],
       ['visits.index']: [],
+      ['city.cityShortName']: this.data.cities[parseInt(e.detail.value) - 1].cityShortName
     })
   },
 
@@ -501,7 +534,8 @@ Page({
   },
 
   handleVisitsChange({ detail = {} }) {
-    console.log(detail.value)
+    console.log(detail)
+
     const index = this.data.visits.current.indexOf(detail.value);
     index === -1 ? this.data.visits.current.push(detail.value) : this.data.visits.current.splice(index, 1);
     var id = this.getItemId(detail.value, this.data.visits.items);
@@ -509,6 +543,20 @@ Page({
     this.setData({
       ['visits.current']: this.data.visits.current,
       ['visits.index']: this.data.visits.index
+    });
+
+    var workplace = this.data.cities[this.data.city.index-1].branches
+    var visitsCurrent = this.data.visits.current
+    var branchIdArr = []
+    for (var i = 0; i < visitsCurrent.length; i++) {
+      for (var j = 0; j < workplace.length; j++) {
+        if (visitsCurrent[i] === workplace[j].branchName && branchIdArr.indexOf(workplace[j].branchId)===-1) {
+          branchIdArr.push(workplace[j].branchId)
+        }
+      }
+    }
+    this.setData({
+      ['visits.branchIdArr']: branchIdArr
     });
   },
 
@@ -574,9 +622,9 @@ Page({
     var isReportOther = this.data.others.content;
     //var reportStaffId = this.data.staffID.content;
     var reportStaffId = this.data.othersStaffId.content;
-    var cityShortName = this.data.city.content;
+    var cityShortName = this.data.city.cityShortName;
     var department = this.data.department.index;
-    var workplace = this.data.visits.index;
+    var workplace = this.data.visits.branchIdArr;
     var goWorkplace = this.data.goWorkplace.content;
     var healthStatus = this.data.status.index;
     var healthDescription = e.detail.value.status_content;
