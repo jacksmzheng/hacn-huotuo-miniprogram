@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/travelReport/travelReport",
     "pages/officestatus/officestatus",
     "pages/submithealth/submithealth",
     "pages/submitvpn/submitvpn",
     "pages/submithelpdonation/submithelpdonation",
     "pages/submitepidemic/submitepidemic",
+    "pages/travelReport/travelReport",
     "pages/report/report",
     "pages/employeereport/employeereport",
     "pages/newslist/newslist",
