@@ -95,7 +95,7 @@ Page({
     },
     familyCondition: {
       title: '6-2.近期您的家庭成员/合住成员是否有发热、乏力、咳嗽、呼吸困难等症状？*',
-      current: '',
+      current: '-',
       position: 'left',
       checked: false,
       disabled: false,
@@ -440,7 +440,6 @@ Page({
   },
   //
   handleAloneOrNotChange({ detail = {} }) {
-    console.log(detail)
     this.setData({
       ['aloneOrNot.current']: detail.value
     });
@@ -449,6 +448,12 @@ Page({
     this.setData({
       ['aloneOrNot.flag']: value == 2
     })
+    if (value === 1) {
+      this.setData({
+        ['familyContact.current']: '-',
+        ['familyCondition.current']: '-'
+      });
+    }
   },
   //
   handleFamilyContactChange({ detail = {} }) {
@@ -457,7 +462,7 @@ Page({
     });
   },
   //
-  handlefamilyConditionChange({ detail = {} }) {
+  handleFamilyConditionChange({ detail = {} }) {
     this.setData({
       ['familyCondition.current']: detail.value
     });
@@ -471,6 +476,12 @@ Page({
     this.setData({
       ['transitMethod.flag']: value == 2
     })
+    if (value === 2) {
+      this.setData({
+        ['transitNo.content']: '',
+        ['transitDate.content']: ''
+      });
+    }
   },
   //
   handleWuhanOrNotChange({ detail = {} }) {
@@ -491,6 +502,11 @@ Page({
     this.setData({
       ['transitHuBei.flag']: value == 2
     })
+    if (value === 2) {
+      this.setData({
+        ['transitCityOfHuBei.current']: []
+      });
+    }
   },
   regionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
