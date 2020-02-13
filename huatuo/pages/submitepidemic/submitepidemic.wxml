@@ -17,9 +17,13 @@
     <view hidden="{{others.isOthersFlag}}">
       <commoninput obj="{{othersStaffId}}" bindinputEvent='{{othersStaffId.bindInputName}}'/>
     </view>
-    <template is='common-picker' data="{{...city, isDisabled}}"></template>
-    <template is='common-picker' data="{{...department, isDisabled}}"></template>
-    <i-panel title="{{visits.title}}">
+    <view hidden="{{!isDisabled}}">
+      <commoninput obj="{{city}}"/>
+      <commoninput obj="{{visits}}"/>
+    </view>
+    <view hidden="{{isDisabled}}">
+      <template is='common-picker' data="{{...city, isDisabled}}"></template>
+      <i-panel title="{{visits.title}}">
       <i-checkbox-group current="{{visits.current}}" bindchange="{{visits.bindName}}">
         <block wx:for="{{visits.items}}">
           <i-checkbox position="{{visits.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}"  disabled="{{isDisabled}}">
@@ -27,6 +31,8 @@
         </block>
       </i-checkbox-group>
     </i-panel>
+    </view>
+    <template is='common-picker' data="{{...department, isDisabled}}"></template>
     <i-panel title="{{goWorkplace.title}}">
       <i-radio-group current="{{goWorkplace.current}}" bindchange="{{goWorkplace.bindName}}">
         <i-radio wx:for="{{goWorkplace.items}}" position="{{goWorkplace.position}}" wx:key="{{item.id}}" color="green" value="{{item.name}}" disabled="{{isDisabled}}">

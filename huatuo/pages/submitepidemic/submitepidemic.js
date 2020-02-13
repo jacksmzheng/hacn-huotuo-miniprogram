@@ -506,7 +506,15 @@ Page({
 
   pickerCityChange: function (e) {
     console.log('picker change : ',e)
-    if (e.detail.value === '0') {return}
+    if (e.detail.value === '0') {
+      this.setData({
+        ['visits.items']: [],
+        ['visits.current']: [],
+        ['visits.index']: [],
+        ['city.cityShortName']: ''
+      })
+      return
+    }
     var index = parseInt(e.detail.value) - 1
     var workplace = this.data.cities[index].branches
     var workplaceArr = []

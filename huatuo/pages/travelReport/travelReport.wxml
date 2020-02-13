@@ -28,7 +28,7 @@
         </i-radio-group>
       </i-panel>
       <i-panel title="{{familyCondition.title}}">
-        <i-radio-group current="{{familyCondition.current}}" bindchange="handleFamilyCondictionChange">
+        <i-radio-group current="{{familyCondition.current}}" bindchange="handleFamilyConditionChange">
             <i-radio wx:for="{{booleanitems}}" color="green" position="{{familyCondition.position}}" wx:key="{{item.id}}" value="{{item.name}}" disabled="{{id}}">
             </i-radio>
         </i-radio-group>
