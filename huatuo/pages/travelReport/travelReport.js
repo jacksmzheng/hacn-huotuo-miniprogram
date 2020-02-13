@@ -514,12 +514,17 @@ Page({
     var id = this.getFieldValue(detail.value, this.data.contactHistory.items);
     if (id == 4) {
       this.setData({
-        isHideContactHistory: index == -1
+        // isHideContactHistory: index == -1
       })
+    } else {
+      const indexNOne = this.data.contactHistory.current.indexOf('以上均无');
+      if (indexNOne !== -1) {
+        this.data.contactHistory.current.splice(indexNOne, 1)
+      }
     }
     index === -1 ? this.data.contactHistory.current.push(detail.value) : this.data.contactHistory.current.splice(index, 1);
     this.setData({
-      ['contactHistory.current']: this.data.contactHistory.current
+      ['contactHistory.current']: index === -1 && id == 4 ? [detail.value] : this.data.contactHistory.current
     });
   },
   //
@@ -528,12 +533,17 @@ Page({
     var id = this.getFieldValue(detail.value, this.data.bodyHistory.items);
     if (id == 8) {
       this.setData({
-        isHideBodyHistory: index == -1
+        // isHideBodyHistory: index == -1
       })
+    } else {
+      const indexNOne = this.data.bodyHistory.current.indexOf('以上均无');
+      if (indexNOne!==-1) {
+        this.data.bodyHistory.current.splice(indexNOne, 1)
+      }
     }
     index === -1 ? this.data.bodyHistory.current.push(detail.value) : this.data.bodyHistory.current.splice(index, 1);
     this.setData({
-      ['bodyHistory.current']: this.data.bodyHistory.current,
+      ['bodyHistory.current']: index === -1 && id == 8 ? [detail.value] : this.data.bodyHistory.current,
       ['bodyHistory.notSeletedOther']: this.data.bodyHistory.current.indexOf('其他') == -1 ? true : false
     });
   },
