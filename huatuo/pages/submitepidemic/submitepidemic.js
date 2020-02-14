@@ -358,6 +358,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      ["id"]: options.id,
+    })
     wx.showLoading({ title: '行所加载中...' });
     var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
     var that = this
@@ -376,6 +379,99 @@ Page({
             'cities': cities,
             ['city.array']: cityArr
           })
+
+          if (options.id) {
+            wx.showLoading({ title: '数据处理中...' });
+            var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
+            wx.request({
+              url: host + '/api/hacn/health/detail',
+              method: 'POST',
+              data: { "serailNumber": options.id },
+              header: {
+                'content-type': 'application/json'
+              },
+              success(res) {
+                console.log(res.data);
+                var data = res.data.returnObject
+                if (res.statusCode == 200) {
+                  // build data
+                  // var visitsItems = that.buildItems(that.data.visits.workplaces[(that.data.city.array.indexOf(cityMap[data.cityShortName]))])
+                  // var visits = []
+                  // data.workplace.split(',').forEach(val => {
+                  //   visits.push(that.getItemNameById(val, visitsItems))
+                  // })
+
+                  var cities = that.data.cities
+                  var branches = []
+                  for (var i = 0; i < cities.length; i++) {
+                    // 当前城市中文名
+                    if (cities[i].cityShortName === data.cityShortName) {
+                      that.setData({
+                        ['city.index']: that.data.city.array.indexOf(cities[i].cityName)
+                      })
+                      branches = cities[i].branches
+                    }
+                  }
+                  // 行所中文列表
+                  var visitsItems = []
+                  for (var i = 0; i < branches.length; i++) {
+                    visitsItems.push(
+                      {
+                        id: branches[i].branchId,
+                        name: branches[i].branchName
+                      })
+                  }
+                  // 当前选中行所中文列表
+                  var workplaceIdArr = data.workplace.split(',')
+                  var visits = []
+                  for (var i = 0; i < workplaceIdArr.length; i++) {
+                    for (var j = 0; j < branches.length; j++) {
+                      if (workplaceIdArr[i] + '' === branches[j].branchId + '') {
+                        visits.push(branches[j].branchName)
+                      }
+                    }
+                  }
+                  console.log(workplaceIdArr, visits, branches)
+
+                  that.setData({
+                    ["isDisabled"]: true,
+                    ["staffID.isDisabled"]: true,
+                    ["staffName.isDisabled"]: true,
+                    ["mobileNo.isDisabled"]: true,
+                    ["othersStaffId.isDisabled"]: true,
+
+                    ["staffID.content"]: data.reportStaffId,
+                    ["staffName.content"]: data.staffName,
+                    ["mobileNo.content"]: data.mobileNumber,
+                    ["others.current"]: data.isReportOther === 'Y' ? '是' : '否',
+                    ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
+                    ["othersStaffId.content"]: data.staffId,
+                    // ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
+                    ["visits.items"]: visitsItems,
+                    ["goWorkplace.current"]: data.goWorkplace === 'Y' ? '是' : '否',
+                    ["department.index"]: data.department,
+
+                    ["status.current"]: that.getItemNameById(data.healthStatus, that.data.status.items),
+                    ["status.isHideMoreSymptom"]: data.healthStatus == 5 ? false : true,
+                    ["status.status_content"]: data.healthDescription,
+
+                    ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '否',
+                    ["isolationStartDate.current"]: data.isolationStartDate,
+                    ["isolationEndDate.current"]: data.isolationEndDate
+                  })
+
+                  that.setData({
+                    ["visits.current"]: visits
+                  })
+                } else {
+                  that.handleError(res.data.message);
+                }
+              },
+              complete(res) {
+                wx.hideLoading();
+              }
+            })
+          }
         } else {
           that.handleError(res.data.message||'获取行所信息失败');
         }
@@ -384,68 +480,6 @@ Page({
         wx.hideLoading();
       }
     })
-    if (options.id) {
-      wx.showLoading({ title: '数据处理中...' });
-      var host = app.api.isProdEnv ? app.api.prodUrl : app.api.devUrl;
-      var that = this
-      wx.request({
-        url: host + '/api/hacn/health/detail',
-        method: 'POST',
-        data: { "serailNumber": options.id },
-        header: {
-          'content-type': 'application/json'
-        },
-        success(res) {
-          console.log(res.data);
-          var data = res.data.returnObject
-          if (res.statusCode == 200) {
-            // build data
-            var visitsItems = that.buildItems(that.data.visits.workplaces[(that.data.city.array.indexOf(cityMap[data.cityShortName]))])
-            var visits = []
-            data.workplace.split(',').forEach(val => {
-              visits.push(that.getItemNameById(val, visitsItems))
-            })
-
-            that.setData({
-              ["id"]: options.id,
-              ["isDisabled"]: true,
-              ["staffID.isDisabled"]: true,
-              ["staffName.isDisabled"]: true,
-              ["mobileNo.isDisabled"]: true,
-              ["othersStaffId.isDisabled"]: true,
-              
-              ["staffID.content"]: data.reportStaffId,
-              ["staffName.content"]: data.staffName,
-              ["mobileNo.content"]: data.mobileNumber,
-              ["others.current"]: data.isReportOther === 'Y' ? '是' : '否',
-              ["others.isOthersFlag"]: data.isReportOther === 'Y' ? false : true,
-              ["othersStaffId.content"]: data.staffId,
-              ["city.index"]: that.data.city.array.indexOf(cityMap[data.cityShortName]),
-              ["visits.items"]: visitsItems,
-              ["goWorkplace.current"]: data.goWorkplace ==='Y' ? '是' : '否',
-              ["department.index"]: data.department,
-              
-              ["status.current"]: that.getItemNameById(data.healthStatus, that.data.status.items),
-              ["status.isHideMoreSymptom"]: data.healthStatus == 5 ? false : true,
-              ["status.status_content"]: data.healthDescription,
-
-              ["isolationOrNot.current"]: data.isIsolation === 'Y' ? '是' : '否',
-              ["isolationStartDate.current"]: data.isolationStartDate,
-              ["isolationEndDate.current"]: data.isolationEndDate
-            })
-
-            that.setData({
-              ["visits.current"]: visits
-            })
-          } else {
-            that.handleError(res.data.message);
-          }
-        },
-        complete(res) {
-          wx.hideLoading();
-        }
-      })
-    }
   },
 
   /**
