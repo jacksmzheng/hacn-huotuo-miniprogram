@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/travelReport/travelReport",
     "pages/officestatus/officestatus",
+    "pages/travelReport/travelReport",
     "pages/submithealth/submithealth",
     "pages/submitvpn/submitvpn",
     "pages/submithelpdonation/submithelpdonation",

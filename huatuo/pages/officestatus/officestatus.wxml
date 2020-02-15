@@ -7,8 +7,8 @@
   <image class="banner-text" mode="widthFix" src="/pages/common/resources/images/banner-text.png" />
 
   <view class="real-time-news">
-    <text style="margin-right: 8rpx;font-size: 24rpx;">公告</text>
-    <view style="width: 4rpx; height: 24rpx; background: #fff;border-radius:2rpx;margin-right: 14rpx;"></view>
+    <text style="margin: 0 8rpx 0 8rpx;font-size: 20rpx;">公告</text>
+    <view style="width: 4rpx; height: 12rpx; background: #fff;border-radius:2rpx;margin: 4rpx 14rpx 0 0;"></view>
     <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" circular="{{true}}" vertical="{{true}}" interval="2000" duration="500">
       <block wx:for="{{realTimeNewsList}}" wx:key="*this">
         <swiper-item>
@@ -49,7 +49,7 @@
     <view class="desc-and-label">
       <view class="office-desc"></view>
       <view style="display: flex; align-items: center;">
-        <view class="label-color-tip" style="background: #333"></view>
+        <view class="label-color-tip" style="background: #aaa"></view>
         <text class="label-text">死亡</text>
         <view class="label-color-tip" style="background: #FFC525"></view>
         <text class="label-text">疑似</text>
@@ -63,7 +63,7 @@
       <text>分行</text>
     </view>
     <view class="branch-situaction-row" wx:for="{{branches}}" wx:key="">
-      <template is="branch-situation" data="{{status:item, fontSize:20}}"></template>
+      <template is="branch-situation" data="{{status:item, fontSize:20, isSub:false}}"></template>
     </view>
 
     <view class="branch-label" style="margin-top: 12rpx;">
@@ -71,7 +71,7 @@
       <text>支行</text>
     </view>
     <view class="branch-situaction-row" style="border: none;">
-      <template is="branch-situation" data="{{status:subBranches, fontSize:16}}"></template>
+      <template is="branch-situation" data="{{status:subBranches, fontSize:16, isSub:true}}"></template>
     </view>
   </view>
 
@@ -81,7 +81,10 @@
       <!-- <text>Active</text> -->
       <text>{{activeIsolation}}</text>
     </view>
-    <view class="divi"></view>
+    <view class="divi">
+      <image src="/pages/common/resources/images/icon5.png" mode="widthFix"></image>
+      <view></view>
+    </view>
     <view class="passive">
       <text>被动隔离</text>
       <!-- <text>Passvie</text> -->
@@ -93,15 +96,13 @@
 </view>
 
 <template name="branch-situation">
-  <view class="branch-situaction" style="font-size: {{fontSize}}rpx;" wx:for="{{status}}">
-    <view>
+  <block wx:for="{{status}}">
+    <view class="branch-situaction" style="font-size: {{fontSize}}rpx;">
       <text class="city-name">{{item.cityName}}</text>
-      <!-- <text class="city-name-en">{{item.area_en}}</text> -->
-    </view>
-    <view>
       <text class="death-num">{{item.death}}</text>
       <text class="suspect-num">{{item.suspect}}</text>
       <text class="confirm-num">{{item.confirmed}}</text>
     </view>
-  </view>
+    <view wx:if="{{index < 2 || isSub == true && index < 3}}" class="stat-divi"></view>
+  </block>
 </template>

@@ -24,7 +24,7 @@ Page({
    */
   onLoad: function(options) {
     const screenWidth = wx.getSystemInfoSync().windowWidth
-    const imageWidth = (screenWidth - 100) / 5
+    const imageWidth = (screenWidth - 100) / 10
     const imageHeight = imageWidth
     this.setData({
       imageWidth,
